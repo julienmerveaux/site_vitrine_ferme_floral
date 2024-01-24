@@ -7,8 +7,12 @@
           <li>
             <router-link to="/">Accueil</router-link>
           </li>
-          <li><a href="#">Notre offre</a></li>
-          <li><a href="#">À propos</a></li>
+          <li>
+            <router-link to="/catalogue_particulier">Catalogue particulier</router-link>
+          </li>
+          <li>
+            <router-link to="/catalogue_pro">Catalogue pro</router-link>
+          </li>
           <li>
             <!-- Utilisez le router-link ici directement -->
             <router-link to="/espace_pro">Espace professionnel</router-link>

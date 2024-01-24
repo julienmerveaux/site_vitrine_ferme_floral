@@ -1,0 +1,39 @@
+<template>
+  <HeaderVue/>
+  <div class="generalCatalogue">
+
+    <CardCatalogueProVue/>
+    <CardCatalogueProVue/>
+    <CardCatalogueProVue/>
+    <CardCatalogueProVue/>
+    <CardCatalogueProVue/>
+    <CardCatalogueProVue/>
+    <CardCatalogueProVue/>
+    <CardCatalogueProVue/>
+
+
+
+  </div>
+  <FooterVue/>
+
+</template>
+
+<script setup>
+
+import HeaderVue from "@/components/HeaderVue.vue";
+import FooterVue from "@/components/FooterVue.vue";
+import CardCatalogueProVue from "@/components/CardCatalogueProVue.vue";
+</script>
+
+
+<style scoped>
+
+.generalCatalogue {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+</style>

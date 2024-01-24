@@ -13,6 +13,16 @@ const router = createRouter({
       path: '/espace_pro',
       name: 'espace_pro',
       component: () => import('@/views/EspaceProView.vue')
+    },
+    {
+      path: '/catalogue_particulier',
+      name: 'catalogue_particulier',
+      component: () => import('@/views/CatalogueParticulierView.vue')
+    },
+    {
+      path: '/catalogue_pro',
+      name: 'catalogue_pro',
+      component: () => import('@/views/CatalogueProView.vue')
     }
   ]
 })
