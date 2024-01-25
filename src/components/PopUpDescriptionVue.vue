@@ -10,17 +10,22 @@
             <H1>PHLOX PANICULATA PAX</H1>
             <H2>Plante vivace</H2>
             <H3>3,75€</H3>
-            <h4>dazfdefzefceafeaf fezfze f fze fzef zef zefze fef  f zf zf fz fzfzfzfzefzefze f ze fzfzf zfz  fz fz</h4>
+            <h4>dazfdefzefceafeaf fezfze f fze fzef zef zefze fef f zf zf fz fzfzfzfzefzefze f ze fzfzf zfz fz fz</h4>
           </div>
         </div>
-        <button class="popup-exit" @click="closePopup">Fermer</button>
+        <div class="button_popup">
+          <button class="popup-exit" @click="closePopup">Acheter</button>
+          <button class="popup-exit" @click="closePopup">Fermer</button>
+        </div>
+
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import {ref} from 'vue';
+
 const emit = defineEmits(['fermerPopup']);
 const isOpen = ref(false);
 
@@ -37,6 +42,12 @@ const closePopup = () => {
   aspect-ratio: 1;
 }
 
+.button_popup {
+  display: flex;
+  justify-content: end;
+  align-items: end;
+}
+
 .popup_gauche {
   display: flex;
   justify-content: center;
@@ -44,11 +55,13 @@ const closePopup = () => {
   width: 50%;
   height: 80%;
 }
+
 .popup_droite {
   text-align: center;
   width: 50%;
   height: 80%;
 }
+
 .popup_general {
   display: flex;
   justify-content: center;
@@ -66,7 +79,7 @@ const closePopup = () => {
   left: 0;
   right: 0;
   bottom: 0;
-  z-index:10;
+  z-index: 10;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -93,7 +106,6 @@ const closePopup = () => {
   background-color: transparent;
   border: none;
   bottom: 100%;
-  left: 48%;
   position: relative;
 
 }

@@ -10,6 +10,8 @@
           <span class="card__category"> Fleur séché</span>
           <h3 class="card__title">PHLOX PANICULATA PAX</h3>
           <span class="card__price">3.75€</span>
+          <h3>quantité : 35</h3>
+
         </div>
         <button class="buttonAchat" @click="afficherPopup">Voir plus</button>
         <PopUpDescriptionVue v-if="popupVisible" @fermerPopup="fermerPopup"/>

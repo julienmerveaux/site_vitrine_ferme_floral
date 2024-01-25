@@ -23,6 +23,21 @@ const router = createRouter({
       path: '/catalogue_pro',
       name: 'catalogue_pro',
       component: () => import('@/views/CatalogueProView.vue')
+    },
+    {
+      path: '/notre_histoire',
+      name: 'notre_histoire',
+      component: () => import('@/views/PageHistoireView.vue')
+    },
+    {
+      path: '/bouquets',
+      name: 'bouquets',
+      component: () => import('@/views/PageBouquetView.vue')
+    },
+    {
+      path: '/contact',
+      name: 'contact',
+      component: () => import('@/views/ContactView.vue')
     }
   ]
 })

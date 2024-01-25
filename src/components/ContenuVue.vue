@@ -1,8 +1,8 @@
 <template>
   <div class="contenu">
-    <Etage1ContenuVue></Etage1ContenuVue>
-    <Etage2ContenueVueTextePuisImage></Etage2ContenueVueTextePuisImage>
-    <Etage2ContenueVueImagePuisTexte></Etage2ContenueVueImagePuisTexte>
+    <Etage1ContenuVue ></Etage1ContenuVue>
+    <Etage2ContenueVueTextePuisImage class="test"></Etage2ContenueVueTextePuisImage>
+    <Etage2ContenueVueImagePuisTexte  class="test"></Etage2ContenueVueImagePuisTexte>
   </div>
 </template>
 
@@ -20,8 +20,13 @@ export default {
 
 <style scoped>
 
+.test {
+  height: 80vh;
+  width: 100%;
+}
 .contenu {
   display: grid;
+  gap: 20px;
   text-align: center;
 }
 </style>

@@ -1,26 +1,37 @@
 <template>
   <div class="header">
     <nav class="container-fluid">
-      <ul>
-        <li><img class="logo" src="../assets/Les%205%20saisons_RGB_Black.jpg"></li>
-        <div class="menuRight">
-          <li>
-            <router-link to="/">Accueil</router-link>
-          </li>
-          <li>
-            <router-link to="/catalogue_particulier">Catalogue particulier</router-link>
-          </li>
-          <li>
-            <router-link to="/catalogue_pro">Catalogue pro</router-link>
-          </li>
-          <li>
-            <!-- Utilisez le router-link ici directement -->
-            <router-link to="/espace_pro">Espace professionnel</router-link>
-          </li>
-          <li><a href="#">Plus</a></li>
-        </div>
+      <div class="menu">
+          <img class="logo" src="../assets/Les%205%20saisons_RGB_Black.jpg">
+          <div class="menuRight">
+            <li>
+              <router-link to="/">Accueil</router-link>
+            </li>
+            <li>
+              <router-link to="/catalogue_particulier">Catalogue particulier</router-link>
+            </li>
+            <li>
+              <router-link to="/catalogue_pro">Catalogue pro</router-link>
+            </li>
+            <li>
+              <!-- Utilisez le router-link ici directement -->
+              <router-link to="/espace_pro">Espace professionnel</router-link>
+            </li>
+            <li>
+              <!-- Utilisez le router-link ici directement -->
+              <router-link to="/notre_histoire">Notre histoire</router-link>
+            </li>
+            <li>
+              <!-- Utilisez le router-link ici directement -->
+              <router-link to="/bouquets">Bouquets</router-link>
+            </li>
+            <li>
+              <!-- Utilisez le router-link ici directement -->
+              <router-link to="/contact">Contact nous</router-link>
+            </li>
+          </div>
 
-      </ul>
+      </div>
     </nav>
   </div>
 
@@ -35,8 +46,27 @@ export default {
 
 <style scoped>
 
+
+.menu {
+  display: flex;
+  width: 100%;
+}
 .logo {
   width: 15%;
+}
+
+li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 20%;
+  width: auto;
+  color: transparent;
+}
+
+a {
+  color: black;
+  text-decoration: none;
 }
 nav ul {
   display: flex;
@@ -61,8 +91,9 @@ nav ul li a:hover {
 }
 
 .menuRight {
-  display:flex;
+  display: flex;
   width: 100%;
-  justify-content: end;
+  justify-content: center;
+  gap:5%;
 }
 </style>

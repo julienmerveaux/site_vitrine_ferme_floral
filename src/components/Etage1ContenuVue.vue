@@ -12,7 +12,7 @@ export default {
       <!-- Image 1 -->
       <figure>
         <img src="https://source.unsplash.com/random/300x200?flower" alt="Fleurs fraîches">
-        <figcaption>Fleurs fraîches</figcaption>
+        <figcaption>Bouquet</figcaption>
       </figure>
 
 
@@ -26,7 +26,7 @@ export default {
       <!-- Image 3 -->
       <figure>
         <img src="https://source.unsplash.com/random/300x202?flower" alt="Compositions">
-        <figcaption>Compositions</figcaption>
+        <figcaption>Évènement</figcaption>
       </figure>
 
 
@@ -35,6 +35,8 @@ export default {
 </template>
 
 <style scoped>
+
+
 .gallery {
   display: flex;
   justify-content: center;

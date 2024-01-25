@@ -7,7 +7,6 @@
       </div>
     </div>
     <ContenuVue></ContenuVue>
-    <ContactVue></ContactVue>
     <FooterVue class="footer"></FooterVue>
   </div>
 </template>

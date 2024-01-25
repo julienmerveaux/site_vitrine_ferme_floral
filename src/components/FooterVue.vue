@@ -2,14 +2,28 @@
   <div class="footer">
     <nav class="container-fluid">
       <ul>
-        <li><img class ="logo" src="../assets/Les%205%20saisons_RGB_Black.jpg"></li>
+        <li><img class="logo" src="../assets/Les%205%20saisons_RGB_Black.jpg"></li>
       </ul>
       <ul>
-        <li><a href="#about">About us</a></li>
-        <li><a href="#features">Features</a></li>
-        <li><a href="#example">User Example</a></li>
-        <li><a href="#pricing">Pricing</a></li>
-        <li><a href="#resources">Resources</a></li>
+        <li><a href="https://www.instagram.com/ferme_florale_les_5_saisons/">
+          <img class="image_reseau" src="../assets/instagram.png"></a>
+        </li>
+
+        <li><a href="https://www.instagram.com/ferme_florale_les_5_saisons/">
+          <img class="image_reseau" src="../assets/instagram.png"></a>
+        </li>
+
+        <li><a href="https://www.instagram.com/ferme_florale_les_5_saisons/">
+          <img class="image_reseau" src="../assets/instagram.png"></a>
+        </li>
+
+        <li><a href="https://www.instagram.com/ferme_florale_les_5_saisons/">
+          <img class="image_reseau" src="../assets/instagram.png"></a>
+        </li>
+
+        <li><a href="https://www.instagram.com/ferme_florale_les_5_saisons/">
+          <img class="image_reseau" src="../assets/instagram.png"></a>
+        </li>
       </ul>
     </nav>
 
@@ -31,19 +45,33 @@
 
     <footer class="container">
       <div class="footer-links">
-        <a href="#about">About us</a> •
-        <a href="#features">Features</a> •
-        <a href="#example">User Example</a> •
-        <a href="#pricing">Pricing</a> •
-        <a href="#resources">Resources</a>
+        <li>
+          <router-link to="/">Accueil</router-link>
+        </li>
+        <li>
+          <router-link to="/catalogue_particulier">Catalogue particulier</router-link>
+        </li>
+        <li>
+          <router-link to="/catalogue_pro">Catalogue pro</router-link>
+        </li>
+        <li>
+          <!-- Utilisez le router-link ici directement -->
+          <router-link to="/espace_pro">Espace professionnel</router-link>
+        </li>
+        <li>
+          <!-- Utilisez le router-link ici directement -->
+          <router-link to="/notre_histoire">Notre histoire</router-link>
+        </li>
+        <li>
+          <!-- Utilisez le router-link ici directement -->
+          <router-link to="/bouquets">Bouquets</router-link>
+        </li>
+        <li>
+          <!-- Utilisez le router-link ici directement -->
+          <router-link to="/contact">Contact nous</router-link>
+        </li>
       </div>
       <small>© 2022 Company name. All rights reserved</small>
-      <div class="social-icons">
-        <a href="#" aria-label="Facebook"><i class="icon-facebook"></i></a>
-        <a href="#" aria-label="Twitter"><i class="icon-twitter"></i></a>
-        <a href="#" aria-label="Instagram"><i class="icon-instagram"></i></a>
-        <a href="#" aria-label="YouTube"><i class="icon-youtube"></i></a>
-      </div>
       <div>
         <a href="#terms">Terms Of Use</a> •
         <a href="#privacy">Privacy Policy</a>
@@ -65,6 +93,11 @@ export default {
 .logo {
   width: 10%;
 }
+
+.image_reseau {
+  width: 50px;
+}
+
 nav.container-fluid {
   display: flex;
   justify-content: space-between;
@@ -141,8 +174,14 @@ footer.container {
 }
 
 .footer-links, .social-icons, small {
-  display: block;
-  margin-top: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0.5rem;
+}
+
+li {
+  list-style-type: none;
 }
 
 </style>
