@@ -1,8 +1,8 @@
 <template>
   <div class="contenu">
     <Etage1ContenuVue ></Etage1ContenuVue>
-    <Etage2ContenueVueTextePuisImage class="test"></Etage2ContenueVueTextePuisImage>
-    <Etage2ContenueVueImagePuisTexte  class="test"></Etage2ContenueVueImagePuisTexte>
+    <Etage2ContenueVueImagePuisTexte></Etage2ContenueVueImagePuisTexte>
+    <Etage2ContenueVueTextePuisImage></Etage2ContenueVueTextePuisImage>
   </div>
 </template>
 
@@ -21,7 +21,7 @@ export default {
 <style scoped>
 
 .test {
-  height: 80vh;
+  height:50vh;
   width: 100%;
 }
 .contenu {

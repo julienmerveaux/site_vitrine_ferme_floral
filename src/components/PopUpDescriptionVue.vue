@@ -14,7 +14,7 @@
           </div>
         </div>
         <div class="button_popup">
-          <button class="popup-exit" @click="closePopup">Acheter</button>
+          <button class="popup-buy">Acheter</button>
           <button class="popup-exit" @click="closePopup">Fermer</button>
         </div>
 
@@ -99,14 +99,26 @@ const closePopup = () => {
 }
 
 .popup.open {
+  color: black;
   display: flex;
 }
 
 .popup-exit {
+  display: flex;
+  justify-content: end;
+  color: black;
   background-color: transparent;
   border: none;
   bottom: 100%;
   position: relative;
 
+}
+@media only screen and (max-width: 768px) {
+  .popup {
+    justify-content: start;
+  }
+  .popup_content {
+    width: 375px;
+  }
 }
 </style>

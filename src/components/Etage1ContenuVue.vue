@@ -68,4 +68,16 @@ export default {
 .gallery figure:hover img {
   transform: scale(1.05);
 }
+
+@media only screen and (max-width: 768px) {
+
+  .gallery {
+    display: grid;
+    justify-content: normal;
+    width: 357px;
+    grid-template-columns: repeat(2, 1fr);
+
+  }
+
+}
 </style>

@@ -1,82 +1,29 @@
 <template>
   <div class="footer">
-    <nav class="container-fluid">
-      <ul>
-        <li><img class="logo" src="../assets/Les%205%20saisons_RGB_Black.jpg"></li>
-      </ul>
-      <ul>
-        <li><a href="https://www.instagram.com/ferme_florale_les_5_saisons/">
-          <img class="image_reseau" src="../assets/instagram.png"></a>
-        </li>
-
-        <li><a href="https://www.instagram.com/ferme_florale_les_5_saisons/">
-          <img class="image_reseau" src="../assets/instagram.png"></a>
-        </li>
-
-        <li><a href="https://www.instagram.com/ferme_florale_les_5_saisons/">
-          <img class="image_reseau" src="../assets/instagram.png"></a>
-        </li>
-
-        <li><a href="https://www.instagram.com/ferme_florale_les_5_saisons/">
-          <img class="image_reseau" src="../assets/instagram.png"></a>
-        </li>
-
-        <li><a href="https://www.instagram.com/ferme_florale_les_5_saisons/">
-          <img class="image_reseau" src="../assets/instagram.png"></a>
-        </li>
-      </ul>
-    </nav>
-
     <main class="container">
-      <section aria-label="Subscribe example">
-        <div class="container">
-          <article>
-            <hgroup>
-              <h2>Subscribe Newsletters</h2>
-            </hgroup>
-            <form class="grid">
-              <input type="email" id="email" name="email" placeholder="Enter your email" aria-label="Email" required>
-              <button type="submit" onclick="event.preventDefault()">SUBSCRIBE NOW</button>
-            </form>
-          </article>
-        </div>
-      </section>
+      <div class="grid">
+        <!-- Main content can be added here -->
+      </div>
     </main>
-
+    <section aria-label="Subscribe to Newsletter">
+      <div class="container">
+        <article>
+          <hgroup>
+            <h2>Newsletter</h2>
+            <h3>Subscribe to Our Newsletter</h3>
+          </hgroup>
+          <form class="grid">
+            <input type="email" id="email" name="email" placeholder="Your Email" aria-label="Email Address" required />
+            <button type="submit" onclick="event.preventDefault()">Subscribe</button>
+          </form>
+        </article>
+      </div>
+    </section>
     <footer class="container">
-      <div class="footer-links">
-        <li>
-          <router-link to="/">Accueil</router-link>
-        </li>
-        <li>
-          <router-link to="/catalogue_particulier">Catalogue particulier</router-link>
-        </li>
-        <li>
-          <router-link to="/catalogue_pro">Catalogue pro</router-link>
-        </li>
-        <li>
-          <!-- Utilisez le router-link ici directement -->
-          <router-link to="/espace_pro">Espace professionnel</router-link>
-        </li>
-        <li>
-          <!-- Utilisez le router-link ici directement -->
-          <router-link to="/notre_histoire">Notre histoire</router-link>
-        </li>
-        <li>
-          <!-- Utilisez le router-link ici directement -->
-          <router-link to="/bouquets">Bouquets</router-link>
-        </li>
-        <li>
-          <!-- Utilisez le router-link ici directement -->
-          <router-link to="/contact">Contact nous</router-link>
-        </li>
-      </div>
-      <small>© 2022 Company name. All rights reserved</small>
-      <div>
-        <a href="#terms">Terms Of Use</a> •
-        <a href="#privacy">Privacy Policy</a>
-      </div>
+      <small><a href="#">Privacy Policy</a> • <a href="#">Terms of Service</a></small>
     </footer>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+
   </div>
 
 </template>

@@ -1,15 +1,15 @@
-
 <template>
-  <div class="general">
-    <img class="image" src="../assets/Ferme%20florale%20les%205%20saisons%201.jpg">
-    <fieldset class="texte">
-      <legend class="legend">Notre histoire</legend>
-      <H1>dezdfzefdzefezf</H1>
-      <span>salut</span>
-      <h3>43</h3>
-    </fieldset>
-  </div>
+  <main class="container">
+    <div class="text-side">
+      <h1>Bienvenue à notre ferme florale</h1>
+      <p>Découvrez notre passion pour la floriculture et notre engagement envers une agriculture durable. Plongez dans l'univers de nos fleurs de saison, cultivées avec amour et respect de la nature.</p>
+    </div>
+    <div class="image-side">
+      <img src="https://source.unsplash.com/600x400/?flowers" alt="Fleurs de la ferme">
+    </div>
+  </main>
 </template>
+
 
 <script setup>
 
@@ -17,38 +17,50 @@
 
 
 
+
 <style scoped>
-.general {
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.container {
   display: flex;
-  width: 100%;
-  height: 100%;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  padding: 2rem;
+}
+.text-side {
+  flex: 1;
+  max-width: 600px;
+}
+.text-side h1 {
+  color: #333;
+  font-size: 2rem;
+}
+.text-side p {
+  color: #666;
+  line-height: 1.6;
+}
+.image-side {
+  flex: 1;
+  text-align: center;
+  max-width: 600px;
+}
+.image-side img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+@media (max-width: 768px) {
+  .container {
+    display: flex;
+    flex-direction:column-reverse;
+    border:solid;
+    ;
+  }
+
 }
 
-.legend {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: solid;
-  background-color: white;
-  height: 50px;
-  width: 200px;
-  font-size: xx-large;
-}
-.image {
-  position: relative;
-  aspect-ratio: 1;
-  height: 80%;
-  left: 15%;
-  top:15%
-}
-.texte {
-  border:solid;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  width: 70%;
-  margin-left: 10px;
-  background-color: white;
-}
 </style>

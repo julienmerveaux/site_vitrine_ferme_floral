@@ -38,8 +38,8 @@ const fermerPopup = () => {
 <style scoped>
 
 .buttonAchat {
-  margin: 10px 100px;
   background-color: transparent;
+  color: black;
   border-radius: 5px;
   padding: 20px;
 }
