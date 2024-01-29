@@ -7,6 +7,7 @@
       </div>
     </div>
     <ContenuVue></ContenuVue>
+    <PiedDePageVue></PiedDePageVue>
     <FooterVue class="footer"></FooterVue>
   </div>
 </template>
@@ -17,10 +18,12 @@ import ContenuVue from "@/components/ContenuVue.vue";
 import HeaderVue from "@/components/HeaderVue.vue";
 import FooterVue from "@/components/FooterVue.vue";
 import ContactVue from "@/components/ContactVue.vue";
+import PiedDePageVue from "@/components/PiedDePageVue.vue";
 
 export default {
   name: 'HomePage',
   components: {
+    PiedDePageVue,
     ContactVue,
     ContenuVue,
     HeaderVue,

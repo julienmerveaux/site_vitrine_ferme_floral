@@ -57,7 +57,7 @@ body {
   .container {
     display: flex;
     flex-direction: column;
-    border:solid;
+    padding: 0;
   }
 }
 

@@ -1,13 +1,14 @@
 <template>
   <div class="footer">
-    <main class="container">
-      <div class="grid">
-        <!-- Main content can be added here -->
-      </div>
-    </main>
     <section aria-label="Subscribe to Newsletter">
       <div class="container">
-        <article>
+        <article class="backgroundArticle">
+          <div class="reseau">
+            <img class="image" src="../assets/instagram.png">
+            <img class="image" src="../assets/instagram.png">
+            <img class="image" src="../assets/instagram.png">
+            <img class="image" src="../assets/instagram.png">
+          </div>
           <hgroup>
             <h2>Newsletter</h2>
             <h3>Subscribe to Our Newsletter</h3>
@@ -37,12 +38,12 @@ export default {
 
 <style scoped>
 
-.logo {
-  width: 10%;
+.backgroundArticle {
+  background-color: white;
 }
+.footer {
+  background: #f8f9fa; /* Couleur de fond légère pour le footer */
 
-.image_reseau {
-  width: 50px;
 }
 
 nav.container-fluid {
@@ -130,5 +131,11 @@ footer.container {
 li {
   list-style-type: none;
 }
+
+.image {
+  height: 50px;
+  margin-left: 10px;
+}
+
 
 </style>

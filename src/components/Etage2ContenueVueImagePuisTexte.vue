@@ -57,7 +57,8 @@ body {
   .container {
     display: flex;
     flex-direction:column-reverse;
-    border:solid;
+    margin-bottom: 10px;
+    padding: 0;
     ;
   }
 

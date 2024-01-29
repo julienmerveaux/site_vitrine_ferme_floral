@@ -1,21 +1,16 @@
 <template>
-  <div>
-    <HeaderVue/>
-    <FormulaireVue/>
-  </div>
+  <HeaderVue></HeaderVue>
+  <EspaceProVue></EspaceProVue>
+  <FooterVue></FooterVue>
 </template>
-
 
 <script setup>
 
-
+import EspaceProVue from "@/components/EspaceProVue.vue";
 import HeaderVue from "@/components/HeaderVue.vue";
-import FormulaireVue from "@/components/Espace_pro.vue";
+import FooterVue from "@/components/FooterVue.vue";
 </script>
 
-
 <style scoped>
-
-
 
 </style>

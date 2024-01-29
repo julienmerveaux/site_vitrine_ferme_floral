@@ -3,7 +3,7 @@
     <div class="general_espace_pro">
       <main class="container">
         <div class="contact-header">
-          <h1>Contactez-nous</h1>
+          <h1>Espace professionnel</h1>
           <p>Nous sommes là pour répondre à toutes vos questions. Remplissez le formulaire ci-dessous et nous vous répondrons dans les plus brefs délais.</p>
         </div>
 
@@ -12,36 +12,36 @@
 
             <div class="form-group">
               <label for="sujet">Sujet</label>
-              <input class="button" type="text" id="sujet" name="sujet" required>
+              <input type="text" id="sujet" name="sujet" required>
             </div>
 
             <div class="form-group">
               <label for="prenom">Prenom</label>
-              <input class="button" type="text" id="prenom" name="prenom" required>
+              <input type="text" id="prenom" name="prenom" required>
             </div>
 
             <div class="form-group">
               <label for="email">Votre adresse e-mail</label>
-              <input class="button" type="email" id="email" name="email" required>
+              <input type="email" id="email" name="email" required>
             </div>
 
             <div class="form-group">
               <label for="telephone">Votre téléphone</label>
-              <input class="button" type="tel" id="telephone" name="telephone" required>
+              <input type="tel" id="telephone" name="telephone" required>
             </div>
 
             <div class="form-group">
               <label for="name_entreprises">Nom de l'entreprise</label>
-              <input class="button" type="text" id="name_entreprises" name="name_entreprises" required>
+              <input type="text" id="name_entreprises" name="name_entreprises" required>
             </div>
 
             <div class="form-group">
               <label for="message">Message</label>
-              <textarea class="button" id="message" name="message"></textarea>
+              <textarea id="message" name="message"></textarea>
             </div>
 
             <div class="form-group">
-              <button class="button" type="submit">Envoyer</button>
+              <button type="submit">Envoyer</button>
             </div>
           </form>
         </div>
@@ -66,10 +66,6 @@ body {
   max-width: 800px;
   margin: 0 auto;
   padding: 2rem;
-}
-
-.button {
-  background-color: white
 }
 
 .contact-header {

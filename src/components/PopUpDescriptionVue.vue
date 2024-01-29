@@ -120,5 +120,15 @@ const closePopup = () => {
   .popup_content {
     width: 375px;
   }
+  .popup_general {
+    flex-direction: column;
+  }
+  .popup_droite {
+    width: 100%;
+    height: 100%;
+  }
+  .popup_gauche {
+    width: 100%;
+  }
 }
 </style>
