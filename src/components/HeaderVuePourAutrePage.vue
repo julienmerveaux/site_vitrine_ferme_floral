@@ -21,7 +21,7 @@
             <router-link class=colorRouter to="/catalogue_pro">Catalogue pro</router-link>
           </li>
           <li class="li-center">
-            <router-link class=colorRouter to="/qui-je-suis">Qui je suis</router-link>
+            <router-link class=colorRouter to="/qui-je-suis">Qui suis-je</router-link>
           </li>
           <li class="li-center">
             <router-link class=colorRouter to="/bouquets">Bouquets</router-link>
@@ -80,6 +80,8 @@ export default {
 .menu-toggle {
   display: none;
   cursor: pointer;
+  color: black;
+  margin: 10px;
 }
 
 .image {

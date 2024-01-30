@@ -21,7 +21,7 @@
             <router-link class=colorRouter to="/catalogue_pro">Catalogue pro</router-link>
           </li>
           <li class="li-center">
-            <router-link class=colorRouter to="/qui-je-suis">Qui je suis</router-link>
+            <router-link class=colorRouter to="/qui-je-suis">Qui suis-je</router-link>
           </li>
           <li class="li-center">
             <router-link class=colorRouter to="/bouquets">Bouquets</router-link>
@@ -81,6 +81,8 @@ export default {
 .menu-toggle {
   display: none;
   cursor: pointer;
+  color: white;
+  margin: 10px;
 }
 
 
@@ -116,7 +118,7 @@ export default {
   justify-content: center;
   width: 100%;
   gap: 20px;
-  text-decoration:;
+
 }
 
 /* Style pour les écrans de téléphone */
