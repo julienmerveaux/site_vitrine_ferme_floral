@@ -1,11 +1,11 @@
 <template>
   <main class="container">
-    <div class="image-side">
-      <img src="https://source.unsplash.com/600x400/?flowers" alt="Fleurs de la ferme">
-    </div>
     <div class="text-side">
-      <h1>Bienvenue à notre ferme florale</h1>
-      <p>ezfezfezDécouvrez notre passion pour la floriculture et notre engagement envers une agriculture durable. Plongez dans l'univers de nos fleurs de saison, cultivées avec amour et respect de la nature.</p>
+      <h1>{{ title }}</h1>
+      <p>{{ text }}</p>
+    </div>
+    <div class="image-side">
+      <img :src="imageUrl" alt="Fleurs de la ferme">
     </div>
   </main>
 </template>
@@ -13,12 +13,23 @@
 
 <script setup>
 
+const props = defineProps({
+  title: String,
+  text: String,
+  imageUrl: String
+})
+
 </script>
 
 
 
 
 <style scoped>
+
+p {
+  justify-content: center;
+}
+
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
@@ -31,6 +42,7 @@ body {
   padding: 2rem;
 }
 .text-side {
+  text-align: center;
   flex: 1;
   max-width: 600px;
 }
@@ -56,9 +68,12 @@ body {
 @media (max-width: 768px) {
   .container {
     display: flex;
-    flex-direction: column;
+    flex-direction:column-reverse;
+    margin-bottom: 10px;
     padding: 0;
+  ;
   }
+
 }
 
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <HeaderVue/>
+  <HeaderVuePourAutrePage/>
   <div class="generalCatalogue">
 
     <CardCatalogueParticulierVue/>
@@ -16,16 +16,18 @@
     <CardCatalogueParticulierVue/>
 
   </div>
-  <FooterVue/>
+<PiedDePageVue></PiedDePageVue>
 
 </template>
 
 <script setup>
 
 import CardCatagueProVue from "@/components/CardCatalogueParticulierVue.vue";
-import HeaderVue from "@/components/HeaderVue.vue";
+import HeaderVue from "@/components/HeaderVuePourHomePage.vue";
 import FooterVue from "@/components/FooterVue.vue";
 import CardCatalogueParticulierVue from "@/components/CardCatalogueParticulierVue.vue";
+import PiedDePageVue from "@/components/PiedDePageVue.vue";
+import HeaderVuePourAutrePage from "@/components/HeaderVuePourAutrePage.vue";
 </script>
 
 

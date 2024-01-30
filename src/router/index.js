@@ -25,7 +25,7 @@ const router = createRouter({
       component: () => import('@/views/CatalogueProView.vue')
     },
     {
-      path: '/notre_histoire',
+      path: '/qui-je-suis',
       name: 'notre_histoire',
       component: () => import('@/views/PageHistoireView.vue')
     },

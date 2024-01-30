@@ -13,7 +13,9 @@
           <h3>quantité : 35</h3>
 
         </div>
-        <button class="buttonAchat" @click="afficherPopup">Voir plus</button>
+        <div class="info">
+          <button class="buttonAchat" @click="afficherPopup">Voir plus</button>
+        </div>
         <PopUpDescriptionVue v-if="popupVisible" @fermerPopup="fermerPopup"/>
       </article>
     </section>
@@ -37,6 +39,12 @@ const fermerPopup = () => {
 
 <style scoped>
 
+.info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
 .buttonAchat {
   background-color: transparent;
   color: black;

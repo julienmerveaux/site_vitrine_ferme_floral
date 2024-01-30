@@ -4,9 +4,9 @@
       <div class="menu-toggle" @click="toggleMenu" v-show="isMobile">☰</div>
       <ul class="nav-menu" v-show="!isMobile || isMenuVisible">
         <li class="site-title">
-          <button class="image">
+          <button class="boutton">
             <router-link to="/">
-              <img src="../assets/Les_5_saisons_RGB_Black.png">
+              <img class="image" src="../assets/Les_5_saisons_RGB_Black.png">
             </router-link>
           </button>
         </li>
@@ -21,7 +21,7 @@
             <router-link class=colorRouter to="/catalogue_pro">Catalogue pro</router-link>
           </li>
           <li class="li-center">
-            <router-link class=colorRouter to="/notre_histoire">Notre histoire</router-link>
+            <router-link class=colorRouter to="/qui-je-suis">Qui je suis</router-link>
           </li>
           <li class="li-center">
             <router-link class=colorRouter to="/bouquets">Bouquets</router-link>
@@ -38,7 +38,7 @@
 
 <script>
 export default {
-  name: "HeaderVue",
+  name: "HeaderVuePourAutrePage",
   data() {
     return {
       isMenuVisible: false,
@@ -64,20 +64,28 @@ export default {
 </script>
 
 <style scoped>
-.colorRouter {
-  color: black;
+
+.boutton {
+  background-color: transparent;
+  border: none;
 }
+
+.colorRouter {
+  font-family: 'Belleza', sans-serif;
+  color: black;
+  text-decoration: none;
+  font-size: x-large;
+}
+
 .menu-toggle {
   display: none;
   cursor: pointer;
 }
 
-
-
 .image {
   height: 150px;
   width: 179px;
-  padding:0;
+  padding: 0;
   border: none;
   background-color: transparent;
 }
@@ -104,6 +112,7 @@ export default {
   display: flex;
   justify-content: center;
   width: 100%;
+  gap: 20px;
 }
 
 /* Style pour les écrans de téléphone */
