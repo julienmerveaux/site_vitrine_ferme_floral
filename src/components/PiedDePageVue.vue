@@ -13,11 +13,11 @@
         referrerpolicy="no-referrer-when-downgrade"></iframe>
     <div class="newsletter-container">
       <h2>Inscrivez-vous à notre Newsletter</h2>
-      <p>Recevez les dernières nouvelles et mises à jour.</p>
-      <form action="#" method="post" class="newsletter-form">
-        <input type="email" name="email" placeholder="Entrez votre email" required>
-        <button type="submit">S'abonner</button>
-      </form>
+      <div class="divDoubleForm">
+        <p>Recevez les dernières nouvelles et mises à jour.</p>
+        <iframe class="form" src="https://heyflow.id/f2d20b34-9948-4494-b2bc-b9033a0dec0a#start"></iframe>
+      </div>
+
     </div>
   </footer>
 </template>
@@ -28,17 +28,23 @@
 
 <style scoped>
 
-
+.divDoubleForm {
+  height: 325px;
+}
+.form {
+  height: 100%;
+  border: none;
+}
 .newsletter-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   background-color: #f9f9f9; /* Couleur de fond douce */
-  padding: 2rem;
+  padding-bottom:50px;
   border-radius: 10px;
   text-align: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 0;
 }
 
 .newsletter-container h2 {
@@ -81,10 +87,12 @@
 }
 
 .footer {
-  display: flex;
+  display: grid;
   justify-content: center;
   padding: 20px 0;
   background: #f8f9fa; /* Couleur de fond légère pour le footer */
+  grid-template-columns: repeat(3,1fr);
+
 }
 
 .footer img {
@@ -102,11 +110,11 @@
 
 @media (max-width: 1427px) {
   .footer {
-    display: flex;
     justify-content: center;
     flex-direction: column;
     text-align: center;
     align-items: center;
+    grid-template-columns: repeat(1,1fr);
   }
 
   .footer img {
@@ -124,5 +132,10 @@
   .footer-details {
     margin-right: 0;
   }
+  .newsletter-container {
+    height: 100%;
+    margin-bottom: 0;
+  }
+
 }
 </style>

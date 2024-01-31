@@ -14,7 +14,9 @@ insectes sont nos alliés ! Nos fleurs poussent en pleine terre, en extérieur o
 abri non chauffé en respectant les saisons.
 Les fleurs ont toujours été pour moi une passion, j’ai quitté la profession de
 fleuriste durant plusieurs années, mais le monde des fleurs n’est jamais très
-loin... Je reviens donc à mon métier passionnant tout en produisant mes propres "
+loin... Je reviens donc à mon métier passionnant tout en produisant mes propres
+fleurs ! A la ferme florale Les 5 Saisons, les fleurs vont un seul voyage.... De la
+terre au bouquet"
         :imageUrl="imageUrl"
     />
   </div>
@@ -42,6 +44,5 @@ export default {
 <style scoped>
 .contenu {
   gap: 20px;
-  text-align: center;
 }
 </style>

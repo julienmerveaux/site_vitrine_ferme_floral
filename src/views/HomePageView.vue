@@ -61,4 +61,10 @@ export default {
   height: 100%;
   gap: 10px;
 }
+
+@media (max-width: 600px) {
+  .imageAccueil {
+    background-image: url("../assets/test2t.webp")
+  }
+}
 </style>

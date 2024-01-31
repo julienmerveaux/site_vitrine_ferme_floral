@@ -15,16 +15,16 @@
             <router-link class=colorRouter to="/">Accueil</router-link>
           </li>
           <li class="li-center">
-            <router-link class=colorRouter to="/espace_pro">Espace professionnel</router-link>
+            <router-link class=colorRouter to="/qui-je-suis">Qui suis-je</router-link>
           </li>
           <li class="li-center">
             <router-link class=colorRouter to="/catalogue_pro">Catalogue pro</router-link>
           </li>
           <li class="li-center">
-            <router-link class=colorRouter to="/qui-je-suis">Qui suis-je</router-link>
+            <router-link class=colorRouter to="/bouquets">Bouquets</router-link>
           </li>
           <li class="li-center">
-            <router-link class=colorRouter to="/bouquets">Bouquets</router-link>
+            <router-link class=colorRouter to="/espace_pro">Espace professionnel</router-link>
           </li>
           <li class="li-center">
             <router-link class=colorRouter to="/contact">Contact</router-link>
