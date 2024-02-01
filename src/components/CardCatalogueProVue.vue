@@ -7,7 +7,7 @@
           <div class="card__img--hover"></div>
         </a>
         <div class="card__info">
-          <span class="card__category"> Fleur séché</span>
+          <span class="card__category"> Fleur séchée</span>
           <h3 class="card__title">PHLOX PANICULATA PAX</h3>
           <span class="card__price">3.75€</span>
           <h3>quantité : 35</h3>

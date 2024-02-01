@@ -39,7 +39,11 @@ const router = createRouter({
       name: 'contact',
       component: () => import('@/views/ContactView.vue')
     }
-  ]
+  ],
+  scrollBehavior(to, from, savedPosition) {
+    // Réinitialise le scroll à la position supérieure (0, 0) à chaque changement de page.
+    return { left: 0, top: 0 }
+  },
 })
 
 export default router

@@ -11,12 +11,12 @@
           <form action="#" method="post">
 
             <div class="form-group">
-              <label for="sujet">Sujet</label>
-              <input class="button" type="text" id="sujet" name="sujet" required>
+              <label for="nom">Nom</label>
+              <input class="button" type="text" id="nom" name="nom" required>
             </div>
 
             <div class="form-group">
-              <label for="prenom">Prenom</label>
+              <label for="prenom">Prénom</label>
               <input class="button" type="text" id="prenom" name="prenom" required>
             </div>
 
@@ -31,8 +31,8 @@
             </div>
 
             <div class="form-group">
-              <label for="name_entreprises">Nom de l'entreprise</label>
-              <input class="button" type="text" id="name_entreprises" name="name_entreprises" required>
+              <label for="sujet">Sujet</label>
+              <input class="button" type="text" id="sujet" name="sujet" required>
             </div>
 
             <div class="form-group">

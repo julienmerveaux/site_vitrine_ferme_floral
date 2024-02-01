@@ -1,25 +1,49 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
+import HeaderVue from "@/components/HeaderVue.vue";
+import PiedDePageVue from "@/components/PiedDePageVue.vue";
+import ContenuVue from "@/components/ContenuVue.vue";
 
 </script>
 
 <template>
-  <RouterView />
+  <div class="app">
+    <HeaderVue class="header"></HeaderVue>
+    <div class="content">
+      <RouterView />
+    </div>
+    <PiedDePageVue></PiedDePageVue>
+  </div>
 </template>
 
 <style scoped>
-#app {
-  display: none;
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Fait en sorte que l'application occupe au moins toute la hauteur de la fenêtre */
 }
 
-.colorRouter {
-  color: black;
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #ffffff; /* Ajoutez une couleur de fond si nécessaire */
+  z-index: 1000; /* Assurez-vous que l'en-tête est au-dessus du contenu */
 }
-body {
 
+
+.content {
+  flex-grow: 1; /* Fait en sorte que le contenu prenne toute la hauteur restante */
+  padding-top: 153px/* Hauteur de l'en-tête (ajoutez la hauteur de l'en-tête ici) */;
+  /* Ajoutez d'autres styles pour le contenu si nécessaire */
+}
+
+.footer {
+  /* Styles pour votre pied de page */
+}
+
+@media  {
+  
 }
 </style>

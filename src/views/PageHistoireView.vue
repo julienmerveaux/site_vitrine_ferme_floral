@@ -1,5 +1,4 @@
 <template>
-  <HeaderVuePourAutrePage/>
   <Etage2ContenueVueImagePuisTexte
       title="Qui suis-je"
       text="Mes fleurs sont cultivées près de Lyon, de Saint-Etienne et de Clermont-Ferrand
@@ -17,16 +16,11 @@ donc formé pendant plusieurs moi et j’ai été accompagné pour créer ma fer
 florale."
       :imageUrl="imageUrl"
   />
-  <PiedDePageVue/>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue';
 import Etage2ContenueVueImagePuisTexte from "@/components/Etage2ContenueVueImagePuisTexte.vue";
-import HeaderVue from "@/components/HeaderVuePourHomePage.vue";
-import FooterVue from "@/components/FooterVue.vue";
-import PiedDePageVue from "@/components/PiedDePageVue.vue";
-import HeaderVuePourAutrePage from "@/components/HeaderVuePourAutrePage.vue";
 
 // Use a ref to hold the image URL
 const imageUrl = ref('');

@@ -4,19 +4,20 @@
       <main class="container">
         <div class="contact-header">
           <h1>Espace professionnel</h1>
-          <p>Nous sommes là pour répondre à toutes vos questions. Remplissez le formulaire ci-dessous et nous vous répondrons dans les plus brefs délais.</p>
+          <p>Nous sommes là pour répondre à toutes vos questions. Remplissez le formulaire ci-dessous et nous vous
+            répondrons dans les plus brefs délais.</p>
         </div>
 
         <div class="contact-form">
           <form action="#" method="post">
 
             <div class="form-group">
-              <label for="sujet">Sujet</label>
-              <input type="text" id="sujet" name="sujet" required>
+              <label for="nom">Nom</label>
+              <input type="text" id="nom" name="nom" required>
             </div>
 
             <div class="form-group">
-              <label for="prenom">Prenom</label>
+              <label for="prenom">Prénom</label>
               <input type="text" id="prenom" name="prenom" required>
             </div>
 
@@ -33,6 +34,16 @@
             <div class="form-group">
               <label for="name_entreprises">Nom de l'entreprise</label>
               <input type="text" id="name_entreprises" name="name_entreprises" required>
+            </div>
+
+            <div class="form-group">
+              <label for="numero_siret">Numéro de siret</label>
+              <input type="number" id="numero_siret" name="numero_siret" required>
+            </div>
+
+            <div class="form-group">
+              <label for="sujet">Sujet</label>
+              <input type="text" id="sujet" name="sujet" required>
             </div>
 
             <div class="form-group">

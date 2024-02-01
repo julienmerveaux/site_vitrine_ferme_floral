@@ -24,11 +24,11 @@
             <router-link class=colorRouter to="/bouquets">Bouquets</router-link>
           </li>
           <li class="li-center">
-            <router-link class=colorRouter to="/espace_pro">Espace professionnel</router-link>
-          </li>
-          <li class="li-center">
             <router-link class=colorRouter to="/contact">Contact</router-link>
           </li>
+        </div>
+        <div class="li-divDroite">
+          <router-link class="colorRouter colorTexte" to="/espace_pro">Espace professionnel</router-link>
         </div>
 
       </ul>
@@ -38,10 +38,10 @@
 
 <script>
 export default {
-  name: "HeaderVuePourAutrePage",
+  name: "HeaderVue",
   data() {
     return {
-      isMenuVisible: false,
+      isMenuVisible: true,
       isMobile: false,
     };
   },
@@ -65,24 +65,38 @@ export default {
 
 <style scoped>
 
+.header {
+  position: fixed;
+  width: 100%;
+  z-index:100;
+}
 .boutton {
   background-color: transparent;
   border: none;
 }
 
+.colorTexte {
+  color:white !important;
+  border: 1px solid;
+  background-color: #1bc71b;
+  border-radius: 10px;
+  padding: 5px;
+}
 .colorRouter {
-  font-family: 'Belleza', sans-serif;
   color: black;
+  font-family: 'Belleza', sans-serif;
   text-decoration: none;
   font-size: x-large;
+  font-weight: bold;
 }
 
 .menu-toggle {
   display: none;
   cursor: pointer;
-  color: black;
+  color: white;
   margin: 10px;
 }
+
 
 .image {
   height: 150px;
@@ -90,6 +104,7 @@ export default {
   padding: 0;
   border: none;
   background-color: transparent;
+  filter: saturate(0%);
 }
 
 .nav-menu {
@@ -98,6 +113,7 @@ export default {
   padding: 0;
   margin: 0;
   width: 100%;
+  background-color: white;
 }
 
 .nav-item {
@@ -115,6 +131,12 @@ export default {
   justify-content: center;
   width: 100%;
   gap: 20px;
+}
+.li-divDroite {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20%;
 }
 
 /* Style pour les écrans de téléphone */
@@ -134,6 +156,14 @@ export default {
 
   .li-divCenter {
     flex-direction: column;
+  }
+}
+
+@media (min-width:601px) and (max-width: 1050px) {
+  .li-divCenter {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 </style>

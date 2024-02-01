@@ -36,7 +36,6 @@ export default {
 <style scoped>
 
 .container {
-  margin: 50px auto;
   max-width: 100%;
   padding: 0 15px;
 }
@@ -45,7 +44,6 @@ export default {
   position: relative;
   width: 100%;
   margin-bottom: 30px;
-  border: 1px solid;
   border-radius: 10px 10px 0 0;
   overflow: hidden; /* Assure that nothing goes outside the border */
   box-shadow: 0 5px 5px #c4c0c0;
