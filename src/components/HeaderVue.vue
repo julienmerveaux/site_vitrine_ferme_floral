@@ -15,7 +15,7 @@
             <router-link class=colorRouter to="/">Accueil</router-link>
           </li>
           <li class="li-center">
-            <router-link class=colorRouter to="/qui-je-suis">Qui suis-je</router-link>
+            <router-link class=colorRouter to="/qui-je-suis">À propos</router-link>
           </li>
           <li class="li-center">
             <router-link class=colorRouter to="/catalogue_pro">Catalogue pro</router-link>
@@ -68,36 +68,8 @@ export default {
 .header {
   position: fixed;
   width: 100%;
-  z-index:100;
+  z-index: 100;
 }
-.boutton {
-  background-color: transparent;
-  border: none;
-}
-
-.colorTexte {
-  color:white !important;
-  border: 1px solid;
-  background-color: #1bc71b;
-  border-radius: 10px;
-  padding: 5px;
-}
-.colorRouter {
-  color: black;
-  font-family: 'Belleza', sans-serif;
-  text-decoration: none;
-  font-size: x-large;
-  font-weight: bold;
-}
-
-.menu-toggle {
-  display: none;
-  cursor: pointer;
-  color: white;
-  margin: 10px;
-}
-
-
 .image {
   height: 150px;
   width: 179px;
@@ -105,65 +77,57 @@ export default {
   border: none;
   background-color: transparent;
   filter: saturate(0%);
+  color: #090909;
+}
+.boutton {
+  background-color: transparent;
+  border: none;
+}
+
+.colorTexte, .colorRouter {
+  /* Utiliser des unités relatives pour les marges, les paddings et les font-sizes */
+  padding: 5px;
+  font-size: calc(1vw + 1vh + 0.5vmin); /* Ajuste la taille de police dynamiquement */
+  text-decoration: none;
+  color: black;
+  font-family: 'Belleza', sans-serif;
+  font-weight: bold;
+  font-size: x-large;
+}
+
+.menu-toggle {
+  cursor: pointer;
+  color: black;
+  margin: 10px;
+  position: fixed;
 }
 
 .nav-menu {
   display: flex;
+  align-items: center; /* Centre les éléments pour les petits écrans */
+  justify-content: space-around;
   list-style-type: none;
   padding: 0;
   margin: 0;
   width: 100%;
-  background-color: white;
-}
-
-.nav-item {
-  margin-right: 20px;
-}
-
-.li-center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  transition: all 0.5s ease; /* Transition douce pour l'apparition du menu */
 }
 
 .li-divCenter {
   display: flex;
-  justify-content: center;
-  width: 100%;
-  gap: 20px;
 }
-.li-divDroite {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 20%;
+.nav-menu > * {
+/* Flex pour permettre aux éléments de s'adapter*/
 }
 
-/* Style pour les écrans de téléphone */
 @media (max-width: 600px) {
-  .menu-toggle {
-    display: block;
+  .li-divCenter {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
   }
-
   .nav-menu {
-    display: flex;
     flex-direction: column;
-    width: 100%;
-    top: 48px;
-    left: 0;
-    background-color: transparent;
-  }
-
-  .li-divCenter {
-    flex-direction: column;
-  }
-}
-
-@media (min-width:601px) and (max-width: 1050px) {
-  .li-divCenter {
-    display: grid;
-    justify-content: center;
-    grid-template-columns: repeat(3, 1fr);
   }
 }
 </style>

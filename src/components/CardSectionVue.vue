@@ -1,7 +1,7 @@
 <template>
   <main>
     <div class="card">
-      <img :src="imageUrl" alt="logo">
+      <img class="image" :src="imageUrl" alt="logo">
       <H1 class="titre"> {{ title }}</H1>
       <H3 class="text"> {{ text }}</H3>
     </div>
@@ -22,6 +22,10 @@ const props = defineProps({
   margin: 0;
 }
 
+.image {
+  width: 10%;
+
+}
 .text {
   text-align: center;
   font-weight: normal;
@@ -33,6 +37,13 @@ const props = defineProps({
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 100%;
 
+}
+
+@media (max-width: 1175px) {
+  .text {
+    padding: 0 10px 0 10px;
+  }
 }
 </style>

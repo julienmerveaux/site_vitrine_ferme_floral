@@ -1,9 +1,3 @@
-<script>
-export default {
-  name: "Etage1ContenuVue"
-}
-</script>
-
 <template>
   <main class="container">
     <div class="grid">
@@ -34,7 +28,6 @@ export default {
 </template>
 
 <style scoped>
-
 .container {
   max-width: 100%;
   padding: 0 15px;
@@ -45,7 +38,7 @@ export default {
   width: 100%;
   margin-bottom: 30px;
   border-radius: 10px 10px 0 0;
-  overflow: hidden; /* Assure that nothing goes outside the border */
+  overflow: hidden;
   box-shadow: 0 5px 5px #c4c0c0;
 }
 
@@ -67,13 +60,13 @@ export default {
   width: 100%;
   bottom: 0;
   left: 0;
-  z-index: 10; /* Below the button, above the image */
+  z-index: 10;
 }
 
 .vague {
   position: absolute;
   width: 100%;
-  bottom: -1px; /* Align the wave to the bottom */
+  bottom: -1px;
   left: 0;
   fill: #ffffff;
 }
@@ -84,15 +77,23 @@ export default {
   display: block;
 }
 
-@media (min-width: 600px) {
+@media (min-width: 751px) {
   .grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 10px;
   }
+  .image-button {
+    padding: 0;
+    font-size: large;
+  }
+  .divBouton {
+    padding: 5px 0;
+
+  }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 750px) {
   .grid {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
@@ -100,10 +101,20 @@ export default {
   }
 
   .image-button {
-    padding: 5px 7px;
+    padding: 10px 10px; /* Augmenter la taille du bouton pour les écrans plus petits */
   }
 }
 
-
-
+@media (min-width: 1075px) {
+  .image-button {
+    font-size: x-large;
+    padding: 0 10px;
+  }
+}
+@media (min-width: 1265px) {
+  .image-button {
+    font-size: x-large;
+    padding: 3% 5%;
+  }
+}
 </style>

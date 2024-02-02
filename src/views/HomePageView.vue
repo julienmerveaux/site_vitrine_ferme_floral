@@ -8,18 +8,18 @@
     </div>
     <div class="sectionCard">
       <CardSectionVue
-          title="Sobre"
+          title="Local"
           text="Nos fleurs sont cultivées par des producteurs locaux au plus près de chez vous, soit -90% d’émissions carbone."
           :imageUrl="imageUrl1"
       ></CardSectionVue>
       <CardSectionVue
           title="Locales"
-          text="Nos fleurs soutiennent les horticulteurs et le commerce de proximité : elles contribuent au maintien des emplois de votre région."
+          text="Des fleurs locales, 100% bio, 100% éthique et cultivées aux rythmes des saisons"
           :imageUrl="imageUrl2"
       ></CardSectionVue>
       <CardSectionVue
           title="De saison"
-          text="Nos fleurs sont cultivées en plein champ ou en serres non chauffées et non éclairées, dans le respect de leur saisonnalité."
+          text="Ici nous respectons la faune et la flore, de la terre au vase....il n'y a qu'un pas!"
           :imageUrl="imageUrl3"
       ></CardSectionVue>
     </div>
@@ -33,18 +33,17 @@
 import ContenuVue from "@/components/ContenuVue.vue";
 import HeaderVue from "@/components/HeaderVue.vue";
 import CardSectionVue from "@/components/CardSectionVue.vue";
-import visageAudrey from "@/assets/visageAudrey.png";
-import icon_monde from "@/assets/icon_monde.png"
-import icons_marqueur from "@/assets/icons_marqueur.png"
-import icons_soleil from "@/assets/icons_soleil.png"
+import localisation from "@/assets/localisation.png"
+import fullTime from "@/assets/tout_les_temps.png"
+import planteVert from "@/assets/plante_vert.png"
 
 export default {
   name: 'HomePage',
   data() {
     return {
-      imageUrl1: icons_soleil,
-      imageUrl2: icon_monde,
-      imageUrl3: icons_marqueur
+      imageUrl1:localisation ,
+      imageUrl2: fullTime,
+      imageUrl3: planteVert
     }
   },
   components: {
@@ -100,7 +99,13 @@ export default {
 
 @media (max-width: 600px) {
   .imageAccueil {
-    background-image: url("../assets/test2t.webp")
+    background-image: url("../assets/nature-3333236_640.jpg");
+    display: flex;
+    justify-content: center;
+  }
+  .conteneurTexte {
+    width: 100%;
+    height: 100%;
   }
   .sectionCard {
     grid-template-columns: repeat(1,1fr);

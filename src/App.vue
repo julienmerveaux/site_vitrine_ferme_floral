@@ -43,7 +43,9 @@ import ContenuVue from "@/components/ContenuVue.vue";
   /* Styles pour votre pied de page */
 }
 
-@media  {
-  
+@media  (max-width: 600px){
+  .content {
+    padding-top: 0;
+  }
 }
 </style>
