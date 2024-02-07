@@ -5,7 +5,7 @@
     </div>
     <div class="text-side">
       <h1>{{ title }}</h1>
-      <p>{{ text }}</p>
+      <p class="textSize">{{ text }}</p>
     </div>
   </main>
 </template>
@@ -45,6 +45,9 @@ body {
   text-align: center;
   flex: 1;
   max-width: 600px;
+}
+.textSize {
+  padding-right: 5px;
 }
 .text-side h1 {
   color: #333;

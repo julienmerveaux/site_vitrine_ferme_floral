@@ -2,8 +2,8 @@
   <div class="body">
     <div class="imageAccueil">
       <div class="conteneurTexte">
-        <H1 class="H1Style"> Hello word !</H1>
-        <H3> Nos fleurs sont cultivées par des producteurs locaux au plus près de chez vous, soit -90% d’émissions carbone. </H3>
+        <H1 class="H1Style"> Bienvenue à le Ferme Florale Les 5 Saisons</H1>
+        <H3> Nos fleurs 100% en agriculture biologique, 100% de saison, cultivées avec 100% d'amour!. </H3>
       </div>
     </div>
     <div class="sectionCard">
@@ -58,6 +58,7 @@ export default {
 
 .H1Style {
   margin: 0;
+  font-weight: bold;
 }
 .sectionCard {
   display: grid;
@@ -69,7 +70,7 @@ export default {
 
 .imageAccueil {
   background-image: url("../assets/nature-3333236_1920.jpg");
-
+  background-size: cover;
   width: 100%;
   height: 60vh;
   background-repeat: no-repeat;
@@ -99,7 +100,7 @@ export default {
 
 @media (max-width: 600px) {
   .imageAccueil {
-    background-image: url("../assets/nature-3333236_640.jpg");
+    background-image: url("../assets/nature-3333236_1920.jpg");
     display: flex;
     justify-content: center;
   }

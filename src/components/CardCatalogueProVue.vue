@@ -178,5 +178,11 @@ body {
   opacity: 1;
 }
 
+@media (max-width: 600px) {
+  .card {
+    margin-right: 0;
+  }
+}
+
 
 </style>

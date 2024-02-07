@@ -46,6 +46,7 @@ import ContenuVue from "@/components/ContenuVue.vue";
 @media  (max-width: 600px){
   .content {
     padding-top: 0;
+    margin-top: 50px;
   }
 }
 </style>

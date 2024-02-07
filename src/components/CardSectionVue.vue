@@ -38,7 +38,6 @@ const props = defineProps({
   flex-direction: column;
   align-items: center;
   height: 100%;
-
 }
 
 @media (max-width: 1175px) {

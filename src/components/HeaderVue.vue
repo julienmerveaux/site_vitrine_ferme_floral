@@ -28,7 +28,8 @@
           </li>
         </div>
         <div class="li-divDroite">
-          <router-link class="colorRouter colorTexte" to="/espace_pro">Espace professionnel</router-link>
+          <router-link class="colorRouter colorTexte" to="/inscription">S'inscrire</router-link>
+          <router-link class="colorRouter colorTexte" to="/login">Se connecter</router-link>
         </div>
 
       </ul>
@@ -87,14 +88,23 @@ export default {
 .colorTexte, .colorRouter {
   /* Utiliser des unités relatives pour les marges, les paddings et les font-sizes */
   padding: 5px;
-  font-size: calc(1vw + 1vh + 0.5vmin); /* Ajuste la taille de police dynamiquement */
   text-decoration: none;
   color: black;
   font-family: 'Belleza', sans-serif;
   font-weight: bold;
   font-size: x-large;
 }
+.colorTexte {
+  border:solid;
+  border-radius: 5px;
+  background-color: #24d524;
+}
 
+.li-divDroite {
+  display: flex;
+  gap: 10px;
+
+}
 .menu-toggle {
   cursor: pointer;
   color: black;
@@ -124,10 +134,25 @@ export default {
   .li-divCenter {
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    gap: 20px;
+    margin-bottom: 20px;
   }
   .nav-menu {
     flex-direction: column;
+  }
+  .header {
+    position: static !important;
+  }
+  .li-divDroite {
+    margin-bottom: 20px;
+  }
+
+}
+
+@media (max-width:985px ) {
+  .colorTexte, .colorRouter {
+    /* Utiliser des unités relatives pour les marges, les paddings et les font-sizes */
+    font-size: large;
   }
 }
 </style>

@@ -38,6 +38,16 @@ const router = createRouter({
       path: '/contact',
       name: 'contact',
       component: () => import('@/views/ContactView.vue')
+    },
+    {
+      path: '/inscription',
+      name: 'inscription',
+      component: () => import('@/views/InscriptionView.vue')
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: () => import('@/views/loginView.vue')
     }
   ],
   scrollBehavior(to, from, savedPosition) {
