@@ -1,6 +1,29 @@
 <script>
+import "../Firebase";
+import {getAuth, signInWithEmailAndPassword} from "firebase/auth";
+import {mapActions} from "vuex";
+
+const auth = getAuth();
+
 export default {
-name: "LoginView"
+  name: "LoginView",
+  data() {
+    return {
+      email: "",
+      password: "",
+    }
+  },
+  methods: {
+    ...mapActions(['loginUser']),
+    submitForm() {
+      this.loginUser(
+          {
+            email: this.email,
+            password: this.password
+          }
+      )
+    }
+  }
 }
 </script>
 
@@ -8,9 +31,11 @@ name: "LoginView"
   <main class="container">
     <section class="sectionStyle" aria-label="Formulaire de Connexion">
       <H1 class="h1Color">Se connecter</H1>
-      <form class="grid">
-        <input type="email" id="email" name="email" placeholder="Adresse Email" aria-label="Adresse Email" required>
-        <input type="password" id="password" name="password" placeholder="Mot de Passe" aria-label="Mot de Passe" required>
+      <form class="grid" @submit.prevent="submitForm">
+        <input v-model="email" type="email" id="email" name="email" placeholder="Adresse Email"
+               aria-label="Adresse Email" required>
+        <input v-model="password" type="password" id="password" name="password" placeholder="Mot de Passe"
+               aria-label="Mot de Passe" required>
         <button type="submit">Connexion</button>
       </form>
     </section>
@@ -29,7 +54,7 @@ body, html {
 /* Navigation */
 nav.container-fluid {
   background-color: #ffffff;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 1rem 0;
 }
 
@@ -48,9 +73,10 @@ nav ul {
 
 .h1Color {
   background-color: #ffffff;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 2rem 0;
 }
+
 nav ul li a {
   color: #333333;
   text-decoration: none;
@@ -61,7 +87,7 @@ nav ul li a {
 form {
   background-color: #ffffff;
   padding: 2rem;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   max-width: 400px;
   margin: 2rem auto;

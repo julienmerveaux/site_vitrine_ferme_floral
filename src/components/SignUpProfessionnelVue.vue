@@ -1,7 +1,7 @@
 <template>
   <fieldset class="formulaire-container">
     <legend class="legend">Professionel</legend>
-    <form id="monFormulaire" @submit.prevent="registerUserProfessionnel">
+    <form id="monFormulaire" @submit.prevent="submitForm">
       <div class="champ-formulaire">
         <label for="name">Nom:</label>
         <input class="size" v-model="name" type="text" id="name" name="name" required>
@@ -32,6 +32,7 @@
 import {createUserWithEmailAndPassword, getAuth} from "@firebase/auth";
 import {getFirestore, collection, addDoc} from "firebase/firestore";
 import "../Firebase";
+import {mapActions} from "vuex";
 
 const db = getFirestore()
 const auth = getAuth();
@@ -42,28 +43,23 @@ export default {
     return {
       name: "test",
       firstname: "test",
-      siret:"123154785214574",
-      uid: "",
+      siret: "123154785214574",
       type: "professionnel"
     };
   },
 
   methods: {
-    registerUserProfessionnel() {
-      createUserWithEmailAndPassword(auth, this.email, this.password)
-          .then((dataUser) => {
-            addDoc(dbRef, {
-              name: this.name,
-              firstname: this.firstname,
-              email: dataUser.user.email,
-              siret:this.siret,
-              type: this.type,
-              uid: dataUser.user.uid,
-            });
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+    ...mapActions(['registerUserParticulier']),
+
+    submitForm() {
+      this.registerUserParticulier({
+        name: this.name,
+        firstname: this.firstname,
+        email: this.email,
+        password: this.password,
+        siret: this.siret,
+        type: this.type
+      });
     },
   }
 }
@@ -76,7 +72,7 @@ export default {
   max-width: 90%;
   margin: 20px auto;
   padding: 20px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Ajoute une ombre pour un effet de profondeur */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ajoute une ombre pour un effet de profondeur */
   border-radius: 8px; /* Bordures arrondies pour le conteneur */
   background-color: #fff; /* Arrière-plan blanc pour le formulaire */
 }
@@ -96,9 +92,11 @@ form {
 .champ-formulaire {
   margin-bottom: 20px;
 }
+
 .size {
   width: 100%;
 }
+
 label {
   margin-bottom: 8px;
   color: #333; /* Couleur de texte plus douce */
@@ -143,6 +141,7 @@ button:hover {
   .formulaire-container {
     max-width: 50%; /* Ajuste la largeur max pour les grands écrans */
   }
+
   form {
     padding: 20px; /* Plus de padding à l'intérieur du formulaire pour les grands écrans */
   }

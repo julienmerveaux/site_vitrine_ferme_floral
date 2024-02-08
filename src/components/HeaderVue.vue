@@ -18,7 +18,7 @@
             <router-link class=colorRouter to="/qui-je-suis">À propos</router-link>
           </li>
           <li class="li-center">
-            <router-link class=colorRouter to="/catalogue_pro">Catalogue pro</router-link>
+            <router-link  v-if="isProfessional" class=colorRouter to="/catalogue_pro">Catalogue pro</router-link>
           </li>
           <li class="li-center">
             <router-link class=colorRouter to="/bouquets">Bouquets</router-link>
@@ -28,8 +28,9 @@
           </li>
         </div>
         <div class="li-divDroite">
-          <router-link class="colorRouter colorTexte" to="/inscription">S'inscrire</router-link>
-          <router-link class="colorRouter colorTexte" to="/login">Se connecter</router-link>
+          <button v-if="getIsConnected" @click="logout" class="colorRouter colorTexte">Déconnecter</button>
+          <router-link v-if="!getIsConnected" class="colorRouter colorTexte" to="/inscription">S'inscrire</router-link>
+          <router-link v-if="!getIsConnected" class="colorRouter colorTexte" to="/login">Se connecter</router-link>
         </div>
 
       </ul>
@@ -38,6 +39,8 @@
 </template>
 
 <script>
+import {mapGetters} from "vuex";
+
 export default {
   name: "HeaderVue",
   data() {
@@ -59,7 +62,17 @@ export default {
     },
     handleResize() {
       this.isMobile = window.innerWidth <= 600;
+    },
+    logout() {
+      this.$store.dispatch('logout');
+      this.$router.push('/');
     }
+  },
+  computed: {
+    ...mapGetters(['getCurrentUser','getIsConnected']),
+    isProfessional() {
+      return this.getCurrentUser.type === 'professionnel';
+    },
   }
 }
 </script>
@@ -71,6 +84,7 @@ export default {
   width: 100%;
   z-index: 100;
 }
+
 .image {
   height: 150px;
   width: 179px;
@@ -80,6 +94,7 @@ export default {
   filter: saturate(0%);
   color: #090909;
 }
+
 .boutton {
   background-color: transparent;
   border: none;
@@ -94,8 +109,9 @@ export default {
   font-weight: bold;
   font-size: x-large;
 }
+
 .colorTexte {
-  border:solid;
+  border: solid;
   border-radius: 5px;
   background-color: #24d524;
 }
@@ -105,6 +121,7 @@ export default {
   gap: 10px;
 
 }
+
 .menu-toggle {
   cursor: pointer;
   color: black;
@@ -126,8 +143,9 @@ export default {
 .li-divCenter {
   display: flex;
 }
+
 .nav-menu > * {
-/* Flex pour permettre aux éléments de s'adapter*/
+  /* Flex pour permettre aux éléments de s'adapter*/
 }
 
 @media (max-width: 600px) {
@@ -137,19 +155,22 @@ export default {
     gap: 20px;
     margin-bottom: 20px;
   }
+
   .nav-menu {
     flex-direction: column;
   }
+
   .header {
     position: static !important;
   }
+
   .li-divDroite {
     margin-bottom: 20px;
   }
 
 }
 
-@media (max-width:985px ) {
+@media (max-width: 985px ) {
   .colorTexte, .colorRouter {
     /* Utiliser des unités relatives pour les marges, les paddings et les font-sizes */
     font-size: large;

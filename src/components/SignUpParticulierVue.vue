@@ -1,7 +1,7 @@
 <template>
   <fieldset class="formulaire-container">
     <legend class="legend">Particulier</legend>
-    <form id="monFormulaire" @submit.prevent="registerUserParticulier">
+    <form id="monFormulaire" @submit.prevent="submitForm">
       <div class="champ-formulaire">
         <label for="name">Nom:</label>
         <input class="size" v-model="name" type="text" id="name" name="name" required>
@@ -29,6 +29,7 @@
 import {createUserWithEmailAndPassword, getAuth} from "@firebase/auth";
 import {getFirestore, collection, addDoc} from "firebase/firestore";
 import "../Firebase";
+import {mapActions} from "vuex";
 
 const db = getFirestore()
 const auth = getAuth();
@@ -39,26 +40,22 @@ export default {
     return {
       name: "test",
       firstname: "test",
-      uid: "",
-      type:"particulier"
+      type: "particulier"
     };
   },
+
   methods: {
-    registerUserParticulier() {
-      createUserWithEmailAndPassword(auth, this.email, this.password)
-          .then((dataUser) => {
-            const userDoc = {
-              name: this.name,
-              firstname: this.firstname,
-              email: dataUser.user.email,
-              uid: dataUser.user.uid,
-              type:this.type
-            };
-            addDoc(dbRef, userDoc);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+    ...mapActions(['registerUserParticulier']),
+
+    submitForm() {
+      this.registerUserParticulier({
+        name: this.name,
+        firstname: this.firstname,
+        email: this.email,
+        password: this.password,
+        siret:null,
+        type: this.type
+      });
     },
   }
 }

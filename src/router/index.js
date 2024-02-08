@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomePageView from "@/views/HomePageView.vue";
+import store from "@/stores/index.js";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -22,7 +23,8 @@ const router = createRouter({
     {
       path: '/catalogue_pro',
       name: 'catalogue_pro',
-      component: () => import('@/views/CatalogueProView.vue')
+      component: () => import('@/views/CatalogueProView.vue'),
+      meta: { requiresType: 'professionnel' }
     },
     {
       path: '/qui-je-suis',
@@ -55,5 +57,15 @@ const router = createRouter({
     return { left: 0, top: 0 }
   },
 })
+router.beforeEach((to, from, next) => {
+  const requiresType = to.matched.some(record => record.meta.requiresType);
+  const userType = store.getters.getCurrentUser.type;
 
+  if (requiresType && userType !== to.meta.requiresType) {
+    // Rediriger vers une page d'erreur ou la page d'accueil
+    next({ path: '/' }); // exemple de redirection
+  } else {
+    next();
+  }
+});
 export default router
