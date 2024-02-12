@@ -19,7 +19,7 @@ import SignUpParticulierVue from "@/components/SignUpParticulierVue.vue";
 import SignUpProfessionnelVue from "@/components/SignUpProfessionnelVue.vue";
 
 // Crée une variable réactive pour suivre le type sélectionné
-const typeInscription = ref('');
+const typeInscription = ref('particulier');
 
 // Fonctions pour mettre à jour le type d'inscription
 const choisirProfessionnel = () => {

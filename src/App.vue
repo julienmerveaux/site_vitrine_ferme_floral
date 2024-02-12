@@ -8,7 +8,7 @@ import ContenuVue from "@/components/ContenuVue.vue";
 
 <template>
   <div class="app">
-    <HeaderVue class="header"></HeaderVue>
+    <HeaderVue id="main" class="header"></HeaderVue>
     <div class="content">
       <RouterView />
     </div>

@@ -11,7 +11,6 @@
           <h3 class="card__title">PHLOX PANICULATA PAX</h3>
           <span class="card__price">3.75€</span>
           <h3>quantité : 35</h3>
-
         </div>
         <div class="info">
           <button class="buttonAchat" @click="afficherPopup">Voir plus</button>
@@ -22,19 +21,32 @@
   </div>
 </template>
 
-<script setup>
+<script>
 import { ref } from 'vue';
 import PopUpDescriptionVue from "@/components/PopUpDescriptionVue.vue";
 
-const popupVisible = ref(false);
+export default {
+  components: {
+    PopUpDescriptionVue
+  },
+  setup() {
+    const popupVisible = ref(false);
 
-const afficherPopup = () => {
-  popupVisible.value = true;
-}
+    const afficherPopup = () => {
+      popupVisible.value = true;
+    }
 
-const fermerPopup = () => {
-  popupVisible.value = false;
-}
+    const fermerPopup = () => {
+      popupVisible.value = false;
+    }
+
+    return {
+      popupVisible,
+      afficherPopup,
+      fermerPopup
+    };
+  }
+};
 </script>
 
 <style scoped>

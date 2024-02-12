@@ -9,9 +9,9 @@
           <div class="card__img--hover"></div>
         </a>
         <div class="card__info">
-          <span class="card__category"> Fleur séchée</span>
-          <h3 class="card__title">PHLOX PANICULATA PAX</h3>
-          <span class="card__price">3.75€</span>
+          <span class="card__category"> {{ fleur.type }}</span>
+          <h3 class="card__title">{{ fleur.titre }}</h3>
+          <span class="card__price">{{ fleur.prix }}</span>
         </div>
       </article>
 
@@ -20,7 +20,12 @@
   </div>
 </template>
 
-<script setup>
+<script>
+export default {
+  props:{
+    fleur:Object
+  }
+}
 
 </script>
 
@@ -32,9 +37,7 @@
 }
 
 
-
-
-*{
+* {
   box-sizing: border-box;
 }
 
@@ -75,6 +78,7 @@ body {
   vertical-align: middle;
   fill: #AD7D52;
 }
+
 .card__time {
   font-size: 12px;
   color: #AD7D52;
@@ -119,6 +123,7 @@ body {
   top: 0;
 
 }
+
 .card {
   margin-right: 25px;
   transition: all .4s cubic-bezier(0.175, 0.885, 0, 1);
@@ -126,10 +131,12 @@ body {
   position: relative;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0px 13px 10px -7px rgba(0, 0, 0,0.1);
+  box-shadow: 0px 13px 10px -7px rgba(0, 0, 0, 0.1);
+  width: 50%;
 }
+
 .card:hover {
-  box-shadow: 0px 30px 18px -8px rgba(0, 0, 0,0.1);
+  box-shadow: 0px 30px 18px -8px rgba(0, 0, 0, 0.1);
   transform: scale(1.10, 1.10);
 }
 

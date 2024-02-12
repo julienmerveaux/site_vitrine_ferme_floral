@@ -2,6 +2,7 @@
 import "../Firebase";
 import {getAuth, signInWithEmailAndPassword} from "firebase/auth";
 import {mapActions} from "vuex";
+import router from "@/router/index.js";
 
 const auth = getAuth();
 
@@ -11,18 +12,30 @@ export default {
     return {
       email: "",
       password: "",
+      error:""
     }
   },
   methods: {
     ...mapActions(['loginUser']),
     submitForm() {
-      this.loginUser(
-          {
-            email: this.email,
-            password: this.password
-          }
-      )
+      this.loginUser({
+        email: this.email,
+        password: this.password
+      }).then(() => {
+        router.push("/")
+      }).catch((error) => {
+        // Gestion des erreurs spécifiques
+        if (error === 'auth/user-not-found') {
+          this.error="Pas le bon email ou l'utilisateur n'existe pas.";
+        } else if (error.code === 'auth/wrong-password') {
+          this.error="Le mot de passe est incorrect.";
+        } else {
+          // Pour toutes les autres erreurs non spécifiques, afficher un message générique
+          this.error="Erreur d'authentification. Veuillez réessayer.";
+        }
+      });
     }
+
   }
 }
 </script>
@@ -31,6 +44,7 @@ export default {
   <main class="container">
     <section class="sectionStyle" aria-label="Formulaire de Connexion">
       <H1 class="h1Color">Se connecter</H1>
+      <h1 v-if="error" class="colorError">{{error}}</h1>
       <form class="grid" @submit.prevent="submitForm">
         <input v-model="email" type="email" id="email" name="email" placeholder="Adresse Email"
                aria-label="Adresse Email" required>
@@ -67,6 +81,9 @@ nav ul {
   max-width: 90%;
 }
 
+.colorError {
+  color: red;
+}
 .sectionStyle {
   text-align: center;
 }

@@ -18,6 +18,9 @@
             <router-link class=colorRouter to="/qui-je-suis">À propos</router-link>
           </li>
           <li class="li-center">
+            <router-link class=colorRouter to="/catalogue_particulier">Catalogue particulier</router-link>
+          </li>
+          <li class="li-center">
             <router-link  v-if="isProfessional" class=colorRouter to="/catalogue_pro">Catalogue pro</router-link>
           </li>
           <li class="li-center">

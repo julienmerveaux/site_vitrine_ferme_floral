@@ -10,14 +10,10 @@
         class="iframeLoca"
         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2780.9234873642185!2d4.278601076722735!3d45.812790710112!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47f441f7c652d207%3A0x5dac752fb5cc0a1b!2s1501%20Rte%20de%20Mussy%2C%2042810%20Rozier-en-Donzy!5e0!3m2!1sfr!2sfr!4v1706620639768!5m2!1sfr!2sfr"
         width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"></iframe>
+        referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
     <div class="newsletter-container">
-      <h2>Inscrivez-vous à notre Newsletter</h2>
-      <div class="divDoubleForm">
-        <p>Recevez les dernières nouvelles et mises à jour.</p>
-        <iframe class="form" src="https://heyflow.id/f2d20b34-9948-4494-b2bc-b9033a0dec0a#start"></iframe>
-      </div>
-
+      <iframe class="airtable-embed" src="https://airtable.com/embed/appbmkbokhHog6r1K/pagkC2PfmEF5ZSwlO/form" frameborder="0" onmousewheel="" width="100%" height="533" style="background: transparent; border: 1px solid #ccc;"></iframe>
     </div>
   </footer>
 </template>
@@ -31,20 +27,22 @@
 .divDoubleForm {
   height: 325px;
 }
+
 .form {
   height: 100%;
   border: none;
 }
+
 .newsletter-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: #f9f9f9; /* Couleur de fond douce */
-  padding-bottom:50px;
   border-radius: 10px;
   text-align: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin-top: 0;
+  margin-right: 10px;
 }
 
 .newsletter-container h2 {
@@ -91,7 +89,7 @@
   justify-content: center;
   padding: 20px 0;
   background: #f8f9fa; /* Couleur de fond légère pour le footer */
-  grid-template-columns: repeat(3,1fr);
+  grid-template-columns: repeat(3, 1fr);
 
 }
 
@@ -101,7 +99,8 @@
   margin-right: 20px;
 }
 
-.footer-details {display: flex;
+.footer-details {
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -114,7 +113,7 @@
     flex-direction: column;
     text-align: center;
     align-items: center;
-    grid-template-columns: repeat(1,1fr);
+    grid-template-columns: repeat(1, 1fr);
   }
 
   .footer img {
@@ -126,12 +125,15 @@
   .contact-details {
     margin-left: 0;
   }
+
   .iframeLoca {
     width: 100%;
   }
+
   .footer-details {
     margin-right: 0;
   }
+
   .newsletter-container {
     height: 100%;
     margin-bottom: 0;

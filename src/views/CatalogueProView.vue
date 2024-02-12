@@ -1,26 +1,30 @@
 <template>
   <div class="generalCatalogue">
 
-    <CardCatalogueProVue/>
-    <CardCatalogueProVue/>
-    <CardCatalogueProVue/>
-    <CardCatalogueProVue/>
-    <CardCatalogueProVue/>
-    <CardCatalogueProVue/>
-    <CardCatalogueProVue/>
-    <CardCatalogueProVue/>
-
-
+    <CardCatalogueProVue v-for="(fleur, id) in getFleurs" :key="id" :fleur="fleur"></CardCatalogueProVue>
 
   </div>
 
 </template>
 
-<script setup>
+<script>
 
 
 import CardCatalogueProVue from "@/components/CardCatalogueProVue.vue";
+import {mapActions, mapGetters} from "vuex";
 
+export default {
+  components: {CardCatalogueProVue},
+  computed: {
+    ...mapGetters("PlantesInformation",["getFleurs"])
+  },
+  methods: {
+    ...mapActions("PlantesInformation", ["allFleurs"])
+  },
+  created() {
+    this.allFleurs();
+  }
+}
 </script>
 
 
