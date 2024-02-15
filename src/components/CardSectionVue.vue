@@ -24,8 +24,8 @@ const props = defineProps({
 
 .image {
   width: 10%;
-
 }
+
 .text {
   text-align: center;
   font-weight: normal;

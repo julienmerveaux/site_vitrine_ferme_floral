@@ -117,9 +117,6 @@ const closePopup = () => {
   .popup {
     justify-content: start;
   }
-  .popup_content {
-    width: 375px;
-  }
   .popup_general {
     flex-direction: column;
   }
@@ -128,6 +125,11 @@ const closePopup = () => {
     height: 100%;
   }
   .popup_gauche {
+    width: 100%;
+  }
+}
+@media only screen and (max-width: 466px) {
+  .popup_content {
     width: 100%;
   }
 }

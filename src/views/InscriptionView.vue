@@ -3,7 +3,7 @@
       <div class="divBouton">
         <!-- Ajout des gestionnaires d'événements sur les boutons -->
         <button class="bouton" @click="choisirParticulier">Particulier</button>
-        <button class="bouton" @click="choisirProfessionnel">Professionnel</button>
+        <button class="bouton" @click="choisirProfessionnel">Horticulteur/Fleuriste</button>
       </div>
       <!-- Affiche le formulaire en fonction de la sélection -->
       <SignUpProfessionnelVue v-if="typeInscription === 'professionnel'"></SignUpProfessionnelVue>

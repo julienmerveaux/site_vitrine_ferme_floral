@@ -4,23 +4,23 @@
     <form id="monFormulaire" @submit.prevent="submitForm">
       <div class="champ-formulaire">
         <label for="name">Nom:</label>
-        <input class="size" v-model="name" type="text" id="name" name="name" required>
+        <input class="size" v-model="name" type="text" id="name" name="name" placeholder="Nom" required>
       </div>
       <div class="champ-formulaire">
         <label for="firstname">Prénom:</label>
-        <input class="size" v-model="firstname" type="text" id="firstname" name="firstname" required>
+        <input class="size" v-model="firstname" type="text" id="firstname" name="firstname" placeholder="Prénom" required>
       </div>
       <div class="champ-formulaire">
         <label for="email">Email:</label>
-        <input class="size" v-model="email" type="email" id="email" name="email" required>
+        <input class="size" v-model="email" type="email" id="email" name="email" placeholder="Email" required>
       </div>
       <div class="champ-formulaire">
         <label for="siret">Siret:</label>
-        <input class="size" v-model="siret" type="number" id="siret" name="siret" required>
+        <input class="size" v-model="siret" type="number" id="siret" name="siret" placeholder="Siret" required>
       </div>
       <div class="champ-formulaire">
         <label for="password">Mot de passe:</label>
-        <input class="size" v-model="password" type="password" id="password" name="password" required>
+        <input class="size" v-model="password" type="password" id="password" name="password" placeholder="Mot de passe" required>
       </div>
       <button type="submit">Envoyer</button>
     </form>
@@ -41,9 +41,9 @@ const dbRef = collection(db, "userProfessionnel");
 export default {
   data() {
     return {
-      name: "test",
-      firstname: "test",
-      siret: "123154785214574",
+      name: "",
+      firstname: "",
+      siret: "",
       type: "professionnel"
     };
   },

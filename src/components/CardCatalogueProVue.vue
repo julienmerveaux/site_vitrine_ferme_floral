@@ -196,5 +196,9 @@ body {
   }
 }
 
+@media (max-width: 425px) {
+
+}
+
 
 </style>

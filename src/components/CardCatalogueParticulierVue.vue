@@ -9,9 +9,9 @@
           <div class="card__img--hover"></div>
         </a>
         <div class="card__info">
-          <span class="card__category"> {{ fleur.type }}</span>
-          <h3 class="card__title">{{ fleur.titre }}</h3>
-          <span class="card__price">{{ fleur.prix }}</span>
+          <span class="card__category"> {{ bouquet.type }}</span>
+          <h3 class="card__title">{{ bouquet.nom }}</h3>
+          <span class="card__price">{{ bouquet.prix }}</span>
         </div>
       </article>
 
@@ -23,7 +23,7 @@
 <script>
 export default {
   props:{
-    fleur:Object
+    bouquet:Object
   }
 }
 

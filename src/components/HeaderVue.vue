@@ -11,26 +11,27 @@
           </button>
         </li>
         <div class="li-divCenter">
-          <li class="li-center">
+          <li class="li-center" :class="{ 'active': isCurrentRoute('/') }">
             <router-link class=colorRouter to="/">Accueil</router-link>
           </li>
-          <li class="li-center">
+          <li class="li-center" :class="{ 'active': isCurrentRoute('/qui-je-suis') }">
             <router-link class=colorRouter to="/qui-je-suis">À propos</router-link>
           </li>
-          <li class="li-center">
-            <router-link class=colorRouter to="/catalogue_particulier">Catalogue particulier</router-link>
+          <li class="li-center" :class="{ 'active': isCurrentRoute('/catalogue_particulier') }">
+            <router-link v-if="!isProfessional" class=colorRouter to="/catalogue_particulier">Boutique</router-link>
           </li>
-          <li class="li-center">
-            <router-link  v-if="isProfessional" class=colorRouter to="/catalogue_pro">Catalogue pro</router-link>
+          <li class="li-center" :class="{ 'active': isCurrentRoute('/catalogue_pro') }">
+            <router-link  v-if="isProfessional" class=colorRouter to="/catalogue_pro">Boutique</router-link>
           </li>
-          <li class="li-center">
-            <router-link class=colorRouter to="/bouquets">Bouquets</router-link>
+          <li class="li-center" :class="{ 'active': isCurrentRoute('/bouquets') }">
+            <router-link v-if="!isProfessional" class=colorRouter to="/bouquets">Bouquets</router-link>
           </li>
-          <li class="li-center">
+          <li class="li-center" :class="{ 'active': isCurrentRoute('/contact') }">
             <router-link class=colorRouter to="/contact">Contact</router-link>
           </li>
         </div>
         <div class="li-divDroite">
+          <h1>{{getCurrentUser.name}} {{getCurrentUser.firstname}}</h1>
           <button v-if="getIsConnected" @click="logout" class="colorRouter colorTexte">Déconnecter</button>
           <router-link v-if="!getIsConnected" class="colorRouter colorTexte" to="/inscription">S'inscrire</router-link>
           <router-link v-if="!getIsConnected" class="colorRouter colorTexte" to="/login">Se connecter</router-link>
@@ -69,6 +70,10 @@ export default {
     logout() {
       this.$store.dispatch('logout');
       this.$router.push('/');
+    },
+    isCurrentRoute(route) {
+      console.log(this.$route.path)
+      return this.$route.path === route;
     }
   },
   computed: {
@@ -86,6 +91,10 @@ export default {
   position: fixed;
   width: 100%;
   z-index: 100;
+}
+
+.nav-menu .li-center.active {
+  text-decoration: underline;
 }
 
 .image {

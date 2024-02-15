@@ -18,7 +18,17 @@ const router = createRouter({
     {
       path: '/catalogue_particulier',
       name: 'catalogue_particulier',
-      component: () => import('@/views/CatalogueParticulierView.vue')
+      component: () => import('@/views/CatalogueParticulierView.vue'),
+    },
+    {
+      path: '/catalogue_fleurs_fraiche',
+      name: 'catalogue_fleurs_fraiche',
+      component: () => import('@/views/catalogue_fleurs_fraicheView.vue'),
+    },
+    {
+      path: '/catalogue_fleurs_sechee',
+      name: 'catalogue_fleurs_sechee',
+      component: () => import('@/views/catalogue_fleurs_secheeView.vue'),
     },
     {
       path: '/catalogue_pro',
@@ -52,16 +62,10 @@ const router = createRouter({
       component: () => import('@/views/loginView.vue')
     }
   ],
-    scrollBehavior(to, from, savedPosition) {
-        // always scroll 10px above the element #main
-        return {
-            // could also be
-            // el: document.getElementById('main'),
-            el: '#main',
-            // 10px above the element
-            top: 10,
-        }
-    },
+  scrollBehavior(to, from, savedPosition) {
+    // always scroll to top
+    return { top: 0 }
+  },
 })
 router.beforeEach((to, from, next) => {
   const requiresType = to.matched.some(record => record.meta.requiresType);

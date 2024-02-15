@@ -4,15 +4,15 @@
     <form id="monFormulaire" @submit.prevent="submitForm">
       <div class="champ-formulaire">
         <label for="name">Nom:</label>
-        <input class="size" v-model="name" type="text" id="name" name="name" required>
+        <input class="size" v-model="name" type="text" id="name" name="name" placeholder="Nom" required>
       </div>
       <div class="champ-formulaire">
         <label for="firstname">Prénom:</label>
-        <input class="size" v-model="firstname" type="text" id="firstname" name="firstname" required>
+        <input class="size" v-model="firstname" type="text" id="firstname" name="firstname" placeholder="Prénom" required>
       </div>
       <div class="champ-formulaire">
         <label for="email">Email:</label>
-        <input class="size" v-model="email" type="email" placeholder="Email">
+        <input class="size" v-model="email" type="email" placeholder="Email" required>
       </div>
       <div class="champ-formulaire">
         <label for="password">Mot de passe:</label>
@@ -38,8 +38,8 @@ const dbRef = collection(db, "userParticulier");
 export default {
   data() {
     return {
-      name: "test",
-      firstname: "test",
+      name: "",
+      firstname: "",
       type: "particulier"
     };
   },

@@ -1,4 +1,4 @@
-import {getAuth, signInWithEmailAndPassword, signOut} from "firebase/auth";
+import {getAuth, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup, signOut} from "firebase/auth";
 import {getFirestore, doc, getDoc, setDoc} from "firebase/firestore";
 import db from "@/Firebase.js";
 import {createUserWithEmailAndPassword} from "@firebase/auth";
@@ -50,6 +50,7 @@ const UsersInformation = {
                     commit('setCurrentUser', userData);
                     commit('setIsConnected', true);
                     console.log('Bien connecté !', userData);
+                   await router.push("/")
                     // Utilisation de router.push ici pourrait ne pas être idéale. Retournez plutôt une valeur ou une promesse résolue pour gérer la navigation dans le composant.
                     return Promise.resolve();
                 } else {
@@ -61,6 +62,34 @@ const UsersInformation = {
             } catch (error) {
                 // Propager l'erreur pour pouvoir l'attraper dans le composant appelant
                 console.error("Erreur lors de la connexion :", error);
+                return Promise.reject(error);
+            }
+        },
+
+        async loginUserWithGoogle({ commit }) {
+            try {
+                const provider = new GoogleAuthProvider();
+                const result = await signInWithPopup(auth, provider);
+                console.log(result.user.uid)
+                const userDocRef = doc(db, "users", result.user.uid);
+                // Récupérer les informations de l'utilisateur
+                const userData = {
+                    email: result.user.email,
+                    name: result.user.displayName,
+                    type: "particulier",
+                    connectionWith:"google"
+                };
+                await setDoc(userDocRef, userData);
+                // Mettre à jour le state avec les informations de l'utilisateur
+                commit('setCurrentUser', userData);
+                commit('setIsConnected', true);
+
+                // Redirection vers une page appropriée, si nécessaire
+                await router.push("/");
+
+                return Promise.resolve();
+            } catch (error) {
+                console.error("Erreur lors de la connexion avec Google:", error);
                 return Promise.reject(error);
             }
         },
@@ -86,7 +115,9 @@ const UsersInformation = {
                     firstname: firstname,
                     siret: siret,
                     email: dataUser.user.email,
-                    type: type
+                    type: type,
+                    connectionWith:"motDePasse"
+
                 };
 
                 await setDoc(userDocRef, userDocData);
@@ -94,7 +125,6 @@ const UsersInformation = {
                 commit('setUserId', dataUser.user.uid);
                 commit('setCurrentUser', userDocData);
 
-                console.log("Utilisateur enregistré dans Firestore avec l'UID:", dataUser.user.uid);
 
                 // Connexion de l'utilisateur après son inscription
                 await signInWithEmailAndPassword(auth, email, password);

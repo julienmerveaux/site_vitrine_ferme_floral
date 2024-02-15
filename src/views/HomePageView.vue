@@ -3,22 +3,22 @@
     <div class="imageAccueil">
       <div class="conteneurTexte">
         <H1 class="H1Style"> Bienvenue à le Ferme Florale Les 5 Saisons</H1>
-        <H3> Nos fleurs 100% en agriculture biologique, 100% de saison, cultivées avec 100% d'amour!. </H3>
+        <H3> Nos fleurs 100% en agriculture biologique, 100% de saison, cultivées avec 100% d'amour! </H3>
       </div>
     </div>
     <div class="sectionCard">
       <CardSectionVue
-          title="Local"
-          text="Nos fleurs sont cultivées par des producteurs locaux au plus près de chez vous, soit -90% d’émissions carbone."
+          title="Locales"
+          text="La ferme florale Les 5 Saisons est située dans un cadre bucolique dans les Monts du Lyonnais"
           :imageUrl="imageUrl1"
       ></CardSectionVue>
       <CardSectionVue
-          title="Locales"
+          title="De saison"
           text="Des fleurs locales, 100% bio, 100% éthique et cultivées aux rythmes des saisons"
           :imageUrl="imageUrl2"
       ></CardSectionVue>
       <CardSectionVue
-          title="De saison"
+          title="Nos valeurs"
           text="Ici nous respectons la faune et la flore, de la terre au vase....il n'y a qu'un pas!"
           :imageUrl="imageUrl3"
       ></CardSectionVue>

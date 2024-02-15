@@ -12,7 +12,7 @@ export default {
     return {
       email: "",
       password: "",
-      error:""
+      error: ""
     }
   },
   methods: {
@@ -26,14 +26,23 @@ export default {
       }).catch((error) => {
         // Gestion des erreurs spécifiques
         if (error === 'auth/user-not-found') {
-          this.error="Pas le bon email ou l'utilisateur n'existe pas.";
+          this.error = "Pas le bon email ou l'utilisateur n'existe pas.";
         } else if (error.code === 'auth/wrong-password') {
-          this.error="Le mot de passe est incorrect.";
+          this.error = "Le mot de passe est incorrect.";
         } else {
           // Pour toutes les autres erreurs non spécifiques, afficher un message générique
-          this.error="Erreur d'authentification. Veuillez réessayer.";
+          this.error = "Erreur d'authentification. Veuillez réessayer.";
         }
       });
+    },
+    async loginWithGoogle() {
+      try {
+        await this.$store.dispatch('loginUserWithGoogle');
+        await router.push("/")
+      } catch (error) {
+        console.error("Erreur lors de la connexion avec Google:", error);
+        // Gérer l'erreur d'une manière appropriée, par exemple afficher un message d'erreur à l'utilisateur
+      }
     }
 
   }
@@ -44,7 +53,7 @@ export default {
   <main class="container">
     <section class="sectionStyle" aria-label="Formulaire de Connexion">
       <H1 class="h1Color">Se connecter</H1>
-      <h1 v-if="error" class="colorError">{{error}}</h1>
+      <h1 v-if="error" class="colorError">{{ error }}</h1>
       <form class="grid" @submit.prevent="submitForm">
         <input v-model="email" type="email" id="email" name="email" placeholder="Adresse Email"
                aria-label="Adresse Email" required>
@@ -52,6 +61,7 @@ export default {
                aria-label="Mot de Passe" required>
         <button type="submit">Connexion</button>
       </form>
+      <button class="styleButtonGoogle" @click="loginWithGoogle">Google</button>
     </section>
   </main>
 </template>
@@ -72,6 +82,10 @@ nav.container-fluid {
   padding: 1rem 0;
 }
 
+.styleButtonGoogle{
+  width: 20vw;
+  margin-bottom: 1%;
+}
 nav ul {
   list-style: none;
   padding: 0;
@@ -84,6 +98,7 @@ nav ul {
 .colorError {
   color: red;
 }
+
 .sectionStyle {
   text-align: center;
 }
