@@ -12,34 +12,29 @@
       </div>
       <div class="champ-formulaire">
         <label for="email">Email:</label>
-        <input class="size" v-model="email" type="email" placeholder="Email" required>
+        <input class="size" v-model="email" type="email" id="email" name="email" placeholder="Email" required>
       </div>
       <div class="champ-formulaire">
         <label for="password">Mot de passe:</label>
-        <input class="size" v-model="password" type="password" placeholder="Mot de passe" required>
+        <input class="size" v-model="password" type="password" id="password" name="password" placeholder="Mot de passe" required>
       </div>
       <button type="submit">S'inscrire</button>
     </form>
   </fieldset>
-
 </template>
 
 
+
 <script>
-import {createUserWithEmailAndPassword, getAuth} from "@firebase/auth";
-import {getFirestore, collection, addDoc} from "firebase/firestore";
-import "../Firebase";
-import {mapActions} from "vuex";
+import { mapActions } from "vuex";
 
-const db = getFirestore()
-const auth = getAuth();
-
-const dbRef = collection(db, "userParticulier");
 export default {
   data() {
     return {
       name: "",
       firstname: "",
+      email: "", // Ajout du champ pour l'adresse e-mail de l'expéditeur
+      password: "",
       type: "particulier"
     };
   },
@@ -51,7 +46,7 @@ export default {
       this.registerUserParticulier({
         name: this.name,
         firstname: this.firstname,
-        email: this.email,
+        email: this.email, // Utilisation de l'adresse e-mail de l'expéditeur fournie par l'utilisateur
         password: this.password,
         siret:null,
         type: this.type
@@ -59,8 +54,8 @@ export default {
     },
   }
 }
-
 </script>
+
 
 <style scoped>
 .formulaire-container {

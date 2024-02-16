@@ -70,14 +70,17 @@ const UsersInformation = {
             try {
                 const provider = new GoogleAuthProvider();
                 const result = await signInWithPopup(auth, provider);
-                console.log(result.user.uid)
+                await router.push("/");
+
                 const userDocRef = doc(db, "users", result.user.uid);
                 // Récupérer les informations de l'utilisateur
+
                 const userData = {
                     email: result.user.email,
                     name: result.user.displayName,
                     type: "particulier",
-                    connectionWith:"google"
+                    connectionWith:"google",
+                    createdAt:Date.now()
                 };
                 await setDoc(userDocRef, userData);
                 // Mettre à jour le state avec les informations de l'utilisateur
@@ -85,7 +88,6 @@ const UsersInformation = {
                 commit('setIsConnected', true);
 
                 // Redirection vers une page appropriée, si nécessaire
-                await router.push("/");
 
                 return Promise.resolve();
             } catch (error) {
@@ -107,6 +109,7 @@ const UsersInformation = {
         async registerUserParticulier({ commit }, { name, firstname, email, password, siret, type }) {
             try {
                 const dataUser = await createUserWithEmailAndPassword(auth, email, password);
+                await router.push("/");
 
                 const userDocRef = doc(db, "users", dataUser.user.uid);
 
@@ -116,7 +119,8 @@ const UsersInformation = {
                     siret: siret,
                     email: dataUser.user.email,
                     type: type,
-                    connectionWith:"motDePasse"
+                    connectionWith:"motDePasse",
+                    createdAt:Date.now()
 
                 };
 
@@ -131,7 +135,6 @@ const UsersInformation = {
 
                 commit('setIsConnected', true);
 
-                await router.push("/");
 
             } catch (error) {
                 console.error("Erreur lors de la création de l'utilisateur:", error);
