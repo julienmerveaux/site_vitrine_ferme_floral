@@ -7,44 +7,52 @@
           <div class="card__img--hover"></div>
         </a>
         <div class="card__info">
-          <span class="card__category"> Fleur séchée</span>
-          <h3 class="card__title">PHLOX PANICULATA PAX</h3>
-          <span class="card__price">3.75€</span>
-          <h3>quantité : 35</h3>
+          <h3 class="card__title">{{ fleur.nom }}</h3>
+          <span class="card__category"> {{ fleur.couleur }}</span>
+          <h1 class="card__price">{{ fleur.prix }}</h1>
+          <h3> Quantité : {{ fleur.quantiteAchat }}</h3>
         </div>
         <div class="info">
-          <button class="buttonAchat" @click="afficherPopup">Voir plus</button>
+          <button v-if="isPanierParticulierRoute" class="buttonAchat" @click="afficherPopup">Voir plus</button>
         </div>
         <PopUpDescriptionVue v-if="popupVisible" @fermerPopup="fermerPopup"/>
       </article>
+      <div v-if="showPopup" class="popup">
+        <p>Vous venez d'ajouter {{fleur.nom}} </p>
+        <p>quantite : {{ fleur.quantiteAchat }} </p>
+      </div>
     </section>
   </div>
 </template>
 
 <script>
-import { ref } from 'vue';
 import PopUpDescriptionVue from "@/components/PopUpDescriptionVue.vue";
 
 export default {
+  props:{
+    fleur:Object
+  },
+
   components: {
     PopUpDescriptionVue
   },
-  setup() {
-    const popupVisible = ref(false);
-
-    const afficherPopup = () => {
-      popupVisible.value = true;
-    }
-
-    const fermerPopup = () => {
-      popupVisible.value = false;
-    }
-
+  data() {
     return {
-      popupVisible,
-      afficherPopup,
-      fermerPopup
+      popupVisible: false,
     };
+  },
+  methods: {
+    afficherPopup() {
+      this.$store.dispatch('PlantesInformation/fleurWithId', this.fleur.id);
+      this.popupVisible = true;
+    },
+    fermerPopup() {
+      this.popupVisible = false;
+    },
+    isPanierParticulierRoute() {
+      console.log(this.$route.name)
+      return this.$route.name === 'PanierPro';
+    }
   }
 };
 </script>

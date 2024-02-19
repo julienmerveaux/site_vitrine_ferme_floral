@@ -4,39 +4,52 @@
       <div class="popup_content">
         <div class="popup_general">
           <div class="popup_gauche">
-            <img class="photoGauche" src=../assets/Ferme%20florale%20les%205%20saisons%201.jpg>
+            <img class="photoGauche" src="../assets/Ferme%20florale%20les%205%20saisons%201.jpg">
           </div>
           <div class="popup_droite">
-            <H1>PHLOX PANICULATA PAX</H1>
-            <H2>Plante vivace</H2>
-            <H3>3,75€</H3>
-            <h4>dazfdefzefceafeaf fezfze f fze fzef zef zefze fef f zf zf fz fzfzfzfzefzefze f ze fzfzf zfz fz fz</h4>
+            <h1 class="card__title">{{ getCurrentFleur.nom }}</h1>
+            <h2 class="card__category">{{ getCurrentFleur.couleur }}</h2>
+            <h3 class="card__price">{{ getCurrentFleur.prix }}</h3>
           </div>
         </div>
         <div class="button_popup">
-          <button class="popup-buy">Acheter</button>
+          <button @click="addPanierPro" class="popup-buy">Ajouter au panier</button>
           <button class="popup-exit" @click="closePopup">Fermer</button>
         </div>
-
       </div>
     </div>
   </div>
 </template>
 
-<script setup>
-import {ref} from 'vue';
+<script>
+import { mapGetters } from "vuex";
 
-const emit = defineEmits(['fermerPopup']);
-const isOpen = ref(false);
-
-const closePopup = () => {
-  isOpen.value = false;
-  emit('fermerPopup');
-}
+export default {
+  data() {
+    return {
+      isOpen: false
+    };
+  },
+  methods: {
+    closePopup() {
+      this.isOpen = false;
+      this.$emit('fermerPopup'); // Assurez-vous que le composant parent écoute cet événement
+    },
+    addPanierPro() {
+      const currentFleur = this.getCurrentFleur;
+      if (currentFleur) {
+        this.$store.dispatch('PanierPro/addArticleToPanier', currentFleur);
+      }
+      this.closePopup();
+    }
+  },
+  computed: {
+    ...mapGetters("PlantesInformation", ["getCurrentFleur"])
+  }
+};
 </script>
 
 <style scoped>
-
 .photoGauche {
   width: 100%;
   aspect-ratio: 1;
@@ -47,6 +60,28 @@ const closePopup = () => {
   justify-content: end;
   align-items: end;
 }
+
+.card__category {
+  font-family: 'Raleway', sans-serif;
+  text-transform: uppercase;
+  font-size: 13px;
+  letter-spacing: 2px;
+  font-weight: 500;
+  color: #868686;
+}
+
+.card__title {
+  margin-top: 5px;
+  margin-bottom: 10px;
+  font-family: 'Roboto Slab', serif;
+}
+
+.card__price {
+  font-size: 12px;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 500;
+}
+
 
 .popup_gauche {
   display: flex;
@@ -111,23 +146,27 @@ const closePopup = () => {
   border: none;
   bottom: 100%;
   position: relative;
-
 }
+
 @media only screen and (max-width: 768px) {
   .popup {
     justify-content: start;
   }
+
   .popup_general {
     flex-direction: column;
   }
+
   .popup_droite {
     width: 100%;
     height: 100%;
   }
+
   .popup_gauche {
     width: 100%;
   }
 }
+
 @media only screen and (max-width: 466px) {
   .popup_content {
     width: 100%;

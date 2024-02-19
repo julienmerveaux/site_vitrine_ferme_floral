@@ -11,7 +11,6 @@ import {mapGetters} from "vuex";
 
 export default {
   components: { CardCatalogueParticulierVue },
-  props: ['type'],
   computed: {
     ...mapGetters("BouquetInformation",["getAllBouquetFraiche"])
   },

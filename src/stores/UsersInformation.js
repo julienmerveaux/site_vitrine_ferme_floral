@@ -8,6 +8,7 @@ const auth = getAuth();
 
 
 const UsersInformation = {
+    namespace:true,
     state: {
         userId: null,
         currentUser: {},

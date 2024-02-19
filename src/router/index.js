@@ -60,6 +60,18 @@ const router = createRouter({
       path: '/login',
       name: 'login',
       component: () => import('@/views/loginView.vue')
+    },
+    {
+      path: '/panierParticulier',
+      name: 'PanierParticulier',
+      component: () => import('@/views/PanierParticulierView.vue'),
+      meta: { requiresType: 'particulier' }
+    },
+    {
+      path: '/panierPro',
+      name: 'PanierPro',
+      component: () => import('@/views/PanierProView.vue'),
+      meta: { requiresType: 'professionnel' }
     }
   ],
   scrollBehavior(to, from, savedPosition) {

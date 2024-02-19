@@ -35,6 +35,7 @@ const BouquetInformation = {
                     prix: record.get('prix'),
                     quantite: record.get('quantite'),
                     taille: record.get('taille'),
+                    quantiteAchat:0
                 }));
                 commit('setAllBouquets', bouquetsData);
                 fetchNextPage();

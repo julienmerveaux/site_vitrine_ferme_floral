@@ -12,18 +12,48 @@
           <span class="card__category"> {{ bouquet.type }}</span>
           <h3 class="card__title">{{ bouquet.nom }}</h3>
           <span class="card__price">{{ bouquet.prix }}</span>
+          <h1 v-if="isPanierParticulierRoute" class="card__price">Quantité : {{ bouquet.quantiteAchat }}</h1>
         </div>
       </article>
-
+      <button v-if="!isPanierParticulierRoute && getIsConnected " @click="addItemPanier" class="buttonStyle">Ajouter au panier</button>
+      <div v-if="showPopup" class="popup">
+        <p>Vous venez d'ajouter {{bouquet.nom}} </p>
+        <p>quantite : {{ bouquet.quantiteAchat }} </p>
+      </div>
     </section>
 
   </div>
 </template>
 
 <script>
+import {mapGetters} from "vuex";
+
 export default {
   props:{
     bouquet:Object
+  },
+  data() {
+    return {
+      showPopup: false
+    };
+  },
+  methods:{
+    ...mapGetters("PanierParticulier",["getPanierparticulier"]),
+    addItemPanier(){
+      this.showPopup = true
+      setTimeout(() => {
+        this.showPopup = false;
+      }, 3000);
+      this.$store.dispatch('PanierParticulier/addArticleToPanier', this.bouquet);
+    },
+
+  },
+  computed:{
+    ...mapGetters(['getCurrentUser','getIsConnected']),
+
+    isPanierParticulierRoute() {
+      return this.$route.name === 'PanierParticulier'; // Remplacez 'panierParticulier' par le nom de votre route
+    }
   }
 }
 
@@ -59,10 +89,20 @@ body {
   align-items: center;
 }
 
+.buttonStyle {
+  width: 50%;
+  background-color: transparent;
+  border:none;
+  padding: 10px;
+}
+
+.buttonStyle:hover {
+  background-color: green;
+}
 .cards {
   width: 100%;
   display: flex;
-  display: -webkit-flex;
+  flex-direction: column;
   justify-content: center;
   -webkit-justify-content: center;
   max-width: 820px;
@@ -187,6 +227,18 @@ body {
 
 .card:hover .card__info-hover {
   opacity: 1;
+}
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: green;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  z-index: 9999; /* Assurez-vous que la popup est au-dessus de tous les autres éléments */
 }
 
 </style>

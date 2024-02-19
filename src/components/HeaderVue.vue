@@ -35,6 +35,8 @@
           <button v-if="getIsConnected" @click="logout" class="colorRouter colorTexte">Déconnecter</button>
           <router-link v-if="!getIsConnected" class="colorRouter colorTexte" to="/inscription">S'inscrire</router-link>
           <router-link v-if="!getIsConnected" class="colorRouter colorTexte" to="/login">Se connecter</router-link>
+          <router-link v-if="getCurrentUser.type ==='particulier'" class="colorRouter colorTexte alignementStyle" to="/panierParticulier">PanierParticulier</router-link>
+          <router-link v-if="getCurrentUser.type ==='professionnel'" class="colorRouter colorTexte alignementStyle" to="/panierPro">PanierProfessionnel</router-link>
         </div>
 
       </ul>
@@ -72,7 +74,6 @@ export default {
       this.$router.push('/');
     },
     isCurrentRoute(route) {
-      console.log(this.$route.path)
       return this.$route.path === route;
     }
   },
@@ -126,6 +127,11 @@ export default {
   border: solid;
   border-radius: 5px;
   background-color: #24d524;
+}
+
+.alignementStyle {
+  display: flex;
+  align-items: center;
 }
 
 .li-divDroite {

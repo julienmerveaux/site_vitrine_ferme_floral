@@ -28,16 +28,18 @@ const PlantesInformation = {
     },
     actions: {
         allFleurs({ commit }) {
-            base('fleursParticulier').select({
+            base('cataloguePro').select({
                 view: "Grid view"
             }).eachPage(function page(records, fetchNextPage) {
                 const fleursData = [];
                 records.forEach(function (record) {
                     const fleurData = {
                         id: record.id,
-                        titre: record.get('titre'),
-                        type: record.get('type'),
+                        nom: record.get('nom'),
+                        couleur: record.get('couleur'),
                         prix: record.get('prix'),
+                        quantite: record.get('quantite'),
+                        quantiteAchat: 0
                     };
                     fleursData.push(fleurData);
                     console.log(fleurData);
@@ -52,15 +54,15 @@ const PlantesInformation = {
             });
         },
         fleurWithId({ commit }, fleurId) {
-            base('fleursParticulier').find(fleurId, function (err, record) {
+            base('cataloguePro').find(fleurId, function (err, record) {
                 if (err) {
                     console.error(err);
                     return;
                 }
                 const fleurDetails = {
                     id: record.id,
-                    titre: record.fields.titre,
-                    type: record.fields.type,
+                    nom: record.fields.nom,
+                    couleur: record.fields.couleur,
                     prix: record.fields.prix,
                 };
                 commit('setCurrentFleur', fleurDetails);
