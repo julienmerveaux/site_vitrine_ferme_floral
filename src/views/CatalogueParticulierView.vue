@@ -53,7 +53,7 @@ export default {
   grid-template-columns: repeat(3, 1fr);
   gap: 30px;
   margin: 0 auto;
-  max-width: 1200px;
+  max-width: 1773px;
 }
 
 .button {

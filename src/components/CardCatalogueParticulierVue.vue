@@ -4,10 +4,9 @@
     <section class="cards">
 
       <article class="card card--1">
-        <div class="card__img"></div>
-        <a href="#" class="card_link">
-          <div class="card__img--hover"></div>
-        </a>
+        <img :src="bouquet.image[0].url" alt="pas de photo">
+
+        <p>{{ bouquet.image.url}} </p>
         <div class="card__info">
           <span class="card__category"> {{ bouquet.type }}</span>
           <h3 class="card__title">{{ bouquet.nom }}</h3>
@@ -109,7 +108,6 @@ body {
 }
 
 .card--1 .card__img, .card--1 .card__img--hover {
-  background-image: url('https://images.pexels.com/photos/45202/brownie-dessert-cake-sweet-45202.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260');
 }
 
 

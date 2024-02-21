@@ -9,16 +9,18 @@
         <div class="card__info">
           <h3 class="card__title">{{ fleur.nom }}</h3>
           <span class="card__category"> {{ fleur.couleur }}</span>
-          <h1 class="card__price">{{ fleur.prix }}</h1>
-          <h3> Quantité : {{ fleur.quantiteAchat }}</h3>
+          <span class="card__price">{{ fleur.prix }}</span>
+          <h3 v-if="!isPanierProRoute"> Quantité : {{ fleur.quantite }}</h3>
+          <h3 v-if="isPanierProRoute"> Quantité : {{ fleur.quantiteAchat }}</h3>
         </div>
         <div class="info">
-          <button v-if="isPanierParticulierRoute" class="buttonAchat" @click="afficherPopup">Voir plus</button>
+          <button class="buttonAchat" @click="afficherPopup">Voir plus</button>
+          <button v-if="isPanierProRoute" class="buttonAchat" @click="supprimerArticle">Supprimer</button>
         </div>
         <PopUpDescriptionVue v-if="popupVisible" @fermerPopup="fermerPopup"/>
       </article>
       <div v-if="showPopup" class="popup">
-        <p>Vous venez d'ajouter {{fleur.nom}} </p>
+        <p>Vous venez d'ajouter {{ fleur.nom }} </p>
         <p>quantite : {{ fleur.quantiteAchat }} </p>
       </div>
     </section>
@@ -29,8 +31,8 @@
 import PopUpDescriptionVue from "@/components/PopUpDescriptionVue.vue";
 
 export default {
-  props:{
-    fleur:Object
+  props: {
+    fleur: Object
   },
 
   components: {
@@ -39,6 +41,7 @@ export default {
   data() {
     return {
       popupVisible: false,
+      showPopup: false
     };
   },
   methods: {
@@ -48,11 +51,22 @@ export default {
     },
     fermerPopup() {
       this.popupVisible = false;
+      this.showPopup = true
+      setTimeout(() => {
+        this.showPopup = false;
+      }, 3000);
     },
-    isPanierParticulierRoute() {
-      console.log(this.$route.name)
+    supprimerArticle() {
+      if (this.isPanierProRoute()) {
+        this.$store.dispatch('PanierPro/deleteArticleFromPanier', this.fleur.id);
+      }
+    },
+  },
+  computed:{
+    isPanierProRoute() {
+      console.log(this.$route.name);
       return this.$route.name === 'PanierPro';
-    }
+    },
   }
 };
 </script>
@@ -65,6 +79,7 @@ export default {
   align-items: center;
   padding: 10px;
 }
+
 .buttonAchat {
   background-color: transparent;
   color: black;
@@ -197,6 +212,19 @@ body {
 .card:hover {
   opacity: 1;
 }
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: green;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  z-index: 9999; /* Assurez-vous que la popup est au-dessus de tous les autres éléments */
+}
+
 
 @media (max-width: 600px) {
   .card {

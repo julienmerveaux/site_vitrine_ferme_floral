@@ -1,53 +1,8 @@
 <template>
-  <div>
-    <div class="general_espace_pro">
-      <main class="container">
-        <div class="contact-header">
-          <h1>Contactez-nous</h1>
-          <p>Nous sommes là pour répondre à toutes vos questions. Remplissez le formulaire ci-dessous et nous vous répondrons dans les plus brefs délais.</p>
-        </div>
+  <iframe class="airtable-embed"
+          src="https://airtable.com/embed/appbmkbokhHog6r1K/shr8iAnzpojVYlBkl?backgroundColor=tealDusty" frameborder="0"
+          onmousewheel="" width="100%" height="1200" style="background: transparent; border: 1px solid #ccc;"></iframe>
 
-        <div class="contact-form">
-          <form action="#" method="post">
-
-            <div class="form-group">
-              <label for="nom">Nom</label>
-              <input class="button" type="text" id="nom" name="nom" required>
-            </div>
-
-            <div class="form-group">
-              <label for="prenom">Prénom</label>
-              <input class="button" type="text" id="prenom" name="prenom" required>
-            </div>
-
-            <div class="form-group">
-              <label for="email">Votre adresse e-mail</label>
-              <input class="button" type="email" id="email" name="email" required>
-            </div>
-
-            <div class="form-group">
-              <label for="telephone">Votre téléphone</label>
-              <input class="button" type="tel" id="telephone" name="telephone" required>
-            </div>
-
-            <div class="form-group">
-              <label for="sujet">Sujet</label>
-              <input class="button" type="text" id="sujet" name="sujet" required>
-            </div>
-
-            <div class="form-group">
-              <label for="message">Message</label>
-              <textarea class="button" id="message" name="message"></textarea>
-            </div>
-
-            <div class="form-group">
-              <button class="button" type="submit">Envoyer</button>
-            </div>
-          </form>
-        </div>
-      </main>
-    </div>
-  </div>
 
 </template>
 
@@ -58,75 +13,8 @@
 
 
 <style scoped>
-body {
-  font-family: 'Arial', sans-serif;
-}
 
-.container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 2rem;
-}
-
-.button {
-  background-color: white
-}
-
-.contact-header {
-  text-align: center;
-  margin-bottom: 2rem;
-}
-
-.contact-header h1 {
-  margin-bottom: 0.5rem;
-}
-
-.contact-header p {
-  color: #666;
-  margin-bottom: 2rem;
-}
-
-.contact-form {
-  background: #f9f9f9;
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.form-group {
-  margin-bottom: 1rem;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 0.5rem;
-}
-
-.form-group input,
-.form-group textarea {
-  width: 100%;
-  padding: 0.75rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  box-sizing: border-box; /* Ajouté */
-}
-
-.form-group textarea {
-  height: 150px;
-}
-
-.form-group button {
-  background: #005f73;
-  color: white;
-  padding: 0.75rem 1.5rem;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 1rem;
-  text-transform: uppercase;
-}
-
-.form-group button:hover {
-  background: #0a9396;
+.airtable-embed {
+  overflow-y: hidden;
 }
 </style>

@@ -72,7 +72,7 @@ const router = createRouter({
       name: 'PanierPro',
       component: () => import('@/views/PanierProView.vue'),
       meta: { requiresType: 'professionnel' }
-    }
+    },
   ],
   scrollBehavior(to, from, savedPosition) {
     // always scroll to top
