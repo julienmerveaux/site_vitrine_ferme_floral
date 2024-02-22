@@ -9,19 +9,21 @@
         <div class="card__info">
           <h3 class="card__title">{{ fleur.nom }}</h3>
           <span class="card__category"> {{ fleur.couleur }}</span>
-          <span class="card__price">{{ fleur.prix }}</span>
+          <h3 class="card__price">{{ fleur.prix }} €</h3>
+          <h1 class="card__price">Nombre par botte : {{ fleur.botte }}</h1>
+
           <h3 v-if="!isPanierProRoute"> Quantité : {{ fleur.quantite }}</h3>
           <h3 v-if="isPanierProRoute"> Quantité : {{ fleur.quantiteAchat }}</h3>
         </div>
         <div class="info">
-          <button class="buttonAchat" @click="afficherPopup">Voir plus</button>
+          <button class="buttonAchat" v-if="!isPanierProRoute" @click="afficherPopup">Voir plus</button>
           <button v-if="isPanierProRoute" class="buttonAchat" @click="supprimerArticle">Supprimer</button>
         </div>
         <PopUpDescriptionVue v-if="popupVisible" @fermerPopup="fermerPopup"/>
       </article>
       <div v-if="showPopup" class="popup">
         <p>Vous venez d'ajouter {{ fleur.nom }} </p>
-        <p>quantite : {{ fleur.quantiteAchat }} </p>
+        <p>quantite : {{ fleur.quantiteAchat }} de {{fleur.botte}}</p>
       </div>
     </section>
   </div>

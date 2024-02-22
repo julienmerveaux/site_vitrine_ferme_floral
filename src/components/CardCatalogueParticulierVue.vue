@@ -10,14 +10,14 @@
         <div class="card__info">
           <span class="card__category"> {{ bouquet.type }}</span>
           <h3 class="card__title">{{ bouquet.nom }}</h3>
-          <span class="card__price">{{ bouquet.prix }}</span>
+          <h2 class="card__price">{{ bouquet.prix }}</h2>
           <h1 v-if="isPanierParticulierRoute" class="card__price">Quantité : {{ bouquet.quantiteAchat }}</h1>
         </div>
       </article>
       <button v-if="!isPanierParticulierRoute && getIsConnected " @click="addItemPanier" class="buttonStyle">Ajouter au panier</button>
       <div v-if="showPopup" class="popup">
         <p>Vous venez d'ajouter {{bouquet.nom}} </p>
-        <p>quantite : {{ bouquet.quantiteAchat }} </p>
+        <p>quantite : {{ bouquet.quantiteAchat }}</p>
       </div>
     </section>
 

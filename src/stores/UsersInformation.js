@@ -3,6 +3,7 @@ import {getFirestore, doc, getDoc, setDoc} from "firebase/firestore";
 import db from "@/Firebase.js";
 import {createUserWithEmailAndPassword} from "@firebase/auth";
 import router from "@/router/index.js";
+import axios from "axios";
 
 const auth = getAuth();
 
@@ -141,6 +142,15 @@ const UsersInformation = {
                 console.error("Erreur lors de la création de l'utilisateur:", error);
             }
         },
+        submitForm({ commit }, formData) {
+            axios.post('/api/submit-form', formData)
+                .then(response => {
+                    commit('FORM_SUBMITTED', response.data);
+                })
+                .catch(error => {
+                    commit('FORM_SUBMIT_FAILED', error);
+                });
+        }
     },
 };
 

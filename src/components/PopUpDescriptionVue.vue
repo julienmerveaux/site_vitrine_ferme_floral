@@ -10,6 +10,7 @@
             <h1 class="card__title">{{ getCurrentFleur.nom }}</h1>
             <h2 class="card__category">{{ getCurrentFleur.couleur }}</h2>
             <h3 class="card__price">{{ getCurrentFleur.prix }}</h3>
+            <h3 class="card__price">{{ getCurrentFleur.botte }}</h3>
           </div>
         </div>
         <div class="button_popup">

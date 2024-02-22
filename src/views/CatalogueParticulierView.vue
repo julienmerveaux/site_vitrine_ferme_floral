@@ -1,4 +1,15 @@
 <template>
+  <div v-if="!getIsConnected && showPopUp" class="popup-overlay">
+    <div class="popup">
+      <p>Veuillez vous connecter ou vous inscrire pour acheter.</p>
+      <div class="divButtonPopup">
+        <router-link class="styleRouter" to="/inscription">S'inscrire</router-link>
+        <router-link class="styleRouter" to="/login">Se connecter</router-link>
+        <button @click="closePopup">Fermer</button>
+      </div>
+
+    </div>
+  </div>
   <div class="button-container">
     <button class="button" @click="showAll = true; showSechee = false; showFraiche = false;">Toutes catégories</button>
     <button class="button" @click="showAll = false; showSechee = false; showFraiche = true;">Fleurs fraiches</button>
@@ -12,10 +23,10 @@
 
 <script>
 import CardCatalogueParticulierVue from "@/components/CardCatalogueParticulierVue.vue";
-import { mapActions, mapGetters } from "vuex";
+import {mapActions, mapGetters} from "vuex";
 
 export default {
-  components: { CardCatalogueParticulierVue },
+  components: {CardCatalogueParticulierVue},
   props: ['type'],
 
   data() {
@@ -23,10 +34,12 @@ export default {
       showAll: true,
       showSechee: false,
       showFraiche: false,
+      showPopUp: true
     };
   },
   computed: {
-    ...mapGetters("BouquetInformation", ["getAllBouquet","getAllBouquetFraiche","getAllBouquetSechee"]),
+    ...mapGetters("BouquetInformation", ["getAllBouquet", "getAllBouquetFraiche", "getAllBouquetSechee"]),
+    ...mapGetters(["getIsConnected"]),
     filteredBouquets() {
       if (this.showFraiche) {
         return this.getAllBouquetFraiche;
@@ -37,7 +50,10 @@ export default {
     }
   },
   methods: {
-    ...mapActions("BouquetInformation", ["allBouquet"])
+    ...mapActions("BouquetInformation", ["allBouquet"]),
+    closePopup() {
+      this.showPopUp = false;
+    }
   },
   created() {
     this.allBouquet();
@@ -47,6 +63,37 @@ export default {
 
 
 <style scoped>
+
+.divButtonPopup {
+  display: flex;
+  justify-content: space-between;
+}
+.styleRouter {
+  text-decoration: none;
+  color: black;
+
+}
+
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5); /* Fond flou */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+.popup {
+  background: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
 
 .d-grid {
   display: grid;
@@ -85,11 +132,13 @@ export default {
   .d-grid {
     grid-template-columns: repeat(1, 1fr);
   }
+
   .button-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap:0;
+    gap: 0;
   }
+
   .button {
     font-size: initial;
   }

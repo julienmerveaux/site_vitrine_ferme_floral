@@ -39,8 +39,10 @@ const PlantesInformation = {
                         couleur: record.get('couleur'),
                         prix: record.get('prix'),
                         quantite: record.get('quantite'),
+                        botte:record.get('botte'),
                         quantiteAchat: 0
                     };
+                    console.log(fleurData)
                     fleursData.push(fleurData);
                     console.log(fleurData);
                 });
@@ -64,6 +66,8 @@ const PlantesInformation = {
                     nom: record.fields.nom,
                     couleur: record.fields.couleur,
                     prix: record.fields.prix,
+                    quantite:record.fields.quantite,
+                    botte:record.fields.botte,
                 };
                 commit('setCurrentFleur', fleurDetails);
                 console.log('Retrieved', record.id);
