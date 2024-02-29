@@ -1,242 +1,136 @@
 <template>
   <div class="generalCard">
-
-    <section class="cards">
-
-      <article class="card card--1">
-        <img :src="bouquet.image[0].url" alt="pas de photo">
-
-        <p>{{ bouquet.image.url}} </p>
-        <div class="card__info">
-          <span class="card__category"> {{ bouquet.type }}</span>
-          <h3 class="card__title">{{ bouquet.nom }}</h3>
-          <h2 class="card__price">{{ bouquet.prix }}</h2>
-          <h1 v-if="isPanierParticulierRoute" class="card__price">Quantité : {{ bouquet.quantiteAchat }}</h1>
-        </div>
-      </article>
-      <button v-if="!isPanierParticulierRoute && getIsConnected " @click="addItemPanier" class="buttonStyle">Ajouter au panier</button>
-      <div v-if="showPopup" class="popup">
-        <p>Vous venez d'ajouter {{bouquet.nom}} </p>
-        <p>quantite : {{ bouquet.quantiteAchat }}</p>
+    <article class="card">
+      <img :src="bouquet.image[0].url" alt="pas de photo" class="card__img">
+      <div class="card__info">
+        <span class="card__category">{{ bouquet.type }}</span>
+        <h3 class="card__title">{{ bouquet.nom }}</h3>
+        <h2 class="card__price">{{ bouquet.prix }} €</h2>
+        <input type="number" v-if="getIsConnected" v-model="bouquet.quantiteAchat" class="card__quantity-input">
+        <h1 v-if="isPanierParticulierRoute" class="card__price">Quantité : {{ bouquet.quantiteAchat }}</h1>
       </div>
-    </section>
-
+      <button v-if="!isPanierParticulierRoute && getIsConnected" @click="addItemPanier" class="buttonStyle">Ajouter au panier</button>
+    </article>
+    <div v-if="showPopup" class="popupCardValidation">
+      <p>Vous venez d'ajouter {{ bouquet.nom }}</p>
+      <p>Quantité : {{ bouquet.quantiteAchat }}</p>
+    </div>
   </div>
 </template>
 
 <script>
-import {mapGetters} from "vuex";
+import { mapGetters } from "vuex";
 
 export default {
-  props:{
-    bouquet:Object
+  props: {
+    bouquet: Object,
   },
   data() {
     return {
-      showPopup: false
+      showPopup: false,
     };
   },
-  methods:{
-    ...mapGetters("PanierParticulier",["getPanierparticulier"]),
-    addItemPanier(){
-      this.showPopup = true
-      setTimeout(() => {
-        this.showPopup = false;
-      }, 3000);
-      this.$store.dispatch('PanierParticulier/addArticleToPanier', this.bouquet);
-    },
-
-  },
-  computed:{
-    ...mapGetters(['getCurrentUser','getIsConnected']),
-
+  computed: {
+    ...mapGetters(['getIsConnected']),
     isPanierParticulierRoute() {
-      return this.$route.name === 'PanierParticulier'; // Remplacez 'panierParticulier' par le nom de votre route
-    }
-  }
-}
-
+      return this.$route.name === 'PanierParticulier';
+    },
+  },
+  methods: {
+    addItemPanier() {
+      if (this.bouquet.quantiteAchat > 0) {
+        this.showPopup = true;
+        console.log(this.showPopup)
+        setTimeout(() => {
+          this.showPopup = false;
+        }, 3000);
+        this.$store.dispatch('PanierParticulier/addArticleToPanier', this.bouquet);
+      } else {
+        alert("Demande incorrecte");
+      }
+    },
+  },
+};
 </script>
 
-
 <style scoped>
-
 .generalCard {
-  height: 100%;
-}
-
-
-* {
-  box-sizing: border-box;
-}
-
-body, html {
-  font-family: 'Roboto Slab', serif;
-  margin: 0;
-  width: 100%;
-  height: 100%;
-  padding: 0;
-}
-
-body {
-  background-color: #D2DBDD;
-  display: flex;
-  display: -webkit-flex;
-  -webkit-justify-content: center;
-  -webkit-align-items: center;
-  justify-content: center;
-  align-items: center;
-}
-
-.buttonStyle {
-  width: 50%;
-  background-color: transparent;
-  border:none;
-  padding: 10px;
-}
-
-.buttonStyle:hover {
-  background-color: green;
-}
-.cards {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  -webkit-justify-content: center;
-  max-width: 820px;
-}
-
-.card--1 .card__img, .card--1 .card__img--hover {
-}
-
-
-.card__clock {
-  width: 15px;
-  vertical-align: middle;
-  fill: #AD7D52;
-}
-
-.card__time {
-  font-size: 12px;
-  color: #AD7D52;
-  vertical-align: middle;
-  margin-left: 5px;
-}
-
-.card__clock-info {
-  float: right;
-}
-
-.card__img {
-  visibility: hidden;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  width: 100%;
-  height: 235px;
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
-
-}
-
-.card__info-hover {
-  position: absolute;
-  padding: 16px;
-  width: 100%;
-  opacity: 0;
-  top: 0;
-}
-
-.card__img--hover {
-  transition: 0.2s all ease-out;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  width: 100%;
-  position: absolute;
-  height: 235px;
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
-  top: 0;
-
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Use auto-fit with minmax for responsive sizing */
+  grid-gap: 20px;
+  max-width: 1200px; /* Adjust the max-width to fit your design */
+  margin: 0 auto;
 }
 
 .card {
-  margin-right: 25px;
-  transition: all .4s cubic-bezier(0.175, 0.885, 0, 1);
-  background-color: #fff;
-  position: relative;
-  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* Align content to the top */
+  border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0px 13px 10px -7px rgba(0, 0, 0, 0.1);
-  width: 50%;
+  background-color: #ffffff;
+  height: auto; /* Height auto for content sizing */
+  box-shadow: 5px 5px 20px #a49f9f;
+
 }
 
-.card:hover {
-  box-shadow: 0px 30px 18px -8px rgba(0, 0, 0, 0.1);
-  transform: scale(1.10, 1.10);
+.card__img {
+  margin-top: 5%;
+  box-shadow: 5px 5px 5px #a49f9f;
+  border-radius: 10px;
+  width: 95%;
+  height: auto; /* Set to auto so the image's aspect ratio is maintained */
+  object-fit: cover;
 }
 
 .card__info {
-  z-index: 2;
-  background-color: #fff;
-  border-bottom-left-radius: 12px;
-  border-bottom-right-radius: 12px;
-  padding: 16px 24px 24px 24px;
+  padding: 15px;
+  text-align: center;
+  width: 100%; /* Full width to align text inputs and titles */
 }
 
-.card__category {
-  font-family: 'Raleway', sans-serif;
-  text-transform: uppercase;
-  font-size: 13px;
-  letter-spacing: 2px;
-  font-weight: 500;
-  color: #868686;
+.card__quantity-input {
+  padding: 5px;
+  margin: 10px 0; /* Add some margin at the top and bottom */
+  border: none;
+  text-align: center;
 }
 
-.card__title {
-  margin-top: 5px;
-  margin-bottom: 10px;
-  font-family: 'Roboto Slab', serif;
-}
-
-.card__price {
-  font-size: 12px;
-  font-family: 'Raleway', sans-serif;
-  font-weight: 500;
-}
-
-.card__author {
-  font-weight: 600;
-  text-decoration: none;
-  color: #AD7D52;
-}
-
-.card:hover .card__img--hover {
-  height: 100%;
-  opacity: 0.3;
-}
-
-.card:hover .card__info {
+.buttonStyle {
+  width: 75%; /* Full width button */
+  padding: 10px 20px; /* Increase padding for a larger button */
+  margin-top: 20px;
   background-color: transparent;
-  position: relative;
+  color: black;
+  border: 1px solid;
+  box-shadow: 0 5px 5px #c4c0c0;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1em; /* Increase font size if necessary */
 }
 
-.card:hover .card__info-hover {
-  opacity: 1;
+/* You may also want to adjust the hover effect for a better feel */
+.buttonStyle:hover {
+  transform: scale(1.05); /* Slight increase in scale */
 }
 
-.popup {
+/* Adjust the popup for larger view */
+.popupCardValidation {
   position: fixed;
-  top: 0;
   left: 50%;
   transform: translateX(-50%);
-  background-color: green;
+  background-color: #4CAF50;
   color: white;
-  padding: 10px 20px;
+  padding: 20px 40px; /* Increase padding for larger popup */
   border-radius: 5px;
-  z-index: 9999; /* Assurez-vous que la popup est au-dessus de tous les autres éléments */
+  z-index: 100;
+  font-size: 1em; /* Adjust font size for readability */
 }
 
+@media (max-width: 768px) {
+  .generalCard {
+    grid-template-columns: 1fr; /* Single column for mobile */
+  }
+}
 </style>

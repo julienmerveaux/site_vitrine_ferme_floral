@@ -30,13 +30,14 @@
             <router-link class=colorRouter to="/contact">Contact</router-link>
           </li>
         </div>
+        <h1>{{getCurrentUser.name}} {{getCurrentUser.firstname}}</h1>
+
         <div class="li-divDroite">
-          <h1>{{getCurrentUser.name}} {{getCurrentUser.firstname}}</h1>
           <button v-if="getIsConnected" @click="logout" class="colorRouter colorTexte">Déconnecter</button>
           <router-link v-if="!getIsConnected" class="colorRouter colorTexte" to="/inscription">S'inscrire</router-link>
           <router-link v-if="!getIsConnected" class="colorRouter colorTexte" to="/login">Se connecter</router-link>
-          <router-link v-if="getCurrentUser.type ==='particulier'" class="colorRouter colorTexte alignementStyle" to="/panierParticulier">PanierParticulier</router-link>
-          <router-link v-if="getCurrentUser.type ==='professionnel'" class="colorRouter colorTexte alignementStyle" to="/panierPro">PanierProfessionnel</router-link>
+          <router-link v-if="getCurrentUser.type ==='particulier'" class="colorRouter colorTexte alignementStyle" to="/panierParticulier">Votre panier</router-link>
+          <router-link v-if="getCurrentUser.type ==='professionnel'" class="colorRouter colorTexte alignementStyle" to="/panierPro">Votre panier</router-link>
         </div>
 
       </ul>

@@ -4,6 +4,7 @@ import PlantesInformation from "@/stores/PlantesInformation.js";
 import BouquetInformation from "@/stores/BouquetInformation.js";
 import PanierParticulier from "@/stores/PanierParticulier.js";
 import PanierPro from "@/stores/PanierPro.js";
+import Stripe from "@/stores/Stripe.js";
 
 const store = createStore({
     modules: {
@@ -12,6 +13,7 @@ const store = createStore({
         BouquetInformation,
         PanierParticulier,
         PanierPro,
+        Stripe,
     },
 
 });

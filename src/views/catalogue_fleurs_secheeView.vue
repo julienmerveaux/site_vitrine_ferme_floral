@@ -26,9 +26,6 @@ export default {
 .d-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
-  margin: 0 auto;
-  max-width: 1200px;
 }
 @media only screen and (max-width: 768px) {
   .d-grid {
