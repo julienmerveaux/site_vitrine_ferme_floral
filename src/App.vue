@@ -1,16 +1,32 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
+<script>
+import {RouterLink, RouterView} from 'vue-router'
 import HeaderVue from "@/components/HeaderVue.vue";
 import PiedDePageVue from "@/components/PiedDePageVue.vue";
 import ContenuVue from "@/components/ContenuVue.vue";
+import StripePayment from "@/components/StripePayment.vue";
+import CardCatalogueParticulierVue from "@/components/CardCatalogueParticulierVue.vue";
+import {mapActions, mapGetters} from "vuex";
 
+export default {
+  name: "PanierParticulierView",
+  components: {PiedDePageVue, HeaderVue},
+
+  methods: {
+    ...mapActions("BouquetInformation", ["allBouquet"]),
+  },
+  created() {
+    this.allBouquet()
+    this.$store.dispatch('PanierParticulier/initializePanier');
+    this.$store.dispatch('PanierPro/initializePanier');
+  }
+}
 </script>
 
 <template>
   <div class="app">
     <HeaderVue id="main" class="header"></HeaderVue>
     <div class="content">
-      <RouterView />
+      <RouterView/>
     </div>
     <PiedDePageVue></PiedDePageVue>
   </div>
@@ -35,7 +51,7 @@ import ContenuVue from "@/components/ContenuVue.vue";
 
 .content {
   flex-grow: 1; /* Fait en sorte que le contenu prenne toute la hauteur restante */
-  padding-top: 153px/* Hauteur de l'en-tête (ajoutez la hauteur de l'en-tête ici) */;
+  padding-top: 153px /* Hauteur de l'en-tête (ajoutez la hauteur de l'en-tête ici) */;
   /* Ajoutez d'autres styles pour le contenu si nécessaire */
 }
 
@@ -43,7 +59,7 @@ import ContenuVue from "@/components/ContenuVue.vue";
   /* Styles pour votre pied de page */
 }
 
-@media  (max-width: 600px){
+@media (max-width: 600px) {
   .content {
     padding-top: 0;
     margin-top: 50px;

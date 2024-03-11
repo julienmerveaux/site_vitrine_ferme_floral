@@ -1,160 +1,140 @@
 <template>
-  <div class="card-container">
-    <div class="card">
-      <div class="card-image"></div>
-      <div class="card-content">
-        <h2 class="card-title">{{ fleur.nom }}</h2>
-        <p class="card-category">{{ fleur.couleur }}</p>
-        <div class="card-details">
-          <p class="card-price">{{ fleur.prix }} €</p>
-          <p class="card-quantity">Nombre par botte: {{ fleur.botte }}</p>
-          <p v-if="!isPanierProRoute">Quantité: {{ fleur.quantite }}</p>
-          <p v-if="isPanierProRoute">Quantité: {{ fleur.quantiteAchat }}</p>
-        </div>
-        <div class="card-actions">
-          <button v-if="!isPanierProRoute" @click="afficherPopup" class="btn">Voir plus</button>
-          <button v-if="isPanierProRoute" @click="supprimerArticle" class="btn btn-danger">Supprimer</button>
-        </div>
+  <div class="generalCard">
+    <article class="card">
+      <img :src="fleurs.image[0].url" alt="pas de photo" class="card__img">
+      <div class="card__info">
+        <h1 class="card__title">{{ fleurs.nom }}</h1>
+        <h2 class="card__category">{{ fleurs.couleur.join(" / ") }}</h2>
+        <span class="card__category">quantité : {{ fleurs.quantite }} de {{ fleurs.botte }} bottes</span>
+        <h2 class="card__price">{{ fleurs.prix }} €</h2>
+        <input type="number" v-if="getIsConnected && !isPanierProRoute" v-model="fleurs.quantiteAchat"
+               class="card__quantity-input">
+        <h1 v-if="isPanierProRoute" class="card__price">Quantité : {{ fleurs.quantiteAchat }}</h1>
       </div>
-    </div>
-    <PopUpDescriptionVue v-if="popupVisible" @fermerPopup="fermerPopup" />
-    <div v-if="showPopup" class="popup-notification">
-      <p>Vous venez d'ajouter {{ fleur.nom }} </p>
-      <p>Quantité: {{ fleur.quantiteAchat }} de {{fleur.botte}}</p>
+      <button v-if="!isPanierProRoute && getIsConnected" @click="addItemPanier" class="buttonStyle">Ajouter au panier
+      </button>
+    </article>
+    <div v-if="showPopup" class="popupCardValidation">
+      <p>Vous venez d'ajouter {{ fleurs.nom }}</p>
+      <p>Quantité : {{ fleurs.quantiteAchat }}</p>
     </div>
   </div>
 </template>
 
 <script>
-import PopUpDescriptionVue from "@/components/PopUpDescriptionVue.vue";
+import {mapGetters} from "vuex";
 
 export default {
   props: {
-    fleur: Object,
-  },
-  components: {
-    PopUpDescriptionVue,
+    fleurs: Object,
   },
   data() {
     return {
-      popupVisible: false,
       showPopup: false,
     };
   },
-  methods: {
-    afficherPopup() {
-      this.$store.dispatch('PlantesInformation/fleurWithId', this.fleur.id);
-      this.popupVisible = true;
-    },
-    fermerPopup() {
-      this.popupVisible = false;
-      this.showPopup = true;
-      setTimeout(() => {
-        this.showPopup = false;
-      }, 3000);
-    },
-    supprimerArticle() {
-      if (this.isPanierProRoute()) {
-        this.$store.dispatch('PanierPro/deleteArticleFromPanier', this.fleur.id);
-      }
-    },
-  },
   computed: {
+    ...mapGetters("UsersInformation",['getIsConnected']),
     isPanierProRoute() {
       return this.$route.name === 'PanierPro';
+    },
+  },
+  methods: {
+    addItemPanier() {
+      console.log(this.fleurs)
+      if (this.fleurs.quantiteAchat > 0) {
+        this.showPopup = true;
+        console.log(this.showPopup)
+        setTimeout(() => {
+          this.showPopup = false;
+        }, 3000);
+        this.$store.dispatch('PanierPro/addArticleToPanier', this.fleurs);
+      } else {
+        alert("Demande incorrecte");
+      }
     },
   },
 };
 </script>
 
 <style scoped>
-.card-container {
-  display: flex;
-  justify-content: center;
-  margin: 20px;
+.generalCard {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Use auto-fit with minmax for responsive sizing */
+  grid-gap: 20px;
+  max-width: 1200px; /* Adjust the max-width to fit your design */
+  margin: 0 auto;
 }
 
 .card {
-  background-color: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  transition: transform 0.3s ease-in-out;
-  width: 100%;
-  max-width: 320px;
-}
-
-.card:hover {
-  transform: translateY(-10px);
-}
-
-.card-image {
-  background-image: url('https://images.pexels.com/photos/45202/brownie-dessert-cake-sweet-45202.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260');
-  background-size: cover;
-  background-position: center;
-  height: 200px;
-}
-
-.card-content {
-  padding: 15px;
-}
-
-.card-title {
-  font-size: 18px;
-  margin-bottom: 5px;
-}
-
-.card-category, .card-price, .card-quantity {
-  font-size: 14px;
-  color: #666666;
-  margin: 5px 0;
-}
-
-.card-actions {
   display: flex;
-  justify-content: space-between;
-  margin-top: 15px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* Align content to the top */
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #ffffff;
+  height: auto; /* Height auto for content sizing */
+  box-shadow: 5px 5px 20px #a49f9f;
+  padding-bottom: 20px;
 }
 
-.btn {
+.card__img {
+  margin-top: 5%;
+  box-shadow: 5px 5px 5px #a49f9f;
+  border-radius: 10px;
+  width: 95%;
+  height: auto; /* Set to auto so the image's aspect ratio is maintained */
+  object-fit: cover;
+}
+
+.card__info {
+  padding: 15px;
+  text-align: center;
+  width: 100%; /* Full width to align text inputs and titles */
+}
+
+.card__quantity-input {
+  padding: 5px;
+  margin: 10px 0; /* Add some margin at the top and bottom */
   border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
+  text-align: center;
+}
+
+.buttonStyle {
+  width: 75%; /* Full width button */
+  padding: 10px 20px; /* Increase padding for a larger button */
+  margin-top: 20px;
+  background-color: transparent;
+  color: black;
+  border: 1px solid;
+  box-shadow: 0 5px 5px #c4c0c0;
+  border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.2s;
+  font-size: 1em; /* Increase font size if necessary */
 }
 
-.btn:hover {
-  opacity: 0.9;
+/* You may also want to adjust the hover effect for a better feel */
+.buttonStyle:hover {
+  transform: scale(1.05); /* Slight increase in scale */
 }
 
-.btn-danger {
-  background-color: #d9534f;
-  color: white;
-}
-
-.btn-danger:hover {
-  background-color: #c9302c;
-}
-
-.popup-notification {
+/* Adjust the popup for larger view */
+.popupCardValidation {
   position: fixed;
-  bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
   background-color: #4CAF50;
-  color: #ffffff;
-  padding: 10px 20px;
+  color: white;
+  padding: 20px 40px; /* Increase padding for larger popup */
   border-radius: 5px;
-  z-index: 10;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-  transition: all 0.3s ease-in-out;
+  z-index: 100;
+  font-size: 1em; /* Adjust font size for readability */
 }
 
 @media (max-width: 768px) {
-  .card-container {
-    flex-direction: column;
-    align-items: center;
+  .generalCard {
+    grid-template-columns: 1fr; /* Single column for mobile */
   }
 }
 </style>

@@ -5,15 +5,14 @@
 </template>
 
 <script>
-import {mapActions, mapGetters, mapState} from 'vuex';
-import {loadStripe} from '@stripe/stripe-js';
+import {mapActions} from 'vuex';
 
 export default {
   methods: {
-    ...mapActions('Stripe', ['createSession']),
+    ...mapActions('Stripe', ['createSessionBouquetMois']),
     async createStripeSession() {
       try {
-        const sessionId = await this.$store.dispatch('Stripe/createSession');
+        const sessionId = await this.$store.dispatch('Stripe/createSessionBouquetMois');
         const stripe = await this.$store.getters['Stripe/stripeInstance'];
         await stripe.redirectToCheckout({ sessionId });
       } catch (error) {

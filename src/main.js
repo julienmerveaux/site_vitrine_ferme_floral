@@ -1,23 +1,14 @@
 import { createApp } from 'vue'
-import { createPinia } from 'pinia'
-
 import App from './App.vue'
 import router from './router'
-import store from "@/stores/index.js";
+import store from "@/stores/index.js"; // Assurez-vous que c'est bien le chemin vers votre store Vuex
 
 const app = createApp(App)
-    .use(store,{
-        AIRTABLE_API_KEY: import.meta.env.AIRTABLE_API_KEY,
-        SENDGRID_API_KEY: import.meta.env.SENDGRID_API_KEY,
-        AIRTABLE_BASE:import.meta.env.AIRTABLE_BASE,
-    })
 
-    app.use(store,{
-        AIRTABLE_API_KEY: import.meta.env.AIRTABLE_API_KEY,
-        SENDGRID_API_KEY: import.meta.env.SENDGRID_API_KEY,
-        AIRTABLE_BASE: import.meta.env.AIRTABLE_BASE,
-    })
-app.use(createPinia())
-app.use(router)
+app.use(store) // Utilisez Vuex
+app.use(router) // Utilisez Vue Router
 
 app.mount('#app')
+
+// Assurez-vous que 'UsersInformation/initAuthState' est une action valide dans votre store Vuex
+store.dispatch('UsersInformation/initAuthState');

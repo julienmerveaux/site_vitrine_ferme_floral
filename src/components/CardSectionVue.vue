@@ -2,8 +2,8 @@
   <main>
     <div class="card">
       <img class="image" :src="imageUrl" alt="logo">
-      <H1 class="titre"> {{ title }}</H1>
-      <H3 class="text"> {{ text }}</H3>
+      <h1 class="titre"> {{ title }}</h1>
+      <h3 class="text"> {{ text }}</h3>
     </div>
   </main>
 </template>

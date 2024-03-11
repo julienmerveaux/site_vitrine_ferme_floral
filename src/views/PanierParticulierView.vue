@@ -4,7 +4,7 @@ import CardCatalogueParticulierVue from "@/components/CardCatalogueParticulierVu
 import StripePayment from "@/components/StripePayment.vue";
 
 export default {
-  name: "PanierView",
+  name: "PanierParticulierView",
   components: {StripePayment, CardCatalogueParticulierVue},
 
   computed:{
@@ -15,13 +15,13 @@ export default {
 
 <template>
   <div class="divTitle">
-    <H1 class="styleTitle">Votre panier</H1>
+    <h1 class="styleTitle">Votre panier</h1>
   </div>
   <div class="d-grid">
     <CardCatalogueParticulierVue v-for="(bouquet, id) in getPanierparticulier" :key="id" :bouquet="bouquet"></CardCatalogueParticulierVue>
   </div>
   <div class="stylePaiement">
-   <stripe-payment></stripe-payment>
+    <StripePayment></StripePayment>
   </div>
 </template>
 

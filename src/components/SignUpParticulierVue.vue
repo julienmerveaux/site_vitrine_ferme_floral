@@ -40,7 +40,7 @@ export default {
   },
 
   methods: {
-    ...mapActions(['registerUserParticulier']),
+    ...mapActions("UsersInformation",['registerUserParticulier']),
 
     submitForm() {
       this.registerUserParticulier({

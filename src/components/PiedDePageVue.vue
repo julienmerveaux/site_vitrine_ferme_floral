@@ -13,7 +13,7 @@
         referrerpolicy="no-referrer-when-downgrade">
     </iframe>
     <div class="newsletter-container">
-      <iframe class="airtable-embed" src="https://airtable.com/embed/appbmkbokhHog6r1K/pagkC2PfmEF5ZSwlO/form" frameborder="0" onmousewheel="" width="100%" height="533" style="background: transparent; border: 1px solid #ccc;"></iframe>    </div>
+      <iframe class="airtable-embed" src="https://airtable.com/embed/appbmkbokhHog6r1K/pagkC2PfmEF5ZSwlO/form" width="100%" height="533" style="background: transparent; border: 1px solid #ccc;"></iframe>    </div>
   </footer>
 </template>
 <script setup>

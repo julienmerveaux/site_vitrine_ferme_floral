@@ -16,7 +16,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['loginUser']),
+    ...mapActions("UsersInformation",["loginUser"]),
     submitForm() {
       this.loginUser({
         email: this.email,
@@ -52,7 +52,7 @@ export default {
 <template>
   <main class="container">
     <section class="sectionStyle" aria-label="Formulaire de Connexion">
-      <H1 class="h1Color">Se connecter</H1>
+      <h1 class="h1Color">Se connecter</h1>
       <h1 v-if="error" class="colorError">{{ error }}</h1>
       <form class="grid" @submit.prevent="submitForm">
         <input v-model="email" type="email" id="email" name="email" placeholder="Adresse Email"

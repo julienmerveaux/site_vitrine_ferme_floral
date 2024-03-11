@@ -9,16 +9,22 @@
       </div>
     </div>
   </div>
-  <div class="category-buttons">
+  <div class="divIntroduction">
+    <p class="colorTextIntro">Ce qui distingue La ferme florale Les 5 Saisons, c'est notre engagement envers l'excellence et l'originalité.
+      Chacune de nos créations est le fruit d'un savoir-faire artisanal, alliant expertise florale et créativité
+      débordante. Nous mettons un point d'honneur à sélectionner nos fleurs issus de notre production afin de garantir la
+      fraîcheur et la qualité de nos bouquets et compositions!</p>
   </div>
+
   <div class="filters">
-    <input type="text" v-model="nom" placeholder="Recherche par nom">
     <input type="number" v-model="maxPrix" placeholder="Prix max">
-    <input type="text" v-model="taille" placeholder="Taille">
-    <select v-model="type" name="selectType" id="selectType">
-      <option value="">Type de fleurs</option>
-      <option value="fleurs-sechee">Fleurs sechées</option>
-      <option value="fleurs-fraiche">Fleurs fraiche</option>
+    <select v-model="selectTaille" name="taille" id="taille">
+      <option value="">Toutes les tailles</option>
+      <option v-for="taille in tabTaille" :value="taille" :key="taille">{{ taille }}</option>
+    </select>
+    <select v-model="selectType" name="type" id="type">
+      <option value="">Toutes les types</option>
+      <option v-for="type in tabType" :value="type" :key="type">{{ type }}</option>
     </select>
     <button @click="applyFilters">Appliquer</button>
     <button @click="resetFilters">Réinitialiser les filtres</button>
@@ -45,30 +51,34 @@ export default {
       showSechee: false,
       showFraiche: false,
       showPopUp: true,
-      nom:"",
+      nom: "",
       maxPrix: null,
-      taille: '',
-      type:"",
+      selectTaille: '',
+      selectType: "",
     };
   },
   computed: {
-    ...mapGetters("BouquetInformation", ["getAllBouquet", "getAllBouquetFraiche", "getAllBouquetSechee","getFilteredBouquets"]),
-    ...mapGetters(["getIsConnected"]),
+    ...mapGetters("BouquetInformation", ["getAllBouquet", "getAllBouquetFraiche", "getAllBouquetSechee", "getFilteredBouquets", "getTabTaille", "getTabType"]),
+    ...mapGetters("UsersInformation", ["getIsConnected"]),
     filteredBouquets() {
       return this.getFilteredBouquets;
+    },
+    tabTaille() {
+      return this.getTabTaille;
+    },
+    tabType() {
+      return this.getTabType;
     }
   },
   methods: {
-    ...mapActions("BouquetInformation", ["allBouquet"]),
     closePopup() {
       this.showPopUp = false;
     },
     applyFilters() {
       this.$store.dispatch('BouquetInformation/filter', {
-        nom: this.nom,
         maxPrix: this.maxPrix,
-        taille: this.taille,
-        type:this.type,
+        taille: this.selectTaille,
+        type: this.selectType,
 
       });
     },
@@ -77,13 +87,10 @@ export default {
 
       this.nom = '';
       this.maxPrix = null;
-      this.taille = '';
-      this.type= ""
+      this.selectTaille = '';
+      this.selectType = ""
     },
   },
-  created() {
-    this.allBouquet();
-  }
 };
 </script>
 
@@ -103,6 +110,18 @@ export default {
   font-size: xx-large;;
 }
 
+.divIntroduction {
+  background: #f8f8f8;
+  padding: 10px 0;
+}
+
+.colorTextIntro {
+  text-align: center;
+  width: 50%;
+  margin:0 auto;
+  font-size: xx-large;
+  font-family: 'Belleza', sans-serif;
+}
 .category-button {
   background-color: #4CAF50;
   color: white;
@@ -196,9 +215,6 @@ export default {
     margin-bottom: 10px;
   }
 }
-
-
-
 
 
 .filters {

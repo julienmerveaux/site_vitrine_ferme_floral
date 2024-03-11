@@ -24,13 +24,14 @@
             <router-link  v-if="isProfessional" class=colorRouter to="/catalogue_pro">Boutique</router-link>
           </li>
           <li class="li-center" :class="{ 'active': isCurrentRoute('/bouquets') }">
-            <router-link v-if="!isProfessional" class=colorRouter to="/bouquets">Bouquets</router-link>
+            <router-link v-if="!isProfessional" class=colorRouter to="/blogs">Blogs</router-link>
           </li>
           <li class="li-center" :class="{ 'active': isCurrentRoute('/contact') }">
             <router-link class=colorRouter to="/contact">Contact</router-link>
           </li>
         </div>
-        <h1>{{getCurrentUser.name}} {{getCurrentUser.firstname}}</h1>
+        <h1 v-if="getIsConnected">{{getCurrentUser.name}} {{getCurrentUser.firstname}}</h1>
+        <h2 v-if="getIsConnected">mode: {{getCurrentUser.type}}</h2>
 
         <div class="li-divDroite">
           <button v-if="getIsConnected" @click="logout" class="colorRouter colorTexte">Déconnecter</button>
@@ -71,7 +72,7 @@ export default {
       this.isMobile = window.innerWidth <= 600;
     },
     logout() {
-      this.$store.dispatch('logout');
+      this.$store.dispatch('UsersInformation/logout');
       this.$router.push('/');
     },
     isCurrentRoute(route) {
@@ -79,7 +80,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getCurrentUser','getIsConnected']),
+    ...mapGetters("UsersInformation",["getCurrentUser","getIsConnected"]),
     isProfessional() {
       return this.getCurrentUser.type === 'professionnel';
     },

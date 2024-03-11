@@ -20,12 +20,27 @@ const PanierParticulier = {
             } else {
                 state.panierParticulier.push({...article});
             }
-        }
+            localStorage.setItem('panierParticulier', JSON.stringify(state.panierParticulier));
+        },
+        setPanier(state, panier) {
+            state.panierParticulier = panier;
+        },
+        clearPanier(state) {
+            state.panierParticulier = [];
+            state.totalPricePanier = 0;
+        },
     },
     actions: {
         addArticleToPanier({ commit }, article) {
+            console.log(article,"article")
             commit('addArticle', article);
-        }
+        },
+        initializePanier({ commit }) {
+            const savedPanier = localStorage.getItem('panierParticulier');
+            if (savedPanier) {
+                commit('setPanier', JSON.parse(savedPanier));
+            }
+        },
     }
 };
 

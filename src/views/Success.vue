@@ -1,6 +1,29 @@
 <script>
+import {mapGetters} from "vuex";
+
 export default {
-  name: "Success"
+  name: "Success",
+  computed: {
+    ...mapGetters("PanierPro", ["getPanierPro"]),
+    ...mapGetters("PanierParticulier", ["getPanierparticulier"]),
+  },
+  async created() {
+    // Correctly access mapped getters through `this`
+    await Promise.all([
+      ...this.getPanierPro.map(article =>
+          this.$store.dispatch('PlantesInformation/updateProductQuantity', {
+            recordId: article.id,
+            quantitySold: article.quantiteAchat,
+          })
+      ),
+      ...this.getPanierparticulier.map(article =>
+          this.$store.dispatch('BouquetInformation/updateProductQuantity', {
+            recordId: article.id,
+            quantitySold: article.quantiteAchat,
+          })
+      ),
+    ]);
+  }
 }
 </script>
 

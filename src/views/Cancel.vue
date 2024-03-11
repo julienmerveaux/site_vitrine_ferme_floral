@@ -1,6 +1,11 @@
 <script>
+import {mapGetters} from "vuex";
+
 export default {
-  name: "Cancel"
+  name: "Cancel",
+  computed:{
+    ...mapGetters("UsersInformation",['getCurrentUser']),
+  }
 }
 </script>
 

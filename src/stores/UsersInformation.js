@@ -1,4 +1,11 @@
-import {getAuth, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup, signOut} from "firebase/auth";
+import {
+    getAuth,
+    GoogleAuthProvider,
+    onAuthStateChanged,
+    signInWithEmailAndPassword,
+    signInWithPopup,
+    signOut
+} from "firebase/auth";
 import {getFirestore, doc, getDoc, setDoc} from "firebase/firestore";
 import db from "@/Firebase.js";
 import {createUserWithEmailAndPassword} from "@firebase/auth";
@@ -9,7 +16,7 @@ const auth = getAuth();
 
 
 const UsersInformation = {
-    namespace:true,
+    namespaced:true,
     state: {
         userId: null,
         currentUser: {},
@@ -22,7 +29,7 @@ const UsersInformation = {
         setCurrentUser(state, userData) {
             state.currentUser = userData;
         },
-        clearUserState(state) {
+        'clearUserState'(state) {
             state.userId = null;
             state.currentUser = {};
         },
@@ -39,6 +46,28 @@ const UsersInformation = {
         }
     },
     actions: {
+        initAuthState({ commit }) {
+            const auth = getAuth();
+            onAuthStateChanged(auth, async (user) => {
+                if (user) {
+                    // L'utilisateur est connecté, récupérez ses informations
+                    const userDocRef = doc(db, "users", user.uid);
+                    const userDocSnapshot = await getDoc(userDocRef);
+                    if (userDocSnapshot.exists()) {
+                        const userData = userDocSnapshot.data();
+                        commit('setCurrentUser', userData);
+                        commit('setIsConnected', true);
+                        commit('setUserId', user.uid);
+                    } else {
+                        // Gérer le cas où il n'y a pas de données utilisateur dans Firestore
+                        console.log("Données utilisateur non trouvées dans Firestore.");
+                    }
+                } else {
+                    // L'utilisateur est déconnecté, nettoyez l'état
+                    commit('clearUserState');
+                }
+            });
+        },
         async loginUser({commit}, {email, password}) {
             try {
                 const userCredential = await signInWithEmailAndPassword(auth, email, password);
@@ -102,6 +131,10 @@ const UsersInformation = {
             try {
                 const auth = getAuth();
                 await signOut(auth);
+                localStorage.removeItem('panierParticulier'); // ou sessionStorage.removeItem('panierParticulier');
+                localStorage.removeItem('panierPro'); // ou sessionStorage.removeItem('panierParticulier');
+                commit('PanierParticulier/clearPanier', null, { root: true });
+                commit('PanierPro/clearPanier', null, { root: true });
                 commit('clearUserState');
                 commit('setIsConnected',false)
             } catch (error) {

@@ -1,14 +1,7 @@
 <template>
   <div class="contenu">
     <Etage1ContenuVue></Etage1ContenuVue>
-    <Etage2ContenueVueImagePuisTexte
-        title="Bouquet du mois"
-        text="La tulipe est une magnifique fleur de saison qui annonce le retour du printemps. Elle a de nombreuses significations selon sa couleur et les circonstances dans lesquelles vous l’offrez. Au même titre que la rose, la tulipe est souvent considérée comme un symbole d’amour.
-En bouquet, elles peuvent être offertes pour exprimer une large palette d’émotions comme la passion ou l’admiration.
-Les tulipes rouges représentent souvent le véritable amour tandis que les tulipes jaunes représentent des pensées joyeuses.
-Entrez avec nous dans ce nouveau printemps et profitez de nos tulipes exceptionnelles!"
-        :imageUrl="imageUrlBouquetDuMois"
-    />
+    <BouquetDuMois :bouquetMois="getBouquetMois"/>
     <Etage2ContenueVueTextePuisImage
         title="À propos"
         text="Mes fleurs sont cultivées près de Lyon, de Saint-Etienne et de Clermont-Ferrand
@@ -26,28 +19,31 @@ loin... Je reviens donc à mon métier passionnant tout en produisant mes propre
         :imageUrl="imageUrlAudrey"
     ></Etage2ContenueVueTextePuisImage>
   </div>
+
 </template>
 
 <script>
 import Etage1ContenuVue from "@/components/Etage1ContenuVue.vue";
-import Etage2ContenueVueImagePuisTexte from "@/components/Etage2ContenueVueImagePuisTexte.vue";
+import BouquetDuMois from "@/components/BouquetDuMois.vue";
+import Etage2ContenueVueTextePuisImage from "@/components/Etage2ContenueVueTextePuisImage.vue";
 import visageAudrey from '@/assets/visageAudrey.png';
-import Bouquet_du_mois from '@/assets/Bouquet_du_mois.png';
-import Etage2ContenueVueTextePuisImage from "@/components/Etage2ContenueVueTextePuisImage.vue"; // Importez l'image avec ESM
+import { mapGetters } from "vuex";
 
 export default {
   name: "ContenuVue",
   components: {
-    Etage2ContenueVueTextePuisImage,
     Etage1ContenuVue,
-    Etage2ContenueVueImagePuisTexte
+    BouquetDuMois,
+    Etage2ContenueVueTextePuisImage
   },
   data() {
     return {
-      imageUrlAudrey: visageAudrey, // Utilisez l'importation comme référence d'image
-      imageUrlBouquetDuMois: Bouquet_du_mois
+      imageUrlAudrey: visageAudrey,
     }
-  }
+  },
+  computed: {
+    ...mapGetters("BouquetInformation", ["getBouquetMois"]),
+  },
 }
 </script>
 

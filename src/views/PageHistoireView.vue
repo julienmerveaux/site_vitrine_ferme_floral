@@ -19,7 +19,7 @@ loin... Je reviens donc à mon métier passionnant tout en produisant mes propre
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import Etage2ContenueVueImagePuisTexte from "@/components/Etage2ContenueVueImagePuisTexte.vue";
+import Etage2ContenueVueImagePuisTexte from "@/components/BouquetDuMois.vue";
 
 // Use a ref to hold the image URL
 const imageUrl = ref('');

@@ -2,8 +2,8 @@
   <div class="body">
     <div class="imageAccueil">
       <div class="conteneurTexte">
-        <H1 class="H1Style"> Bienvenue à le Ferme Florale Les 5 Saisons</H1>
-        <H3> Nos fleurs 100% en agriculture biologique, 100% de saison, cultivées avec 100% d'amour! </H3>
+        <h1 class="H1Style"> Bienvenue à le Ferme Florale Les 5 Saisons</h1>
+        <h3> Nos fleurs 100% en agriculture biologique, 100% de saison, cultivées avec 100% d'amour! </h3>
       </div>
     </div>
     <div class="sectionCard">
@@ -23,32 +23,29 @@
           :imageUrl="imageUrl3"
       ></CardSectionVue>
     </div>
-
     <ContenuVue class="Contenue"></ContenuVue>
+
   </div>
 </template>
 
 <script>
-
-import ContenuVue from "@/components/ContenuVue.vue";
-import HeaderVue from "@/components/HeaderVue.vue";
 import CardSectionVue from "@/components/CardSectionVue.vue";
-import localisation from "@/assets/localisation.png"
-import fullTime from "@/assets/tout_les_temps.png"
-import planteVert from "@/assets/plante_vert.png"
+import ContenuVue from "@/components/ContenuVue.vue";
+import localisation from "@/assets/localisation.png";
+import fullTime from "@/assets/tout_les_temps.png";
+import planteVert from "@/assets/plante_vert.png";
 
 export default {
   name: 'HomePage',
   data() {
     return {
-      imageUrl1:localisation ,
+      imageUrl1: localisation,
       imageUrl2: fullTime,
       imageUrl3: planteVert
     }
   },
   components: {
     CardSectionVue,
-    HeaderVue,
     ContenuVue,
   }
 }

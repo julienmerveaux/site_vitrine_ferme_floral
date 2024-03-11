@@ -11,10 +11,22 @@ const PanierPro = {
         addArticle(state, article) {
             const articleExistant = state.panierPro.find(i => i.id === article.id);
             if (articleExistant) {
-                articleExistant.quantiteAchat += 1;
+                console.log("existant")
+                articleExistant.quantiteAchat += article.quantiteAchat;
             } else {
-                state.panierPro.push({...article, quantiteAchat: 1});
+                console.log("created")
+
+                state.panierPro.push({...article});
             }
+            localStorage.setItem('panierPro', JSON.stringify(state.panierPro));
+
+        },
+        setPanier(state, panier) {
+            state.panierPro = panier;
+        },
+        clearPanier(state) {
+            state.panierPro = [];
+            state.totalPricePanier = 0;
         },
         deleteArticle(state, articleId) {
             const index = state.panierPro.findIndex(item => item.id === articleId);
@@ -31,7 +43,13 @@ const PanierPro = {
         },
         deleteArticleFromPanier({ commit }, articleId) {
             commit('deleteArticle', articleId);
-        }
+        },
+        initializePanier({ commit }) {
+            const savedPanier = localStorage.getItem('panierPro');
+            if (savedPanier) {
+                commit('setPanier', JSON.parse(savedPanier));
+            }
+        },
     }
 }
 

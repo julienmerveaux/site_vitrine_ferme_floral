@@ -1,5 +1,6 @@
 import Airtable from 'airtable';
 import axios from "axios";
+import bouquetDuMois from "@/components/BouquetDuMois.vue";
 
 // Configurez Airtable avec votre API key et l'ID de base
 Airtable.configure({
@@ -10,87 +11,120 @@ const base = Airtable.base('appbmkbokhHog6r1K');
 
 
 const BouquetInformation = {
-    namespaced: true,
-    state: {
-        AllBouquets: [],
-        FilteredBouquets: [], // Les bouquets filtrés
-    },
-    getters: {
-        getAllBouquet: state => state.AllBouquets,
-        getAllBouquetFraiche: state => state.AllBouquets.filter(bouquet => bouquet.type === "fleurs-fraiche"),
-        getAllBouquetSechee: state => state.AllBouquets.filter(bouquet => bouquet.type === "fleurs-sechee"),
-        getFilteredBouquets: state => {
-            // Retourne les bouquets filtrés s'il y en a, sinon retourne tous les bouquets
-            return state.FilteredBouquets.length > 0 ? state.FilteredBouquets : state.AllBouquets;
+        namespaced: true,
+        state: {
+            AllBouquets: [],
+            FilteredBouquets: [], // Les bouquets filtrés
+            tabTaille: [],
+            tabType: [],
+            bouquetDuMois: {}
         },
-    },
-    mutations: {
-        setAllBouquets(state, bouquetObject) {
-            state.AllBouquets = bouquetObject;
+        getters: {
+            getAllBouquet: state => state.AllBouquets,
+            getAllBouquetFraiche: state => state.AllBouquets.filter(bouquet => bouquet.type === "Fleurs fraiche"),
+            getAllBouquetSechee: state => state.AllBouquets.filter(bouquet => bouquet.type === "Fleurs sechée"),
+            getFilteredBouquets: state => {
+                // Retourne les bouquets filtrés s'il y en a, sinon retourne tous les bouquets
+                return state.FilteredBouquets.length > 0 ? state.FilteredBouquets : state.AllBouquets;
+            },
+            getTabTaille: state => state.tabTaille,
+            getTabType: state => state.tabType,
+            getBouquetMois:state => state.bouquetDuMois
         },
-        setFilteredBouquets(state, filteredBouquets) {
-            state.FilteredBouquets = filteredBouquets;
-        }
-    },
-    actions: {
-        allBouquet({commit}) {
-            base('Bouquet').select({
-                view: "Grid view"
-            }).eachPage(function page(records, fetchNextPage) {
-                const bouquetsData = records.map(record => ({
-                    id: record.id,
-                    nom: record.get('nom'),
-                    type: record.get('type'),
-                    prix: record.get('prix'),
-                    quantite: record.get('quantite'),
-                    taille: record.get('taille'),
-                    quantiteAchat: 0,
-                    image: record.get('image')
-                }));
-                console.log(bouquetsData)
-                console.log("salut")
-                commit('setAllBouquets', bouquetsData);
-                fetchNextPage();
-            }, function done(err) {
-                if (err) {
-                    console.error(err);
-                    return;
-                }
-            });
+        mutations: {
+            setAllBouquets(state, bouquetObject) {
+                state.AllBouquets = bouquetObject;
+            },
+            setFilteredBouquets(state, filteredBouquets) {
+                state.FilteredBouquets = filteredBouquets;
+            },
+            setTabTaille(state, taille) {
+                state.tabTaille = taille;
+            },
+            setTabType(state, type) {
+                state.tabType = type;
+            },
+            setBouquetDuMois(state, bouquetDuMois) {
+                state.bouquetDuMois = bouquetDuMois;
+            },
         },
-        filter({ commit, state }, filterCriteria) {
-            console.log(filterCriteria)
-            const filtered = state.AllBouquets.filter(bouquet => {
-                let matchesCriteria = true; // On commence en supposant que le bouquet correspond aux critères
+        actions: {
+            allBouquet({commit}) {
+                let uniqueTaille = new Set(); // Initialise un Set vide pour les couleurs uniques
+                let uniqueType = new Set(); // Initialise un Set vide pour les couleurs uniques
 
-                // Vérifier si un nom a été fourni et si oui, si le bouquet correspond au nom
-                if (filterCriteria.nom && filterCriteria.nom !== '') {
-                    matchesCriteria = matchesCriteria && bouquet.nom.toLowerCase().includes(filterCriteria.nom.toLowerCase());
-                }
+                base('Bouquet').select({
+                    view: "Grid view"
+                }).eachPage(function page(records, fetchNextPage) {
+                    const bouquetsData = records.map(record => {
+                        const taille = record.get('taille');
+                        const type = record.get('type');
+                        if (taille) {
+                            uniqueTaille.add(taille);
+                        }
+                        if (type) {
+                            uniqueType.add(type);
+                        }
 
-                // Vérifier si un prix maximum a été fourni et si oui, si le bouquet ne dépasse pas ce prix
-                if (filterCriteria.maxPrix && filterCriteria.maxPrix !== null) {
-                    matchesCriteria = matchesCriteria && bouquet.prix <= filterCriteria.maxPrix;
-                }
+                        return {
+                            id: record.id,
+                            nom: record.get('nom'),
+                            type: type,
+                            prix: record.get('prix'),
+                            quantite: record.get('quantite'),
+                            taille: taille,
+                            quantiteAchat: 0,
+                            image: record.get('image'),
+                            text:record.get('text'),
+                        }
+                    });
 
-                // Vérifier si une taille a été fournie et si oui, si le bouquet correspond à cette taille
-                if (filterCriteria.taille && filterCriteria.taille !== '') {
-                    matchesCriteria = matchesCriteria && bouquet.taille.toLowerCase() === filterCriteria.taille.toLowerCase();
-                }
+                    commit('setAllBouquets', bouquetsData);
+                    commit('setTabTaille', Array.from(uniqueTaille));
+                    commit('setTabType', Array.from(uniqueType));
+                    commit('setBouquetDuMois', bouquetsData.find(bouquetDuMois => bouquetDuMois.type === "Bouquet du mois"));
 
-                if (filterCriteria.type && filterCriteria.type !== '') {
-                    matchesCriteria = matchesCriteria && bouquet.type === filterCriteria.type;
-                }
-                return matchesCriteria;
-            });
-            console.log(filtered)
 
-            commit('setFilteredBouquets', filtered);
-        }
+                    fetchNextPage();
+                } , function done(err) {
+                    if (err) {
+                        console.error(err);
+                        return;
+                    }
+                });
+            },
 
-    },
+            filter({commit, state}, {taille, maxPrix, type}) {
+                const filtered = state.AllBouquets.filter(bouquet => {
+                    let isValid = true;
 
-};
+
+                    if (maxPrix && bouquet.maxPrix > maxPrix) {
+                        isValid = false;
+                    }
+
+                    if (taille && taille !== '' && bouquet.taille !== taille) {
+                        isValid = false;
+                    }
+                    if (type && type !== '' && bouquet.type !== type) {
+                        isValid = false;
+                    }
+
+                    return isValid;
+                });
+
+                commit('setFilteredBouquets', filtered);
+            },
+            updateQuantiteAchat({ commit, state }, { quantiteAchat }) {
+                // Créer une copie de l'objet bouquetDuMois pour éviter les mutations directes de l'état
+                const updatedBouquetDuMois = { ...state.bouquetDuMois, quantiteAchat: quantiteAchat };
+                // Utiliser la mutation pour mettre à jour l'état
+                commit('setBouquetDuMois', updatedBouquetDuMois);
+            }
+        },
+
+
+    };
 
 
 export default BouquetInformation;
