@@ -32,7 +32,6 @@ const PanierParticulier = {
     },
     actions: {
         addArticleToPanier({ commit }, article) {
-            console.log(article,"article")
             commit('addArticle', article);
         },
         initializePanier({ commit }) {

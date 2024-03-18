@@ -73,7 +73,7 @@ const BouquetInformation = {
                             prix: record.get('prix'),
                             quantite: record.get('quantite'),
                             taille: taille,
-                            quantiteAchat: 0,
+                            quantiteAchat: 1,
                             image: record.get('image'),
                             text:record.get('text'),
                         }

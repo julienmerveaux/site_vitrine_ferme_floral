@@ -5,12 +5,14 @@
       <div class="card__info">
         <span class="card__category">{{ bouquet.type }}</span>
         <h3 class="card__title">{{ bouquet.nom }}</h3>
-        <h2 class="card__price">{{ bouquet.prix }} €</h2>
+        <h2 v-if="getIsConnected" class="card__price">{{ bouquet.prix }} €</h2>
+
         <input type="number" v-if="getIsConnected && !isPanierParticulierRoute" v-model="bouquet.quantiteAchat"
                class="card__quantity-input">
         <h1 v-if="isPanierParticulierRoute" class="card__price">Quantité : {{ bouquet.quantiteAchat }}</h1>
       </div>
       <button v-if="!isPanierParticulierRoute && getIsConnected" @click="addItemPanier" class="buttonStyle">Ajouter au
+        <p>{{isPanierParticulierRoute}}</p>
         panier
       </button>
     </article>
@@ -36,14 +38,13 @@ export default {
   computed: {
     ...mapGetters("UsersInformation",['getIsConnected']),
     isPanierParticulierRoute() {
-      return this.$route.name === 'PanierParticulier';
+      return this.$route.name === 'PanierParticulierView';
     },
   },
   methods: {
     addItemPanier() {
       if (this.bouquet.quantiteAchat > 0) {
         this.showPopup = true;
-        console.log(this.showPopup)
         setTimeout(() => {
           this.showPopup = false;
         }, 3000);

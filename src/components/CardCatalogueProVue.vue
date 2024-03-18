@@ -41,10 +41,8 @@ export default {
   },
   methods: {
     addItemPanier() {
-      console.log(this.fleurs)
       if (this.fleurs.quantiteAchat > 0) {
         this.showPopup = true;
-        console.log(this.showPopup)
         setTimeout(() => {
           this.showPopup = false;
         }, 3000);

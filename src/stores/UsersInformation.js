@@ -80,7 +80,6 @@ const UsersInformation = {
                     const userData = userDocSnapshot.data();
                     commit('setCurrentUser', userData);
                     commit('setIsConnected', true);
-                    console.log('Bien connecté !', userData);
                    await router.push("/")
                     // Utilisation de router.push ici pourrait ne pas être idéale. Retournez plutôt une valeur ou une promesse résolue pour gérer la navigation dans le composant.
                     return Promise.resolve();

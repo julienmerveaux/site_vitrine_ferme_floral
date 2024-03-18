@@ -1,5 +1,6 @@
 <template>
   <div class="payment-button-container">
+    <input v-model="adresse_livraison" type="text">
     <button @click="createStripeSession" class="buy-button">Acheter</button>
   </div>
 </template>
@@ -7,12 +8,18 @@
 <script>
 import {mapActions} from 'vuex';
 
+
 export default {
+  data() {
+    return {
+      adresse_livraison: ""
+    }
+  },
   methods: {
     ...mapActions('Stripe', ['createSessionPro']),
     async createStripeSession() {
       try {
-        const sessionId = await this.$store.dispatch('Stripe/createSessionPro');
+        const sessionId = await this.$store.dispatch('Stripe/createSessionPro',this.adresse_livraison);
         const stripe = await this.$store.getters['Stripe/stripeInstance'];
         await stripe.redirectToCheckout({ sessionId });
       } catch (error) {

@@ -42,7 +42,6 @@ export default {
   computed: {
     ...mapGetters("PlantesInformation", ["getAllFleurs", "getFilteredFleurs", "getTabColor"]), // Assurez-vous d'inclure getTabColor ici
     filteredFleurs() {
-      console.log(this.getFilteredFleurs)
       return this.getFilteredFleurs;
     },
     tabColor() {

@@ -11,10 +11,8 @@ const PanierPro = {
         addArticle(state, article) {
             const articleExistant = state.panierPro.find(i => i.id === article.id);
             if (articleExistant) {
-                console.log("existant")
                 articleExistant.quantiteAchat += article.quantiteAchat;
             } else {
-                console.log("created")
 
                 state.panierPro.push({...article});
             }

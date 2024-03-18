@@ -61,12 +61,11 @@ const PlantesInformation = {
                         prix: record.get('Prix'),
                         quantite: record.get('Quantite'),
                         botte: record.get('Botte'),
-                        quantiteAchat: 0,
+                        quantiteAchat: 1,
                         image: record.get('Image'),
                         showFleurs: record.get("showFleurs")
                     };
                 });
-                console.log(bouquetsData, "rfgegfergregreg")
                 commit('setAllFleurs', bouquetsData);
                 commit('setTabColor', Array.from(uniqueColors)); // Convertit le Set en Array pour le commit
 
@@ -103,8 +102,6 @@ const PlantesInformation = {
                         }
                     }
                 ]);
-
-                console.log('Quantité mise à jour avec succès');
             } catch (error) {
                 console.error('Erreur lors de la mise à jour de la quantité', error);
             }

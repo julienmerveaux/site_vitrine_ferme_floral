@@ -98,8 +98,6 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
     const requiresType = to.matched.some(record => record.meta.requiresType);
     const userType = store.getters['UsersInformation/getCurrentUser']?.type; // Utilisez l'opérateur optionnel pour éviter les erreurs
-    console.log(requiresType)
-    console.log(userType)
     if (requiresType && userType !== to.meta.requiresType) {
         // Rediriger vers une page d'erreur ou la page d'accueil
         next({path: '/'}); // exemple de redirection
