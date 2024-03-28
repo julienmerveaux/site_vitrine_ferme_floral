@@ -3,26 +3,25 @@ import {mapGetters} from "vuex";
 
 export default {
   name: "Success",
+  data(){
+    return{
+    }
+  },
   computed: {
-    ...mapGetters("PanierPro", ["getPanierPro"]),
-    ...mapGetters("PanierParticulier", ["getPanierparticulier"]),
+    ...mapGetters("Stripe", ["getSessionDetail"]),
   },
   async created() {
-    // Correctly access mapped getters through `this`
-    await Promise.all([
-      ...this.getPanierPro.map(article =>
-          this.$store.dispatch('PlantesInformation/updateProductQuantity', {
-            recordId: article.id,
-            quantitySold: article.quantiteAchat,
-          })
-      ),
-      ...this.getPanierparticulier.map(article =>
-          this.$store.dispatch('BouquetInformation/updateProductQuantity', {
-            recordId: article.id,
-            quantitySold: article.quantiteAchat,
-          })
-      ),
-    ]);
+    const urlParams = new URLSearchParams(window.location.search);
+    const sessionId = urlParams.get('session_id');
+    if (sessionId) {
+      try {
+        // Appelez une action Vuex pour récupérer les informations de session ou faites une requête directe à votre API.
+        const sessionDetails = await this.$store.dispatch('Stripe/retrieveSessionDetails', sessionId);
+        this.test = sessionDetails.nom; // Supposons que 'retrieveSessionDetails' renvoie les détails de la session.
+      } catch (error) {
+        console.error('Erreur lors de la récupération des détails de la session:', error);
+      }
+    }
   }
 }
 </script>
@@ -30,6 +29,7 @@ export default {
 <template>
   <div class="success-container">
     <h1>Succès!</h1>
+    {{getSessionDetail}}
     <p>Votre achat a été complétée avec succès.</p>
   </div>
 </template>

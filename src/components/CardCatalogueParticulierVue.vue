@@ -12,9 +12,14 @@
         <h1 v-if="isPanierParticulierRoute" class="card__price">Quantité : {{ bouquet.quantiteAchat }}</h1>
       </div>
       <button v-if="!isPanierParticulierRoute && getIsConnected" @click="addItemPanier" class="buttonStyle">Ajouter au
-        <p>{{isPanierParticulierRoute}}</p>
         panier
       </button>
+      <FormulaireAchatVue v-if="getIsConnected"
+      :bouquetId="this.bouquet.id"
+      :nom="this.bouquet.nom"
+      :price="this.bouquet.prix"
+      :quantiteAchat="this.bouquet.quantiteAchat"
+      ></FormulaireAchatVue>
     </article>
     <div v-if="showPopup" class="popupCardValidation">
       <p>Vous venez d'ajouter {{ bouquet.nom }}</p>
@@ -25,17 +30,26 @@
 
 <script>
 import {mapGetters} from "vuex";
+import Test from "@/components/FormulaireAchatVue.vue";
+import FormulaireAchatVue from "@/components/FormulaireAchatVue.vue";
+import panierParticulier from "@/stores/PanierParticulier.js";
+
 
 export default {
+  components: {FormulaireAchatVue, Test},
   props: {
     bouquet: Object,
   },
   data() {
     return {
       showPopup: false,
+      showFacturation:false
     };
   },
   computed: {
+    panierParticulier() {
+      return panierParticulier
+    },
     ...mapGetters("UsersInformation",['getIsConnected']),
     isPanierParticulierRoute() {
       return this.$route.name === 'PanierParticulierView';
@@ -53,6 +67,24 @@ export default {
         alert("Demande incorrecte");
       }
     },
+    async subscribeMonthly() {
+      try {
+        const aboInfo = {
+          bouquetId: this.bouquet.id,
+          nom:this.bouquet.nom,
+          price:this.bouquet.prix,
+          quantiteAchat: this.bouquet.quantiteAchat,
+        }
+        const sessionId = await this.$store.dispatch('Stripe/createSessionAbonnement', aboInfo);
+        const stripe = await this.$store.getters["Stripe/stripeInstance"];
+        await stripe.redirectToCheckout({ sessionId }); // Assurez-vous que sessionId est l'ID de la session, pas l'URL
+
+
+      } catch (error) {
+        console.error("Erreur lors de la création de l'abonnement mensuel :", error);
+        alert("Une erreur s'est produite lors de la tentative d'abonnement.");
+      }
+    }
   },
 };
 </script>

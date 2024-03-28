@@ -14,11 +14,8 @@ export default {
   components: {CardCatalogueParticulierVue},
   props: ['type'],
   computed: {
-    ...mapGetters("BouquetInformation", ["getAllBouquetSechee"])
+    ...mapGetters("BouquetInformation", ["getAllBouquetSechee","getAllBouquet"]),
   },
-  methods: {},
-  created() {
-  }
 };
 </script>
 

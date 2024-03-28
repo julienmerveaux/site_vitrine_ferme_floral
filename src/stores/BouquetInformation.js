@@ -21,8 +21,8 @@ const BouquetInformation = {
         },
         getters: {
             getAllBouquet: state => state.AllBouquets,
-            getAllBouquetFraiche: state => state.AllBouquets.filter(bouquet => bouquet.type === "Fleurs fraiche"),
-            getAllBouquetSechee: state => state.AllBouquets.filter(bouquet => bouquet.type === "Fleurs sechée"),
+            getAllBouquetFraiche: state => state.AllBouquets.filter(bouquet => bouquet.type === "Fleurs fraiches"),
+            getAllBouquetSechee: state => state.AllBouquets.filter(bouquet => bouquet.type === "Fleurs séchées"),
             getFilteredBouquets: state => {
                 // Retourne les bouquets filtrés s'il y en a, sinon retourne tous les bouquets
                 return state.FilteredBouquets.length > 0 ? state.FilteredBouquets : state.AllBouquets;
@@ -78,7 +78,6 @@ const BouquetInformation = {
                             text:record.get('text'),
                         }
                     });
-
                     commit('setAllBouquets', bouquetsData);
                     commit('setTabTaille', Array.from(uniqueTaille));
                     commit('setTabType', Array.from(uniqueType));

@@ -1,6 +1,7 @@
 import {createRouter, createWebHistory} from 'vue-router'
 import HomePageView from "@/views/HomePageView.vue";
 import store from "@/stores/index.js";
+import ArticleDetail from "@/views/ArticleDetail.vue";
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -88,6 +89,22 @@ const router = createRouter({
             name: 'Cancel',
             component: () => import('@/views/Cancel.vue'),
         },
+        {
+            path: '/commandes',
+            name: 'Commandes',
+            component: () => import('@/views/Commandes.vue'),
+        },
+        {
+            path: '/abonnements',
+            name: 'Abonnements',
+            component: () => import('@/views/Abonnements.vue'),
+        },
+        {
+            path: '/:id/:titre',
+            name: 'ArticleDetail',
+            component: ArticleDetail,
+            props: true
+        }
     ],
     scrollBehavior(to, from, savedPosition) {
         // always scroll to top

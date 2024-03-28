@@ -1,12 +1,11 @@
 <script>
 export default {
-  name: "testPhoto"
+  name: "Abonnements"
 }
 </script>
 
 <template>
-<img src="@/assets/nature-3333236_1920.jpg">
-  fefzefezf
+<h1> les abonnements</h1>
 </template>
 
 <style scoped>

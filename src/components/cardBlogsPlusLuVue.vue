@@ -1,11 +1,11 @@
 <script>
 import { marked } from "marked";
-import {mapGetters} from "vuex";
 
 export default {
-  name: "cardBlogsVue",
+  name: "cardBlogsPlusLuVue",
   props: {
-    blogs: Object
+    blogs: Object,
+    index:Number,
   },
   data() {
     return {
@@ -19,15 +19,16 @@ export default {
   },
   methods: {
     toggleModal() {
-      // this.showBlogs = !this.showBlogs;
+      this.showBlogs = !this.showBlogs;
       const articleId = this.blogs.id;
-      const articleTitle = this.blogs.Titre_url
-      this.$store.dispatch("BlogsInformations/setCurrentBlogs", this.blogs);
-      this.$router.push({ name: 'ArticleDetail', params: { id: articleId, titre:articleTitle} });
+      const articleTitle = this.blogs.Titre;
+      const newUrl = `/${articleTitle.replace(/\s+/g, '-')}/${articleId}`; // Remplacer les espaces par des tirets
+
+      // Utiliser le routeur Vue.js pour naviguer vers la nouvelle URL
+      this.$router.push(newUrl);
 
       this.$store.dispatch('BlogsInformations/updateNombreVue',articleId);
     },
-
     closePopup(){
       this.showBlogs = !this.showBlogs;
     }
@@ -38,9 +39,8 @@ export default {
 <template>
   <div class="article-card" @click="toggleModal">
     <div class="article-card2">
-      <img class="article-image" :src="blogs?.Image_couverture[0].url" alt="Image de l'article">
+      <div class="article-index">{{ index }}</div>
       <div class="article-content">
-        <span class="article-title">{{blogs.Type}}</span>
         <span class="article-title">{{blogs.Temps_lecture}} minutes</span>
         <h3 class="article-title">{{ blogs.Titre }}</h3>
         <div class="article-info">
@@ -75,6 +75,16 @@ export default {
   margin-top:10px;
   padding:0;
 
+}
+.article-index {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px; /* Ajustez la largeur en fonction de vos besoins */
+  height: 40px; /* Ajustez la hauteur en fonction de vos besoins */
+  font-size: xxx-large; /* Taille de la police */
+
+  margin-right: 20px; /* Espacement à droite du contenu */
 }
 
 .article-card2 {

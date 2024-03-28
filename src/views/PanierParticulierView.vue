@@ -18,7 +18,7 @@ export default {
     <h1 class="styleTitle">Votre panier</h1>
   </div>
   <div class="d-grid">
-    <CardCatalogueParticulierVue v-for="(bouquet, id) in getPanierparticulier" :key="id" :bouquet="bouquet"></CardCatalogueParticulierVue>
+    <CardCatalogueParticulierVue class="style_Card" v-for="(bouquet, id) in getPanierparticulier" :key="id" :bouquet="bouquet"></CardCatalogueParticulierVue>
   </div>
   <div class="stylePaiement">
     <StripePayment></StripePayment>

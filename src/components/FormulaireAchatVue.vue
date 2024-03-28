@@ -1,6 +1,6 @@
 <template>
-  <div class="payment-button-container">
-    <button @click="showValidePanier = true" class="buy-button">Valider le panier</button>
+  <div>
+    <button @click="showValidePanier = true" class="buy-button">S'abonner Mensuellement</button>
     <div v-if="showValidePanier" class="overlay">
       <div class="modal">
         <h1>Adresse de livraison</h1>
@@ -21,8 +21,10 @@
           </div>
 
           <div class="d-flex">
-            <p> Si l'adresse de facturation est la meme que l'adresse de livraison </p>
-            <button type="button" @click="copierAdresseLivraisonToFacturation">Click</button>
+            <p> Dupliquer ces informations pour l’adresse de facturation </p>
+            <button class="buy-button styleButtonDuplication" type="button"
+                    @click="copierAdresseLivraisonToFacturation">Dupliquer
+            </button>
           </div>
 
           <h1>Adresse de facturation</h1>
@@ -51,17 +53,24 @@
 
           <button type="submit" class="buy-button">Acheter</button>
         </form>
+        <button @click="showValidePanier = false" class="buy-button">Annuler</button>
+
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
-import CardCatalogueParticulierVue from "@/components/CardCatalogueParticulierVue.vue";
+import {mapActions, mapGetters} from "vuex";
 
 export default {
-  components: { CardCatalogueParticulierVue },
+  name: 'FormulaireAchatVue',
+  props:{
+    bouquetId: Number,
+    nom:String,
+    price:Number,
+    quantiteAchat: Number,
+  },
   data() {
     return {
       showValidePanier: false,
@@ -99,12 +108,19 @@ export default {
               this.adresse_facturation_ville +
               " " +
               this.adresse_facturation_postal,
+          bouquetId: this.bouquetId,
+          nom: this.nom,
+          price: this.price,
+          quantiteAchat: this.quantiteAchat,
         };
 
-        const sessionId = await this.$store.dispatch("Stripe/createSessionPro", adresses);
+        console.log(adresses);
+        const sessionId = await this.$store.dispatch(
+            "Stripe/createSessionAbonnement",
+            adresses
+        );
         const stripe = await this.$store.getters["Stripe/stripeInstance"];
-        await stripe.redirectToCheckout({ sessionId });
-
+        await stripe.redirectToCheckout({sessionId});
       } catch (error) {
         console.error("Error creating Stripe session:", error);
       }
@@ -122,6 +138,11 @@ export default {
 .d-flex {
   display: flex;
 }
+
+.styleButtonDuplication {
+  width: 30%;
+}
+
 .overlay {
   position: fixed;
   top: 0;
@@ -157,21 +178,14 @@ body, html {
 }
 
 /* Flexbox pour le conteneur principal pour centrer le contenu */
-.payment-button-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  padding: 20px;
-}
+
 
 /* Styles pour le formulaire et les inputs */
 .modal {
   background: #fff;
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   width: 100%;
   max-width: 500px;
 }
@@ -224,14 +238,11 @@ button.buy-button:hover {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000; /* S'assure que l'overlay est toujours au-dessus des autres contenus */
 }
 
-</style>
-<style>
-/* Vos styles CSS restent inchangés */
 </style>

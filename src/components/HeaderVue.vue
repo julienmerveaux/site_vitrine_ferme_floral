@@ -30,10 +30,22 @@
             <router-link class=colorRouter to="/contact">Contact</router-link>
           </li>
         </div>
-        <h1 v-if="getIsConnected">{{getCurrentUser.name}} {{getCurrentUser.firstname}}</h1>
-        <h2 v-if="getIsConnected">mode: {{getCurrentUser.type}}</h2>
 
         <div class="li-divDroite">
+          <div v-if="getIsConnected" class="profile-menu">
+            <img
+                src="../assets/profil.png"
+                alt="Profil"
+                class="profile-img"
+                @click="toggleProfileMenu"
+            />
+            <ul v-show="isProfileMenuVisible" class="dropdown-menu">
+              <li class="text-center">{{getCurrentUser.name}} {{getCurrentUser.firstname}}</li>
+              <li><router-link to="/commandes">Mes commandes</router-link></li>
+              <li><router-link to="/abonnements">Mes abonnements</router-link></li>
+              <!-- Ajoutez plus d'options ici si nécessaire -->
+            </ul>
+          </div>
           <button v-if="getIsConnected" @click="logout" class="colorRouter colorTexte">Déconnecter</button>
           <router-link v-if="!getIsConnected" class="colorRouter colorTexte" to="/inscription">S'inscrire</router-link>
           <router-link v-if="!getIsConnected" class="colorRouter colorTexte" to="/login">Se connecter</router-link>
@@ -55,6 +67,7 @@ export default {
     return {
       isMenuVisible: true,
       isMobile: false,
+      isProfileMenuVisible: false,
     };
   },
   created() {
@@ -77,7 +90,10 @@ export default {
     },
     isCurrentRoute(route) {
       return this.$route.path === route;
-    }
+    },
+    toggleProfileMenu() {
+      this.isProfileMenuVisible = !this.isProfileMenuVisible;
+    },
   },
   computed: {
     ...mapGetters("UsersInformation",["getCurrentUser","getIsConnected"]),
@@ -94,6 +110,50 @@ export default {
   position: fixed;
   width: 100%;
   z-index: 100;
+}
+.text-center {
+  text-align: center;
+}
+.profile-menu {
+  position: relative;
+}
+
+.profile-img {
+  height: 40px; /* Taille de l'image du profil */
+  width: 40px; /* Taille de l'image du profil */
+  cursor: pointer;
+  border-radius: 20px; /* Pour rendre l'image circulaire */
+}
+
+.dropdown-menu {
+  position: absolute;
+  right: 0;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  padding: 0;
+  margin-top: 5px;
+  list-style-type: none;
+  width: 200px; /* Largeur du menu déroulant */
+}
+
+.dropdown-menu li {
+  padding: 10px;
+  border-bottom: 1px solid #dddddd;
+}
+
+.dropdown-menu li:last-child {
+  border-bottom: none;
+}
+
+.dropdown-menu li a {
+  text-decoration: none;
+  color: black;
+}
+
+/* Pour afficher le menu lorsque isProfileMenuVisible est vrai */
+.profile-menu ul[v-show="true"] {
+  display: block;
 }
 
 .nav-menu .li-center.active {

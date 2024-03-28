@@ -36,6 +36,7 @@ const UsersInformation = {
         setIsConnected(state, isConnected) {
             state.isConnected = isConnected;
         },
+
     },
     getters: {
         getCurrentUser: (state) => {
@@ -46,6 +47,7 @@ const UsersInformation = {
         }
     },
     actions: {
+
         initAuthState({ commit }) {
             const auth = getAuth();
             onAuthStateChanged(auth, async (user) => {
@@ -148,14 +150,16 @@ const UsersInformation = {
                 const userDocRef = doc(db, "users", dataUser.user.uid);
 
                 const userDocData = {
+                    userId:dataUser.user.uid,
                     name: name,
                     firstname: firstname,
                     siret: siret,
                     email: dataUser.user.email,
                     type: type,
                     connectionWith:"motDePasse",
+                    commande:[],
+                    abonnement:[],
                     createdAt:Date.now()
-
                 };
 
                 await setDoc(userDocRef, userDocData);
