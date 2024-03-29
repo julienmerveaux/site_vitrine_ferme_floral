@@ -14,8 +14,6 @@ export default {
   computed: {
     ...mapGetters("BouquetInformation",["getAllBouquetFraiche"])
   },
-  methods: {
-  },
 };
 </script>
 

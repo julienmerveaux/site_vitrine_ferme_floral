@@ -45,7 +45,7 @@ const stripe = {
             const panier = rootGetters['PanierParticulier/getPanierparticulier'];
 
             try {
-                const response = await fetch('http://localhost:3000/create-stripe-session', {
+                const response = await fetch('https://localhost:3000/create-stripe-session', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -70,7 +70,7 @@ const stripe = {
             const panier = rootGetters['PanierPro/getPanierPro'];
             console.log(adresse)
             try {
-                const response = await fetch('http://localhost:3000/create-stripe-session', {
+                const response = await fetch('https://localhost:3000/create-stripe-session', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -96,7 +96,7 @@ const stripe = {
                 const user = rootGetters['UsersInformation/getCurrentUser'];
 
 
-                const response = await fetch('http://localhost:3000/create-stripe-session_abonnement', {
+                const response = await fetch('https://localhost:3000/create-stripe-session_abonnement', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -132,8 +132,8 @@ const stripe = {
                     quantity: item.quantiteAchat,
                 })),
                 mode: 'payment',
-                success_url: 'http://localhost:5173/success',
-                cancel_url: 'http://localhost:5173/cancel',
+                success_url: 'https://localhost:5173/success',
+                cancel_url: 'https://localhost:5173/cancel',
                 metadata: {
                     customerType: 'particulier'
                 }
@@ -141,7 +141,7 @@ const stripe = {
 
             // Ici, vous appelez votre API pour créer la session Stripe
             try {
-                const response = await fetch('http://localhost:3000/create-stripe-session', {
+                const response = await fetch('https://localhost:3000/create-stripe-session', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

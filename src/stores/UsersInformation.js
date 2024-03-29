@@ -44,9 +44,13 @@ const UsersInformation = {
         },
         getIsConnected: (state) => {
             return state.isConnected
+        },
+        getHistoriqueCommandes: (state) => {
+            return state.currentUser.commandes;
         }
     },
     actions: {
+
 
         initAuthState({ commit }) {
             const auth = getAuth();
@@ -157,7 +161,7 @@ const UsersInformation = {
                     email: dataUser.user.email,
                     type: type,
                     connectionWith:"motDePasse",
-                    commande:[],
+                    commandes:[],
                     abonnement:[],
                     createdAt:Date.now()
                 };

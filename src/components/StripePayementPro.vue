@@ -77,6 +77,7 @@ export default {
   },
   computed: {
     ...mapGetters("PanierParticulier", ["getPanierparticulier"]),
+    ...mapGetters("UsersInformation",["getCurrentUser"]),
   },
   methods: {
     ...mapActions("Stripe", ["createSession"]),
@@ -99,6 +100,8 @@ export default {
               this.adresse_facturation_ville +
               " " +
               this.adresse_facturation_postal,
+          userId:this.getCurrentUser.userId
+
         };
 
         const sessionId = await this.$store.dispatch("Stripe/createSessionPro", adresses);
