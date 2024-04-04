@@ -102,7 +102,8 @@ export default {
               this.adresse_facturation_ville +
               " " +
               this.adresse_facturation_postal,
-          userId:this.getCurrentUser.userId
+          userId:this.getCurrentUser.userId,
+          isParticulier:this.getCurrentUser.type
         };
         const sessionId = await this.$store.dispatch(
             "Stripe/createSession",

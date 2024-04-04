@@ -74,18 +74,19 @@ export default {
   data() {
     return {
       showValidePanier: false,
-      adresse_livraison_lieu: "",
-      adresse_livraison_ville: "",
-      adresse_livraison_postal: "",
+      adresse_livraison_lieu: "19 rue des charmes",
+      adresse_livraison_ville: "pont sur sambre",
+      adresse_livraison_postal: "59138",
       adresse_facturation_lieu: "",
       adresse_facturation_ville: "",
       adresse_facturation_postal: "",
-      checkboxValidate: false,
+      checkboxValidate: true,
       errorText: "",
     };
   },
   computed: {
     ...mapGetters("PanierParticulier", ["getPanierparticulier"]),
+    ...mapGetters("UsersInformation", ["getCurrentUser"]),
   },
   methods: {
     ...mapActions("Stripe", ["createSession"]),
@@ -112,9 +113,10 @@ export default {
           nom: this.nom,
           price: this.price,
           quantiteAchat: this.quantiteAchat,
+          isParticulier:this.getCurrentUser.type
+
         };
 
-        console.log(adresses);
         const sessionId = await this.$store.dispatch(
             "Stripe/createSessionAbonnement",
             adresses

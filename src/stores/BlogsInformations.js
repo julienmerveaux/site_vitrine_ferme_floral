@@ -43,7 +43,6 @@ const BlogsInformations = {
             state.tabType = type;
         },
         setCurrentBlog(state, info) {
-            console.log(info)
             state.currentBlogs = info;
         },
     },
@@ -56,7 +55,6 @@ const BlogsInformations = {
                 const blogsData = records.map(record => {
 
                     const type = record.get('Type');
-                    console.log(type)
                     if (type) {
                         uniqueType.add(type);
                     }
@@ -95,7 +93,6 @@ const BlogsInformations = {
                 }
 
                 let currentViews = record.get('Nombre_vu');
-                console.log(currentViews, "nombre de vue actuelle");
 
                 // Incrémenter le nombre de vues
                 let newViews = currentViews + 1;
@@ -112,7 +109,6 @@ const BlogsInformations = {
                         console.error(err);
                         return;
                     }
-                    console.log("Nombre de vues mis à jour pour l'article", articleId);
                 });
             });
         }
@@ -129,7 +125,6 @@ const BlogsInformations = {
             commit('setFilteredBlogs', filtered);
         },
         setCurrentBlogs({ commit }, blog) {
-            console.log(blog);
             commit('setCurrentBlog', blog);
             // Stocker les informations de blog dans localStorage
             localStorage.setItem('currentBlog', JSON.stringify(blog));

@@ -36,12 +36,10 @@ const stripe = {
         async retrieveSessionDetails({ commit }, sessionId) {
             // Faire une requête à l'API pour récupérer les détails de la session avec l'ID de session.
             const response = await axios.get('/retrieve-session-details', { params: { session_id: sessionId } });
-            console.log(response)
             commit('setSessionDetails', response.data);
             return response.data;
         },
         async createSession({commit, rootGetters}, adresse) {
-            console.log(adresse)
             const panier = rootGetters['PanierParticulier/getPanierparticulier'];
 
             try {
@@ -68,7 +66,6 @@ const stripe = {
         async createSessionPro({commit, rootGetters}, adresse) {
 
             const panier = rootGetters['PanierPro/getPanierPro'];
-            console.log(adresse)
             try {
                 const response = await fetch('https://localhost:3000/create-stripe-session', {
                     method: 'POST',

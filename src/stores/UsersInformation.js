@@ -47,11 +47,32 @@ const UsersInformation = {
         },
         getHistoriqueCommandes: (state) => {
             return state.currentUser.commandes;
+        },
+        getHistoriqueAbonnements: (state) => {
+            return state.currentUser.abonnement;
         }
     },
     actions: {
 
-
+        async deleteAbo({ commit }, info) {
+            try {
+                // Remplacez cette URL par l'endpoint correct de votre API
+                const response = await fetch(`https://localhost:3000/deleteAbo/${info.idAbonnement}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({info}),
+                });
+                if (!response.ok) {
+                    throw new Error('Erreur lors de l\'annulation de l\'abonnement');
+                }
+                // Traitement supplémentaire si nécessaire
+            } catch (error) {
+                console.error("Erreur dans annulerAbonnementAction", error);
+                throw error;
+            }
+        },
         initAuthState({ commit }) {
             const auth = getAuth();
             onAuthStateChanged(auth, async (user) => {
