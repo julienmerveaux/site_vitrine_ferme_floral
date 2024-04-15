@@ -1,8 +1,6 @@
 <template>
-  <h1 class="text-center">Nos articles</h1>
-
   <div class="filters">
-    <select v-model="selectType" name="type" id="type">
+    <select class="styleSelect" v-model="selectType" name="type" id="type">
       <option value="">Toutes les types</option>
       <option v-for="type in tabType" :value="type" :key="type">{{ type }}</option>
     </select>
@@ -32,7 +30,7 @@
       </div>
     </section>
   </div>
-  <h1 class="text-center">Les plus lus</h1>
+  <h1 class="text-center">Articles les plus consultés</h1>
   <section class="latest-articles2 wrapper">
     <div class="articles-container2">
       <CardBlogsPlusLuVue
@@ -103,16 +101,19 @@ export default {
 
 <style scoped>
 
+.styleSelect{
+  background-color: white;
+}
+
 .filters {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   gap: 20px;
   padding: 20px;
   margin-top: 20px;
-  background: #f8f8f8;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .filters input[type="text"],
@@ -141,14 +142,13 @@ export default {
 
 /* Bouton appliquer */
 .filters button:first-of-type {
-  background-color: #4CAF50;
-  color: white;
+  background-color: var(--couleur-button);
+  color: black;
 }
 
 /* Bouton réinitialiser */
 .filters button:last-of-type {
-  background-color: #f44336;
-  color: white;
+  background-color: var(--couleur-button);
 }
 
 /* Style pour les grands écrans */
@@ -156,7 +156,6 @@ export default {
   .filters {
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-evenly;
   }
 
   .filters input[type="text"],
@@ -168,12 +167,11 @@ export default {
 }
 
 /* Style pour les écrans très petits */
-@media (
-
-max-width: 600px) {
+@media (max-width: 600px) {
   .filters {
     width: 100%;
     box-sizing: border-box;
+
   }
 
   .filters input[type="text"],

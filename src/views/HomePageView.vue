@@ -2,8 +2,8 @@
   <div class="body">
     <div class="imageAccueil">
       <div class="conteneurTexte">
-        <h1 class="H1Style"> Bienvenue à le Ferme Florale Les 5 Saisons</h1>
-        <h3> Nos fleurs 100% en agriculture biologique, 100% de saison, cultivées avec 100% d'amour! </h3>
+        <h1 class="H1Style"> Bienvenue à la Ferme Florale Les 5 Saisons</h1>
+        <h3 class="H3Style"> Nos fleurs 100% en agriculture biologique, 100% de saison, cultivées avec 100% d'amour! </h3>
       </div>
     </div>
     <div class="sectionCard">
@@ -53,9 +53,13 @@ export default {
 
 <style>
 
+.H3Style {
+  font-size: x-large;
+}
 .H1Style {
-  margin: 0;
   font-weight: bold;
+  font-size: xxx-large;
+  margin-top:100px;
 }
 .sectionCard {
   display: grid;
@@ -66,6 +70,9 @@ export default {
 }
 
 .imageAccueil {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-image: url("../assets/nature-3333236_1920.jpg");
   background-size: cover;
   width: 100%;
@@ -76,11 +83,11 @@ export default {
 .conteneurTexte {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   height: 100%;
   color: white;
   padding-left: 5%;
-  width: 30%;
+  width: 100%;
+  text-align: center;
 }
 
 .texteImage {
@@ -97,7 +104,8 @@ export default {
 
 @media (max-width: 600px) {
   .imageAccueil {
-    background-image: url("../assets/nature-3333236_1920.jpg");
+    //background-image: url("../assets/nature-3333236_1920.jpg");
+    background-image: url("../assets/photo-couverture2.jpg");
     display: flex;
     justify-content: center;
   }

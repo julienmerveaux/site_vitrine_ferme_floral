@@ -88,6 +88,7 @@ const stripe = {
         },
 
         async createSessionAbonnement({commit, rootGetters}, aboInfo) {
+            console.log(aboInfo)
 
             try {
                 const user = rootGetters['UsersInformation/getCurrentUser'];

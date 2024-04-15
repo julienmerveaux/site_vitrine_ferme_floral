@@ -1,35 +1,32 @@
 <template>
-  <div class="divIntroduction">
-    <p class="colorTextIntro">Ce qui distingue La ferme florale Les 5 Saisons, c'est notre engagement envers l'excellence et l'originalité.
-      Chacune de nos créations est le fruit d'un savoir-faire artisanal, alliant expertise florale et créativité
-      débordante. Nous mettons un point d'honneur à sélectionner nos fleurs issus de notre production afin de garantir la
-      fraîcheur et la qualité de nos bouquets et compositions!</p>
-  </div>
-  <div class="filters">
-    <input type="text" v-model="nom" placeholder="Recherche par nom">
-    <input type="number" v-model="maxPrix" placeholder="Prix max">
-    <select v-model="selectCouleur" autocomplete="off" name="selectCouleur" id="selectCouleur">
-      <option value="">Toutes les Couleurs</option>
-      <option v-for="couleur in tabColor" :value="couleur" :key="couleur">{{ couleur}}</option>
-    </select>
+<!--  <div class="divIntroduction">-->
+<!--    <h1 class="colorTextIntro">Boutique dédié aux professionnels</h1>-->
+<!--  </div>-->
+<!--  {{filteredFleurs}}-->
 
-    <button @click="applyFilters">Appliquer</button>
-    <button @click="resetFilters">Réinitialiser les filtres</button>
-    <div class="catalogue-grid">
-      <CardCatalogueProVue v-for="(fleurs, id) in filteredFleurs" :key="id" :fleurs="fleurs"></CardCatalogueProVue>
-    </div>
-  </div>
+<!--  <div class="filters">-->
+<!--    <input type="text" v-model="nom" placeholder="Recherche par nom">-->
+<!--    <input type="number" v-model="maxPrix" placeholder="Prix max">-->
+<!--    <select v-model="selectCouleur" autocomplete="off" name="selectCouleur" id="selectCouleur">-->
+<!--      <option value="">Toutes les Couleurs</option>-->
+<!--      <option v-for="couleur in tabColor" :value="couleur" :key="couleur">{{ couleur}}</option>-->
+<!--    </select>-->
+
+<!--    <button @click="applyFilters">Appliquer</button>-->
+<!--    <button @click="resetFilters">Réinitialiser les filtres</button>-->
+<!--    <div class="catalogue-grid">-->
+<!--      <CardCatalogueProVue v-for="(fleurs, id) in filteredFleurs" :key="id" :fleurs="fleurs"></CardCatalogueProVue>-->
+<!--    </div>-->
+<!--  </div>-->
+  <div id="kuuFormContent"></div>
 </template>
 
 <script>
-import CardCatalogueParticulierVue from "@/components/CardCatalogueParticulierVue.vue";
 import {mapActions, mapGetters} from "vuex";
-import CardCatalogueProVue from "@/components/CardCatalogueProVue.vue";
+import {embedKuuFormProfessionnal} from "@/script/script.js";
 
 export default {
-  components: {
-    CardCatalogueProVue,
-  },
+
   props: ['type'],
   data() {
     return {
@@ -70,7 +67,10 @@ export default {
   },
   created() {
     this.allFleurs();
-  }
+  },
+  mounted() {
+    embedKuuFormProfessionnal();
+  },
 };
 </script>
 
@@ -118,7 +118,7 @@ export default {
 
 .catalogue-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 50px;
   padding: 0 20px;
   margin-bottom: 20px;

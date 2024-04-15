@@ -1,7 +1,9 @@
 <template>
-  <iframe class="airtable-embed" src="https://airtable.com/embed/appbmkbokhHog6r1K/paga9ZOqP4EvMFtzr/form"
-          width="100%" height="1000"
-          style="background: transparent; border: 1px solid #ccc;"></iframe>
+  <div class="styleIframe">
+    <iframe class="airtable-embed" src="https://airtable.com/embed/appbmkbokhHog6r1K/paga9ZOqP4EvMFtzr/form"
+            width="50%" height="100%"
+            style="background: transparent; border: 1px solid #ccc;"></iframe>
+  </div>
 </template>
 
 
@@ -12,5 +14,15 @@ import axios from "axios";
 
 
 <style scoped>
-
+.styleIframe {
+display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 110vh;
+  background-color: blue;
+}
+.colors-background-default {
+  color: blue !important;
+}
 </style>

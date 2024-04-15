@@ -18,7 +18,6 @@
         <td>{{ abonnement.livraison }}</td>
         <td>{{ abonnement.nb_produits_achetes }}</td>
         <td>{{ abonnement.prixTotal }} €</td>
-        <td>{{ abonnement.id }} €</td>
         <td>
           <button @click="annulerAbonnement(abonnement.id)">Annuler</button>
         </td>

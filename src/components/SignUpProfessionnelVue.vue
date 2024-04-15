@@ -15,6 +15,10 @@
         <input class="size" v-model="email" type="email" id="email" name="email" placeholder="Email" required>
       </div>
       <div class="champ-formulaire">
+        <label for="siret">Nom entreprise</label>
+        <input class="size" v-model="nom_entreprise" type="text" id="nom_entreprise" name="nom_entreprise" placeholder="Nom entreprise" required>
+      </div>
+      <div class="champ-formulaire">
         <label for="siret">Siret:</label>
         <input class="size" v-model="siret" type="number" id="siret" name="siret" placeholder="Siret" required>
       </div>
@@ -44,7 +48,8 @@ export default {
       name: "",
       firstname: "",
       siret: "",
-      type: "professionnel"
+      type: "professionnel",
+      nom_entreprise:""
     };
   },
 
@@ -58,7 +63,8 @@ export default {
         email: this.email,
         password: this.password,
         siret: this.siret,
-        type: this.type
+        type: this.type,
+        nom_entreprise:this.nom_entreprise
       });
     },
   }

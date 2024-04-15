@@ -38,11 +38,6 @@ const router = createRouter({
             meta: {requiresType: 'professionnel'}
         },
         {
-            path: '/qui-je-suis',
-            name: 'notre_histoire',
-            component: () => import('@/views/PageHistoireView.vue')
-        },
-        {
             path: '/blogs',
             name: 'blogs',
             component: () => import('@/views/PageBlogsView.vue')

@@ -95,8 +95,8 @@
 
 .responsive-images {
   width: 100%;
-  height: auto;
   display: block;
+  height: 100%;
 }
 
 @media (min-width: 751px) {

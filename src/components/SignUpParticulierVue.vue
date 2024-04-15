@@ -1,6 +1,6 @@
 <template>
   <fieldset class="formulaire-container">
-    <legend class="legend">Particulier</legend>
+    <legend class="legend">Particulier / entreprise</legend>
     <form id="monFormulaire" @submit.prevent="submitForm">
       <div class="champ-formulaire">
         <label for="name">Nom:</label>
@@ -13,6 +13,14 @@
       <div class="champ-formulaire">
         <label for="email">Email:</label>
         <input class="size" v-model="email" type="email" id="email" name="email" placeholder="Email" required>
+      </div>
+      <div class="champ-formulaire">
+        <label for="nom_entreprise">Nom entreprise:</label>
+        <input class="size" v-model="nom_entreprise" type="text" id="nom_entreprise" name="nom_entreprise" placeholder="Nom entreprise">
+      </div>
+      <div class="champ-formulaire">
+        <label for="numero_siret">Numéro de siret:</label>
+        <input class="size" v-model="siret" type="number" id="numero_siret" name="numero_siret" placeholder="Numéro de siret">
       </div>
       <div class="champ-formulaire">
         <label for="password">Mot de passe:</label>
@@ -35,6 +43,8 @@ export default {
       firstname: "",
       email: "", // Ajout du champ pour l'adresse e-mail de l'expéditeur
       password: "",
+      siret:"",
+      nom_entreprise:"",
       type: "particulier"
     };
   },
@@ -48,8 +58,9 @@ export default {
         firstname: this.firstname,
         email: this.email, // Utilisation de l'adresse e-mail de l'expéditeur fournie par l'utilisateur
         password: this.password,
-        siret:null,
-        type: this.type
+        siret:this.siret,
+        type: this.type,
+        nom_entreprise:this.nom_entreprise
       });
     },
   }

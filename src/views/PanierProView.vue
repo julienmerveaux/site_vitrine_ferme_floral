@@ -30,7 +30,7 @@ export default {
 <style scoped>
 .d-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
 }
 
 .divTitle {

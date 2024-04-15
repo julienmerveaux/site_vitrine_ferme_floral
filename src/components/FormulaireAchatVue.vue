@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button @click="showValidePanier = true" class="buy-button">S'abonner Mensuellement</button>
+    <button @click="showValidePanier = true" class="styleButtonAddAbo">S'abonner mensuellement</button>
     <div v-if="showValidePanier" class="overlay">
       <div class="modal">
         <h1>Adresse de livraison</h1>
@@ -41,7 +41,7 @@
 
           <div class="d-flex">
             <p name="adresse_facturation_postal"> Postal : </p>
-            <input v-model="adresse_facturation_postal" type="number">
+            <input v-model="adresse_facturation_postal" type="text">
           </div>
 
           <p style="color: red;">{{ errorText }}</p>
@@ -50,8 +50,8 @@
             <div> Cocher pour valider vos informations</div>
             <input v-model="checkboxValidate" type="checkbox">
           </h5>
-
-          <button type="submit" class="buy-button">Acheter</button>
+          <p>{{message}}</p>
+          <button type="submit" class="buy-button">S'abonner</button>
         </form>
         <button @click="showValidePanier = false" class="buy-button">Annuler</button>
 
@@ -82,6 +82,7 @@ export default {
       adresse_facturation_postal: "",
       checkboxValidate: true,
       errorText: "",
+      message:"En achetant ce produit local je contribue à la production de fleurs de saisons et je m’abonne jusqu’à ce que j’arrête mon abonnement dans mon compte client"
     };
   },
   computed: {
@@ -137,6 +138,31 @@ export default {
 </script>
 
 <style scoped>
+.styleButtonAddAbo {
+  border: 1px solid #ccc;
+  background-color: #f8f8f8;
+  color: #555;
+  font-size: 16px;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s;
+  width: 100%;
+}
+
+.styleButtonAddAbo:hover {
+  background-color: cornflowerblue; /* Lighter background on hover */
+}
+
+/* Adding focus style for accessibility */
+.styleButtonAddAbo:focus {
+  outline: none; /* Remove default focus outline */
+  border-color: blue; /* Blue border for focus */
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5); /* Glow effect to indicate focus */
+}
+
+
 .d-flex {
   display: flex;
 }

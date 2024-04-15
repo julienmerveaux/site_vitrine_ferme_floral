@@ -17,9 +17,11 @@ const PlantesInformation = {
         tabColor: [],
     },
     getters: {
-        getAllFleurs: state => state.AllFleurs,
+        getAllFleurs: state => {
+            return state.AllFleurs
+        },
         getFilteredFleurs: state => {
-            // Retourne les bouquets filtrés s'il y en a, sinon retourne tous les bouquets
+            console.log(state.AllFleurs)
             return state.FilteredFleurs.length > 0 ? state.FilteredFleurs : state.AllFleurs;
         },
         getTabColor: state => state.tabColor,
@@ -65,7 +67,8 @@ const PlantesInformation = {
                         image: record.get('Image'),
                         showFleurs: record.get("showFleurs")
                     };
-                });
+                }).filter(bouquet => bouquet.showFleurs); // Filtrer les fleurs avec showFleurs en true
+
                 commit('setAllFleurs', bouquetsData);
                 commit('setTabColor', Array.from(uniqueColors)); // Convertit le Set en Array pour le commit
 

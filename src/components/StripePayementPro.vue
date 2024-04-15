@@ -21,8 +21,8 @@
           </div>
 
           <div class="d-flex">
-            <p> Si l'adresse de facturation est la meme que l'adresse de livraison </p>
-            <button type="button" @click="copierAdresseLivraisonToFacturation">Click</button>
+            <p> Dupliquer ces informations pour l’adresse de facturation </p>
+            <button  class="buy-button styleButtonDuplication" type="button" @click="copierAdresseLivraisonToFacturation">Dupliquer</button>
           </div>
 
           <h1>Adresse de facturation</h1>
@@ -51,6 +51,8 @@
 
           <button type="submit" class="buy-button">Acheter</button>
         </form>
+        <button @click="showValidePanier = false" class="buy-button">Annuler</button>
+
       </div>
     </div>
   </div>
@@ -127,6 +129,11 @@ export default {
 .d-flex {
   display: flex;
 }
+
+.styleButtonDuplication {
+  width: 30%;
+}
+
 .overlay {
   position: fixed;
   top: 0;
@@ -237,6 +244,4 @@ button.buy-button:hover {
 }
 
 </style>
-<style>
-/* Vos styles CSS restent inchangés */
-</style>
+

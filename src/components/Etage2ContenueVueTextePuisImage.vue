@@ -2,7 +2,7 @@
   <main class="container">
     <div class="text-side">
       <h1>{{ title }}</h1>
-      <p>{{ text }}</p>
+      <p class="textStyle">{{ text }}</p>
     </div>
     <div class="image-side">
       <img :src="imageUrl" alt="Fleurs de la ferme">
@@ -27,24 +27,25 @@ const props = defineProps({
 <style scoped>
 
 p {
-  justify-content: center;
+  justify-content: space-around;
 }
 
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+.textStyle {
+  font-size: x-large;
 }
+
 .container {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: center;
-  gap: 2rem;
+  justify-content: space-evenly;
+  background-color: var(--couleur-separeted-part);
   padding: 2rem;
 }
 .text-side {
   text-align: center;
   flex: 1;
-  max-width: 600px;
+  max-width: 900px;
 }
 .text-side h1 {
   color: #333;

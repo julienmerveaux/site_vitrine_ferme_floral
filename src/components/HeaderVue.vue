@@ -3,55 +3,68 @@
     <nav class="container-fluid">
       <div class="menu-toggle" @click="toggleMenu" v-show="isMobile">☰</div>
       <ul class="nav-menu" v-show="!isMobile || isMenuVisible">
-        <li class="site-title">
-          <button class="boutton">
-            <router-link to="/">
-              <img class="image" src="../assets/Les_5_saisons_RGB_Black.png">
-            </router-link>
-          </button>
-        </li>
-        <div class="li-divCenter">
-          <li class="li-center" :class="{ 'active': isCurrentRoute('/') }">
-            <router-link class=colorRouter to="/">Accueil</router-link>
+        <div class="divHeaderGauche">
+          <li class="site-title">
+            <button class="boutton">
+              <router-link to="/">
+                <img class="image" src="../assets/Les_5_saisons_RGB_Black.png">
+              </router-link>
+            </button>
           </li>
-          <li class="li-center" :class="{ 'active': isCurrentRoute('/qui-je-suis') }">
-            <router-link class=colorRouter to="/qui-je-suis">À propos</router-link>
-          </li>
-          <li class="li-center" :class="{ 'active': isCurrentRoute('/catalogue_particulier') }">
-            <router-link v-if="!isProfessional" class=colorRouter to="/catalogue_particulier">Boutique</router-link>
-          </li>
-          <li class="li-center" :class="{ 'active': isCurrentRoute('/catalogue_pro') }">
-            <router-link  v-if="isProfessional" class=colorRouter to="/catalogue_pro">Boutique</router-link>
-          </li>
-          <li class="li-center" :class="{ 'active': isCurrentRoute('/bouquets') }">
-            <router-link v-if="!isProfessional" class=colorRouter to="/blogs">Blogs</router-link>
-          </li>
-          <li class="li-center" :class="{ 'active': isCurrentRoute('/contact') }">
-            <router-link class=colorRouter to="/contact">Contact</router-link>
-          </li>
+        </div>
+        <div class="divHeaderCenter">
+          <div class="li-divCenter">
+            <li class="li-center" :class="{ 'active': isCurrentRoute('/') }">
+              <router-link class=colorRouter to="/">Accueil</router-link>
+            </li>
+            <li class="li-center" :class="{ 'active': isCurrentRoute('/catalogue_particulier') }">
+              <router-link v-if="!isProfessional" class=colorRouter to="/catalogue_particulier">Boutique</router-link>
+            </li>
+            <li class="li-center" :class="{ 'active': isCurrentRoute('/catalogue_pro') }">
+              <router-link v-if="isProfessional" class=colorRouter to="/catalogue_pro">Boutique</router-link>
+            </li>
+            <li class="li-center" :class="{ 'active': isCurrentRoute('/bouquets') }">
+              <router-link v-if="!isProfessional" class=colorRouter to="/blogs">Blogs</router-link>
+            </li>
+            <li class="li-center" :class="{ 'active': isCurrentRoute('/contact') }">
+              <router-link class=colorRouter to="/contact">Contact</router-link>
+            </li>
+          </div>
         </div>
 
-        <div class="li-divDroite">
-          <div v-if="getIsConnected" class="profile-menu">
-            <img
-                src="../assets/profil.png"
-                alt="Profil"
-                class="profile-img"
-                @click="toggleProfileMenu"
-            />
-            <ul v-show="isProfileMenuVisible" class="dropdown-menu">
-              <li class="text-center">{{getCurrentUser.name}} {{getCurrentUser.firstname}}</li>
-              <li><router-link to="/commandes">Mes commandes</router-link></li>
-              <li><router-link to="/abonnements">Mes abonnements</router-link></li>
-              <!-- Ajoutez plus d'options ici si nécessaire -->
-            </ul>
+        <div class="divHeaderDroite">
+          <div class="li-divDroite">
+            <div v-if="getIsConnected" class="profile-menu">
+              <img
+                  src="../assets/profil.png"
+                  alt="Profil"
+                  class="profile-img"
+                  @click="toggleProfileMenu"
+              />
+              <ul v-show="isProfileMenuVisible" class="dropdown-menu">
+                <li class="text-center">{{ getCurrentUser.name }} {{ getCurrentUser.firstname }}</li>
+                <li>
+                  <router-link to="/commandes">Mes commandes</router-link>
+                </li>
+                <li>
+                  <router-link to="/abonnements">Mes abonnements</router-link>
+                </li>
+                <!-- Ajoutez plus d'options ici si nécessaire -->
+              </ul>
+            </div>
+            <button v-if="getIsConnected" @click="logout" class="colorRouter colorTexte">Déconnecter</button>
+            <router-link v-if="!getIsConnected" class="colorRouter colorTexte" to="/inscription">S'inscrire
+            </router-link>
+            <router-link v-if="!getIsConnected" class="colorRouter colorTexte" to="/login">Se connecter</router-link>
+            <router-link v-if="getCurrentUser.type ==='particulier'" class="colorRouter colorTexte alignementStyle"
+                         to="/panierParticulier">Votre panier
+            </router-link>
+            <router-link v-if="getCurrentUser.type ==='professionnel'" class="colorRouter colorTexte alignementStyle"
+                         to="/panierPro">Votre panier
+            </router-link>
           </div>
-          <button v-if="getIsConnected" @click="logout" class="colorRouter colorTexte">Déconnecter</button>
-          <router-link v-if="!getIsConnected" class="colorRouter colorTexte" to="/inscription">S'inscrire</router-link>
-          <router-link v-if="!getIsConnected" class="colorRouter colorTexte" to="/login">Se connecter</router-link>
-          <router-link v-if="getCurrentUser.type ==='particulier'" class="colorRouter colorTexte alignementStyle" to="/panierParticulier">Votre panier</router-link>
-          <router-link v-if="getCurrentUser.type ==='professionnel'" class="colorRouter colorTexte alignementStyle" to="/panierPro">Votre panier</router-link>
         </div>
+
 
       </ul>
     </nav>
@@ -96,7 +109,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters("UsersInformation",["getCurrentUser","getIsConnected"]),
+    ...mapGetters("UsersInformation", ["getCurrentUser", "getIsConnected"]),
     isProfessional() {
       return this.getCurrentUser.type === 'professionnel';
     },
@@ -106,14 +119,31 @@ export default {
 
 <style scoped>
 
+.divHeaderDroite {
+  width: 25%;
+}
+
+.divHeaderCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+}
+
+.divHeaderGauche {
+  width: 25%;
+}
+
 .header {
   position: fixed;
   width: 100%;
   z-index: 100;
 }
+
 .text-center {
   text-align: center;
 }
+
 .profile-menu {
   position: relative;
 }
@@ -183,12 +213,13 @@ export default {
   font-family: 'Belleza', sans-serif;
   font-weight: bold;
   font-size: x-large;
+
 }
 
 .colorTexte {
-  border: solid;
-  border-radius: 5px;
-  background-color: #24d524;
+  border: 1px solid;
+  border-radius: 10px;
+  background-color: var(--couleur-button);
 }
 
 .alignementStyle {
@@ -212,7 +243,6 @@ export default {
 .nav-menu {
   display: flex;
   align-items: center; /* Centre les éléments pour les petits écrans */
-  justify-content: space-around;
   list-style-type: none;
   padding: 0;
   margin: 0;

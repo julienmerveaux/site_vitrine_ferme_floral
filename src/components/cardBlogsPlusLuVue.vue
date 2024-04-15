@@ -1,11 +1,11 @@
 <script>
-import { marked } from "marked";
+import {marked} from "marked";
 
 export default {
   name: "cardBlogsPlusLuVue",
   props: {
     blogs: Object,
-    index:Number,
+    index: Number,
   },
   data() {
     return {
@@ -13,7 +13,7 @@ export default {
     };
   },
   computed: {
-    loadText(){
+    loadText() {
       return marked(this.blogs.Text)
     }
   },
@@ -27,9 +27,9 @@ export default {
       // Utiliser le routeur Vue.js pour naviguer vers la nouvelle URL
       this.$router.push(newUrl);
 
-      this.$store.dispatch('BlogsInformations/updateNombreVue',articleId);
+      this.$store.dispatch('BlogsInformations/updateNombreVue', articleId);
     },
-    closePopup(){
+    closePopup() {
       this.showBlogs = !this.showBlogs;
     }
   }
@@ -41,7 +41,7 @@ export default {
     <div class="article-card2">
       <div class="article-index">{{ index }}</div>
       <div class="article-content">
-        <span class="article-title">{{blogs.Temps_lecture}} minutes</span>
+        <span class="article-title">{{ blogs.Temps_lecture }} minutes</span>
         <h3 class="article-title">{{ blogs.Titre }}</h3>
         <div class="article-info">
           <time class="article-date" :datetime="blogs.Date">{{ blogs.Date }}</time>
@@ -64,18 +64,19 @@ export default {
 </template>
 
 <style scoped>
-#pageBlogs img{
+#pageBlogs img {
   margin: 0 auto;
 }
 
-#greyLine{
+#greyLine {
   height: 2px;
-  width:100%;
-  background-color:#666;
-  margin-top:10px;
-  padding:0;
+  width: 100%;
+  background-color: #666;
+  margin-top: 10px;
+  padding: 0;
 
 }
+
 .article-index {
   display: flex;
   align-items: center;
@@ -83,7 +84,8 @@ export default {
   width: 40px; /* Ajustez la largeur en fonction de vos besoins */
   height: 40px; /* Ajustez la hauteur en fonction de vos besoins */
   font-size: xxx-large; /* Taille de la police */
-
+  background-color: none var(--couleur-texte);
+  background: none;
   margin-right: 20px; /* Espacement à droite du contenu */
 }
 
@@ -92,11 +94,13 @@ export default {
   width: 100%;
   align-items: center; /* Aligner les éléments verticalement */
 }
+
 .article-card {
   display: flex;
   flex-direction: column;
   width: 100%;
   align-items: center; /* Aligner les éléments verticalement */
+  background-color: var(--couleur-separeted-part);
 }
 
 .article-image {
@@ -125,7 +129,7 @@ export default {
 .article-title {
   font-size: 1rem;
   margin: 0;
-  color: #333; /* Couleur du texte pour le titre */
+
 }
 
 .article-info {
@@ -147,6 +151,7 @@ export default {
 .button:hover {
   background-color: #005f73; /* Une teinte plus foncée pour l'état de survol */
 }
+
 .button {
   padding: 10px 20px;
   margin: 20px auto;
@@ -169,8 +174,6 @@ export default {
 .card-info span {
   margin-left: 5px;
 }
-
-
 
 
 .container {

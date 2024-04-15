@@ -33,6 +33,10 @@ export default {
 </template>
 
 <style scoped>
+* {
+  font-family: Helvetica, Courier New, Arial, sans-serif !important;
+  background-color: var(--couleur-principale) !important ;
+}
 .app {
   display: flex;
   flex-direction: column;
@@ -40,7 +44,7 @@ export default {
 }
 
 .header {
-  position: fixed;
+  position: static;
   top: 0;
   left: 0;
   right: 0;
@@ -51,12 +55,7 @@ export default {
 
 .content {
   flex-grow: 1; /* Fait en sorte que le contenu prenne toute la hauteur restante */
-  padding-top: 153px /* Hauteur de l'en-tête (ajoutez la hauteur de l'en-tête ici) */;
-  /* Ajoutez d'autres styles pour le contenu si nécessaire */
-}
 
-.footer {
-  /* Styles pour votre pied de page */
 }
 
 @media (max-width: 600px) {
@@ -65,4 +64,5 @@ export default {
     margin-top: 50px;
   }
 }
+
 </style>

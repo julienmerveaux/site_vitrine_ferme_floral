@@ -107,7 +107,6 @@ const UsersInformation = {
                     const userData = userDocSnapshot.data();
                     commit('setCurrentUser', userData);
                     commit('setIsConnected', true);
-                   await router.push("/")
                     // Utilisation de router.push ici pourrait ne pas être idéale. Retournez plutôt une valeur ou une promesse résolue pour gérer la navigation dans le composant.
                     return Promise.resolve();
                 } else {
@@ -167,8 +166,9 @@ const UsersInformation = {
                 console.error("Erreur lors de la déconnexion :", error);
             }
         },
-        async registerUserParticulier({ commit }, { name, firstname, email, password, siret, type }) {
+        async registerUserParticulier({ commit }, { name, firstname, email, password, siret, type, nom_entreprise }) {
             try {
+                console.log({ name, firstname, email, password, siret, type, nom_entreprise })
                 const dataUser = await createUserWithEmailAndPassword(auth, email, password);
                 await router.push("/");
 
@@ -181,6 +181,7 @@ const UsersInformation = {
                     siret: siret,
                     email: dataUser.user.email,
                     type: type,
+                    nom_entreprise:nom_entreprise,
                     connectionWith:"motDePasse",
                     commandes:[],
                     abonnement:[],

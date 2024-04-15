@@ -1,29 +1,66 @@
 <template>
-  <div class="generalCard">
-    <article class="card">
-      <img :src="bouquet.image[0].url" alt="pas de photo" class="card__img">
-      <div class="card__info">
-        <span class="card__category">{{ bouquet.type }}</span>
-        <h3 class="card__title">{{ bouquet.nom }}</h3>
-        <h2 v-if="getIsConnected" class="card__price">{{ bouquet.prix }} €</h2>
+  <div class="card" @click="togglePopup">
+    <div class="card-image">
+      <img :src="bouquet.image[0].url" alt="Pink Tulip">
+    </div>
+    <div class="card-body">
+      <h2 class="card-title">{{ bouquet.nom }}</h2>
+      <p class="card-price">{{ bouquet.prix }} € </p>
+      <div v-if="!isPanierParticulierRoute" class="quantity-selector">
+        <div class="divGaucheCard">
+          <button @click="downCompteur">-</button>
+          <input style="-moz-appearance: textfield" type="number" @click="button" :value="quantiteAchat">
+          <button @click="upCompteur">+</button>
+          <div class="quantity-selector2">
+            <button v-if="!isPanierParticulierRoute" class="styleButtonAddPanier" @click="addItemPanier">Ajouter au
+              panier
+            </button>
+        </div>
 
-        <input type="number" v-if="getIsConnected && !isPanierParticulierRoute" v-model="bouquet.quantiteAchat"
-               class="card__quantity-input">
-        <h1 v-if="isPanierParticulierRoute" class="card__price">Quantité : {{ bouquet.quantiteAchat }}</h1>
+        </div>
+        <FormulaireAchatVue v-if="getIsConnected"
+                            :bouquetId="this.bouquet.id"
+                            :nom="this.bouquet.nom"
+                            :price="this.bouquet.prix"
+                            :quantiteAchat="this.bouquet.quantiteAchat"
+                            @click="cancelPropagation"
+        ></FormulaireAchatVue>
       </div>
-      <button v-if="!isPanierParticulierRoute && getIsConnected" @click="addItemPanier" class="buttonStyle">Ajouter au
-        panier
-      </button>
-      <FormulaireAchatVue v-if="getIsConnected"
-      :bouquetId="this.bouquet.id"
-      :nom="this.bouquet.nom"
-      :price="this.bouquet.prix"
-      :quantiteAchat="this.bouquet.quantiteAchat"
-      ></FormulaireAchatVue>
-    </article>
-    <div v-if="showPopup" class="popupCardValidation">
-      <p>Vous venez d'ajouter {{ bouquet.nom }}</p>
-      <p>Quantité : {{ bouquet.quantiteAchat }}</p>
+    </div>
+  </div>
+
+  <div v-if="!isPanierParticulierRoute && showPopup" class="popup">
+    <div class="popup-content">
+      <div class="styleDivButtonClose">
+        <button class="styleButtonClose" @click="togglePopup">x</button>
+      </div>
+      <div class="imgStyle">
+        <img :src="bouquet.image[0].url" alt="Pink Tulip">
+      </div>
+      <h3>{{ bouquet.nom }}</h3>
+      <p class="card-price2">Quantité : {{ bouquet.quantite }} </p>
+      <p class="card-price2">{{ bouquet.prix }} € </p>
+      <div class="d-flex gap-10">
+        <div class="divGaucheInfo">
+          <div class="quantity-selector2">
+            <button @click="downCompteur">-</button>
+            <input style="-moz-appearance: textfield" type="number" :value="quantiteAchat">
+            <button @click="upCompteur">+</button>
+          </div>
+          <div class="quantity-selector2">
+            <button class="styleButtonAddPanier" @click="addItemPanier">Ajouter au panier</button>
+          </div>
+        </div>
+
+        <FormulaireAchatVue v-if="getIsConnected"
+                            :bouquetId="this.bouquet.id"
+                            :nom="this.bouquet.nom"
+                            :price="this.bouquet.prix"
+                            :quantiteAchat="this.bouquet.quantiteAchat"
+                            @click="cancelPropagation"
+                            class="btnAbo"
+        ></FormulaireAchatVue>
+      </div>
     </div>
   </div>
 </template>
@@ -43,19 +80,23 @@ export default {
   data() {
     return {
       showPopup: false,
-      showFacturation:false
+      showFacturation: false,
+      quantiteAchat: 1
     };
   },
   computed: {
     panierParticulier() {
       return panierParticulier
     },
-    ...mapGetters("UsersInformation",['getIsConnected']),
+    ...mapGetters("UsersInformation", ['getIsConnected']),
     isPanierParticulierRoute() {
       return this.$route.name === 'PanierParticulierView';
     },
   },
   methods: {
+    cancelPropagation(event){
+      event.stopPropagation();
+    },
     addItemPanier() {
       if (this.bouquet.quantiteAchat > 0) {
         this.showPopup = true;
@@ -67,107 +108,223 @@ export default {
         alert("Demande incorrecte");
       }
     },
-    async subscribeMonthly() {
+    async subscribeMonthly(event) {
+      event.stopPropagation();
       try {
         const aboInfo = {
           bouquetId: this.bouquet.id,
-          nom:this.bouquet.nom,
-          price:this.bouquet.prix,
+          nom: this.bouquet.nom,
+          price: this.bouquet.prix,
           quantiteAchat: this.bouquet.quantiteAchat,
         }
+        console.log(aboInfo)
         const sessionId = await this.$store.dispatch('Stripe/createSessionAbonnement', aboInfo);
         const stripe = await this.$store.getters["Stripe/stripeInstance"];
-        await stripe.redirectToCheckout({ sessionId }); // Assurez-vous que sessionId est l'ID de la session, pas l'URL
+        await stripe.redirectToCheckout({sessionId}); // Assurez-vous que sessionId est l'ID de la session, pas l'URL
 
 
       } catch (error) {
         console.error("Erreur lors de la création de l'abonnement mensuel :", error);
         alert("Une erreur s'est produite lors de la tentative d'abonnement.");
       }
+    },
+    togglePopup() {
+      this.showPopup = !this.showPopup;
+    },
+    downCompteur(event) {
+      event.stopPropagation(); // Cela empêche l'événement de se propager
+      if (this.quantiteAchat > 0) {
+        this.quantiteAchat -= 1;
+      }
+    },
+    upCompteur(event) {
+      event.stopPropagation(); // Cela empêche l'événement de se propager
+      this.quantiteAchat += 1;
+    },
+    button(event) {
+      event.stopPropagation();
     }
   },
+
 };
 </script>
 
 <style scoped>
-.generalCard {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Use auto-fit with minmax for responsive sizing */
-  grid-gap: 20px;
-  max-width: 1200px; /* Adjust the max-width to fit your design */
-  margin: 0 auto;
+
+.gap-10 {
+  gap: 60px;
+}
+
+.divGaucheInfo {
+  display: flex;
+}
+.btnAbo {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+.styleButtonAddPanier {
+  border: 1px solid #ccc;
+  background-color: #f8f8f8;
+  color: #555;
+  font-size: 16px;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+  margin-left: 10px;
+  transition: background-color 0.3s;
+}
+
+.styleButtonAddPanier:hover {
+  background-color: #e9e9e9; /* Lighter background on hover */
+}
+
+/* Adding focus style for accessibility */
+.styleButtonAddPanier:focus {
+  outline: none; /* Remove default focus outline */
+  border-color: blue; /* Blue border for focus */
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5); /* Glow effect to indicate focus */
+}
+
+.styleDivButtonClose {
+  display: flex;
+  justify-content: end;
+}
+
+.styleButtonClose {
+  background: none;
+  border: 1px white;
+  font-size: x-large;
+}
+
+.styleButtonClose:hover {
+  background: #f8f6f6;
+  border-radius: 50%;
+
+}
+
+.d-flex {
+  display: flex;
+  justify-content: end;
+  min-height: 100px;
+}
+
+.imgStyle {
+  text-align: center;
+}
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+img {
+  width: 50%
 }
 
 .card {
-  padding-bottom: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start; /* Align content to the top */
-  border-radius: 8px;
-  overflow: hidden;
-  background-color: #ffffff;
-  height: auto; /* Height auto for content sizing */
-  box-shadow: 5px 5px 20px #a49f9f;
-
-}
-
-.card__img {
-  margin-top: 5%;
-  box-shadow: 5px 5px 5px #a49f9f;
-  border-radius: 10px;
-  width: 95%;
-  height: auto; /* Set to auto so the image's aspect ratio is maintained */
-  object-fit: cover;
-}
-
-.card__info {
-  padding: 15px;
-  text-align: center;
-  width: 100%; /* Full width to align text inputs and titles */
-}
-
-.card__quantity-input {
-  padding: 5px;
-  margin: 10px 0; /* Add some margin at the top and bottom */
-  border: none;
-  text-align: center;
-}
-
-.buttonStyle {
-  width: 75%; /* Full width button */
-  padding: 10px 20px; /* Increase padding for a larger button */
-  margin-top: 20px;
-  background-color: transparent;
-  color: black;
-  border: 1px solid;
-  box-shadow: 0 5px 5px #c4c0c0;
-  border-radius: 4px;
   cursor: pointer;
-  font-size: 1em; /* Increase font size if necessary */
+  border: 1px solid #ccc;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+  font-family: Arial, sans-serif;
+  height: fit-content;
+  border-radius: 14px;
 }
 
-/* You may also want to adjust the hover effect for a better feel */
-.buttonStyle:hover {
-  transform: scale(1.05); /* Slight increase in scale */
+.card-image img {
+  width: 60%;
+  display: block;
+  margin: 20px 20%;
 }
 
-/* Adjust the popup for larger view */
-.popupCardValidation {
-  position: fixed;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #4CAF50;
-  color: white;
-  padding: 20px 40px; /* Increase padding for larger popup */
-  border-radius: 5px;
-  z-index: 100;
-  font-size: 1em; /* Adjust font size for readability */
+.card-body {
+  padding: 15px;
+  color: #333;
 }
 
-@media (max-width: 768px) {
-  .generalCard {
-    grid-template-columns: 1fr; /* Single column for mobile */
-  }
+.card-title {
+  color: #333;
+  font-size: 16px;
+  margin-bottom: 5px;
 }
+
+.card-price {
+  color: #888;
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+.card-price2 {
+  color: #888;
+  font-size: large;
+  margin-bottom: 15px;
+}
+
+.quantity-selector {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+}
+
+.divGaucheCard {
+  display: flex;
+}
+.quantity-selector2 {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.quantity-selector2 {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  gap: 5px;
+}
+
+.quantity-selector button, .quantity-selector input, .quantity-selector2 button, .quantity-selector2 input {
+  border: 1px solid #ccc;
+  background-color: #f8f8f8;
+  color: #555;
+  font-size: 16px;
+  padding: 8px;
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+}
+
+.quantity-selector input, .quantity-selector2 input {
+  max-width: 80px;
+  text-align: center;
+  margin: 0 5px;
+}
+
+.quantity-selector button:hover, .quantity-selector2 button:hover {
+  background: cornflowerblue;
+}
+
+.quantity-selector input:focus, .quantity-selector2 input:focus {
+  border-color: red;
+  box-shadow: red
+}
+
+
 </style>

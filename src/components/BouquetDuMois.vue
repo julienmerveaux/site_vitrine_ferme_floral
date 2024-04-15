@@ -1,8 +1,7 @@
 <template>
-  <div v-if="!getIsConnected && showPopUp" class="popup-overlay">
+  <div class="popup-overlay" v-if="showPopUp && !getIsConnected">
     <div class="popup">
-      <p class="popup_styleText">Veuillez vous connecter ou vous inscrire pour ajouter le bouquet du mois a votre
-        panier.</p>
+      <p class="popup-message">Veuillez vous connecter ou vous inscrire pour ajouter le bouquet du mois à votre panier.</p>
       <div class="popup-buttons">
         <router-link class="button-link" to="/inscription">S'inscrire</router-link>
         <router-link class="button-link" to="/login">Se connecter</router-link>
@@ -10,23 +9,21 @@
       </div>
     </div>
   </div>
-  <div class="styleDivtitle">
-    <h1>Bouquet du mois</h1>
-  </div>
   <main class="container">
     <div class="image-side">
-      <img v-if="bouquetDuMois2.image && bouquetDuMois2.image.length" :src="bouquetMois.image[0].url"
-           alt="Fleurs de la ferme">
+      <img v-if="bouquetMois.image && bouquetMois.image.length" :src="bouquetMois.image[0].url" alt="Fleurs de la ferme">
     </div>
+
     <div class="text-side">
       <h1>{{ bouquetMois.nom }}</h1>
-      <h2>{{ bouquetMois.text }}</h2>
-      <h3>{{ bouquetMois.prix }} €</h3>
-      <input type="number" ref="quantiteInput" v-model="bouquetMois.quantiteAchat" class="card__quantity-input">
-      <div class="stylePaiement">
+      <p class="pStyle">{{ bouquetMois.text }}</p>
+      <h3 class="h3Style">{{ bouquetMois.prix }} €</h3>
+      <input type="number" v-model="bouquetMois.quantiteAchat" class="quantity-input">
+      <div class="payment-options">
       </div>
-      <button type=submit @click="addItemPanier">Ajouter au panier</button>
-      <div v-if="showPopupValidation" class="popupCardValidation">
+      <button class="margin_bottom" @click="addItemPanier">Ajouter au panier</button>
+
+      <div v-if="showPopupValidation" class="popup-validation">
         <p>Vous venez d'ajouter {{ bouquetMois.quantiteAchat }} {{ bouquetMois.nom }}</p>
         <p>Quantité : {{ bouquetMois.quantiteAchat }}</p>
       </div>
@@ -35,39 +32,33 @@
 </template>
 
 <script>
-import {mapActions, mapGetters} from "vuex";
-import StripePayment from "@/components/StripePayment.vue";
-import StripePayementBouquetMois from "@/components/StripePayementBouquetMois.vue";
+import { mapGetters } from "vuex";
 
 export default {
   props: {
     bouquetMois: Object
   },
   name: 'BouquetDuMois',
-  components: {StripePayementBouquetMois, StripePayment},
   data() {
     return {
-      showPopupValidation: false,
-      quantiteAchat: 0,
-      showPopUp: false
+      showPopUp:false,
+      showPopupValidation: false
     };
   },
   computed: {
-    ...mapGetters("UsersInformation", ["getCurrentUser", "getIsConnected"]),
-    bouquetDuMois2() {
-      return this.$store.getters['BouquetInformation/getBouquetMois'];
-    }
+    ...mapGetters("UsersInformation", ["getIsConnected"])
   },
   methods: {
     addItemPanier() {
       if (!this.getIsConnected) {
+        console.log(true)
         this.showPopUp = true;
-        return; // Arrêter l'exécution si l'utilisateur n'est pas connecté
+        return;
       }
+
       const quantite = this.bouquetMois.quantiteAchat;
       if (quantite > 0 && quantite <= 5) {
-        this.$store.dispatch('PanierParticulier/addArticleToPanier', this.bouquetMois);
-
+        // Ajoutez l'article au panier
         this.showPopupValidation = true;
         setTimeout(() => this.showPopupValidation = false, 3000);
       } else {
@@ -77,15 +68,18 @@ export default {
     closePopup() {
       this.showPopUp = false;
     }
-    ,
-  },
-  created() {
   }
-
 }
 </script>
 
 <style scoped>
+
+.pStyle {
+  color: var(--couleur-texte);
+  line-height:1.6;
+  font-size: x-large;
+}
+
 .button-link {
   background-color: #4CAF50;
   color: white;
@@ -100,32 +94,9 @@ export default {
   background-color: #367c39;
 }
 
-.popupCardValidation {
-  position: initial;
-  left: 50%;
-  top: 50%;
-  background-color: #4CAF50;
-  color: white;
-  padding: 20px 40px; /* Increase padding for larger popup */
-  border-radius: 5px;
-  z-index: 100;
-  font-size: 1em; /* Adjust font size for readability */
+.margin_bottom {
+  margin-bottom: 20px;
 }
-
-.button.close {
-  background-color: #f44336;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.popup_styleText {
-  font-family: 'Belleza', sans-serif;
-  font-size: xx-large;;
-}
-
 .popup-overlay {
   position: fixed;
   top: 0;
@@ -154,7 +125,43 @@ export default {
   font-size: 18px;
   text-align: center;
   margin-bottom: 20px;
+  font-family: 'Arial', sans-serif; /* Nouveau style de police */
+  font-weight: normal; /* Supprimer le style gras */
 }
+
+.popup-validation {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 20px 40px;
+  border-radius: 5px;
+  z-index: 100;
+  font-size: 1em;
+  font-family: 'Arial', sans-serif; /* Nouveau style de police */
+  font-weight: normal; /* Supprimer le style gras */
+}
+
+.title {
+  text-align: center;
+  font-family: 'Arial', sans-serif; /* Nouveau style de police */
+  font-weight: normal; /* Supprimer le style gras */
+  color: black;
+}
+
+.text-side {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  flex: 1;
+  max-width: 900px;
+  font-family: 'Arial', sans-serif; /* Nouveau style de police */
+  font-weight: normal; /* Supprimer le style gras */
+  gap: 20px;
+  align-items: center;
+}
+
 
 .popup-buttons {
   display: flex;
@@ -163,46 +170,26 @@ export default {
   justify-content: center;
 }
 
-p {
-  justify-content: center;
+
+
+.button.close {
+  background-color: var(--couleur-button);
+  color: black;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
-.styleDivtitle {
-  text-align: center;
-}
-
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
 
 .container {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: center;
-  gap: 2rem;
-  padding: 2rem;
+  justify-content: space-evenly;
+  background-color: var(--couleur-separeted-part);
 }
 
-.text-side {
-  text-align: center;
-  flex: 1;
-  max-width: 600px;
-}
-
-.textSize {
-  padding-right: 5px;
-}
-
-.text-side h1 {
-  color: #333;
-  font-size: 2rem;
-}
-
-.text-side p {
-  color: #666;
-  line-height: 1.6;
-}
 
 .image-side {
   flex: 1;
@@ -217,14 +204,35 @@ body {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+.quantity-input {
+  text-align: center;
+  width: 200px;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+}
+
+button {
+  background-color: var(--couleur-principale);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: large;
+}
+
+button:hover {
+  background-color: beige;
+}
+
 @media (max-width: 768px) {
   .container {
     display: flex;
     flex-direction: column;
     margin-bottom: 10px;
-    padding: 0;;
+    padding: 0;
   }
-
 }
-
 </style>

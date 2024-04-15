@@ -124,7 +124,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .d-flex {
   display: flex;
 }

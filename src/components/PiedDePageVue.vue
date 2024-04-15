@@ -9,7 +9,7 @@
     <iframe
         class="iframeLoca"
         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2780.9234873642185!2d4.278601076722735!3d45.812790710112!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47f441f7c652d207%3A0x5dac752fb5cc0a1b!2s1501%20Rte%20de%20Mussy%2C%2042810%20Rozier-en-Donzy!5e0!3m2!1sfr!2sfr!4v1706620639768!5m2!1sfr!2sfr"
-        width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+        width="600" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
         referrerpolicy="no-referrer-when-downgrade">
     </iframe>
     <div class="newsletter-container">
@@ -119,15 +119,6 @@
     margin-right: 0;
     max-width: none;
   }
-
-  .contact-details {
-    margin-left: 0;
-  }
-
-  .iframeLoca {
-    width: 100%;
-  }
-
   .footer-details {
     margin-right: 0;
   }

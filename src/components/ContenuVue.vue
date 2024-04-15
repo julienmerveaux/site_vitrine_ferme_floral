@@ -49,6 +49,7 @@ export default {
 
 <style scoped>
 .contenu {
+  display: grid;
   gap: 20px;
 }
 </style>
