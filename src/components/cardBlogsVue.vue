@@ -87,11 +87,10 @@ export default {
   height: 130px;
   flex-grow: 1;
   padding: 10px;
-  background-color: var(--couleur-button);
+  background-color: var(--couleur-separeted-part);
 }
 
 .article-category {
-  background-color: var(--couleur-principale);
   font-size: 0.8rem;
   padding: 3px 6px;
   border-radius: 3px;

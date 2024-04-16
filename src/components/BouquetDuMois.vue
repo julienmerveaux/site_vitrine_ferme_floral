@@ -18,14 +18,7 @@
       <h1>{{ bouquetMois.nom }}</h1>
       <p class="pStyle">{{ bouquetMois.text }}</p>
       <h3 class="h3Style">{{ bouquetMois.prix }} €</h3>
-      <input type="number" v-model="bouquetMois.quantiteAchat" class="quantity-input">
       <div class="payment-options">
-      </div>
-      <button class="margin_bottom" @click="addItemPanier">Ajouter au panier</button>
-
-      <div v-if="showPopupValidation" class="popup-validation">
-        <p>Vous venez d'ajouter {{ bouquetMois.quantiteAchat }} {{ bouquetMois.nom }}</p>
-        <p>Quantité : {{ bouquetMois.quantiteAchat }}</p>
       </div>
     </div>
   </main>
@@ -214,7 +207,8 @@ export default {
 }
 
 button {
-  background-color: var(--couleur-principale);
+  background-color: var(--couleur-button);
+  color: var(--couleur-button-texte) !important;
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
@@ -222,6 +216,7 @@ button {
   transition: background-color 0.3s ease;
   font-size: large;
 }
+
 
 button:hover {
   background-color: beige;

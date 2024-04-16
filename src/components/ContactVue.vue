@@ -15,13 +15,15 @@ import axios from "axios";
 
 <style scoped>
 .styleIframe {
-display: flex;
+  display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 110vh;
   background-color: blue;
+  margin: 10px auto;
 }
+
 .colors-background-default {
   color: blue !important;
 }

@@ -35,14 +35,16 @@ const choisirParticulier = () => {
 .divBouton{
   display: flex;
   justify-content: center;
-  gap: 10px;
+  gap: 100px;
   width: 100%;
+  margin: 30px auto 70px auto;
+
 }
 .bouton {
-  padding: 10px 20px;
-  font-size: 16px;
-  color: #FFFFFF;
-  background-color: #007bff;
+  padding: 1rem;
+  font-size: xx-large;
+  color: var(--couleur-button-texte);
+  background-color: var(--couleur-button);
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -52,7 +54,8 @@ const choisirParticulier = () => {
 }
 
 .bouton:hover, .bouton-stylé:focus {
-  background-color: #0056b3;
+  background-color: var(--couleur-button-texte);
+  color: black;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
   transform: translateY(-2px);
 }

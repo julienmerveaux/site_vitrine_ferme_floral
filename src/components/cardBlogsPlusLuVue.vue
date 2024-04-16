@@ -84,8 +84,7 @@ export default {
   width: 40px; /* Ajustez la largeur en fonction de vos besoins */
   height: 40px; /* Ajustez la hauteur en fonction de vos besoins */
   font-size: xxx-large; /* Taille de la police */
-  background-color: none var(--couleur-texte);
-  background: none;
+  background: none var(--couleur-texte) none;
   margin-right: 20px; /* Espacement à droite du contenu */
 }
 

@@ -42,8 +42,7 @@ export default {
   background-color: white;
 }
 .footer {
-  background: #f8f9fa; /* Couleur de fond légère pour le footer */
-
+  background-color: var(--couleur-header-footer) !important;
 }
 
 nav.container-fluid {
@@ -51,6 +50,7 @@ nav.container-fluid {
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
+  background-color: var(--couleur-header-footer)
 }
 
 nav ul {

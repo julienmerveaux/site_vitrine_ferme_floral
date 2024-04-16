@@ -85,6 +85,8 @@ nav.container-fluid {
 .styleButtonGoogle{
   width: 20vw;
   margin-bottom: 1%;
+  background-color: var(--couleur-button);
+  color: var(--couleur-button-texte);
 }
 nav ul {
   list-style: none;
@@ -104,8 +106,6 @@ nav ul {
 }
 
 .h1Color {
-  background-color: #ffffff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 2rem 0;
 }
 
@@ -137,14 +137,15 @@ button {
   width: 100%;
   padding: 0.75rem;
   border: none;
-  background-color: #007bff;
-  color: white;
+  background-color: var(--couleur-button);
+  color: var(--couleur-button-texte);
   border-radius: 4px;
   cursor: pointer;
 }
 
 button:hover {
-  background-color: #0056b3;
+  background-color: var(--couleur-button-texte);
+  color: black;
 }
 
 /* Footer */

@@ -86,7 +86,7 @@
   display: grid;
   justify-content: center;
   padding: 20px 0;
-  background: #f8f9fa; /* Couleur de fond légère pour le footer */
+  background-color: var(--couleur-header-footer) !important;
   grid-template-columns: repeat(3, 1fr);
 
 }

@@ -23,7 +23,10 @@
             <li class="li-center" :class="{ 'active': isCurrentRoute('/catalogue_pro') }">
               <router-link v-if="isProfessional" class=colorRouter to="/catalogue_pro">Boutique</router-link>
             </li>
-            <li class="li-center" :class="{ 'active': isCurrentRoute('/bouquets') }">
+            <li class="li-center" :class="{ 'active': isCurrentRoute('/catalogue_Abonnemment') }">
+              <router-link v-if="!isProfessional" class=colorRouter to="/catalogue_Abonnemment">Abonnements</router-link>
+            </li>
+            <li class="li-center" :class="{ 'active': isCurrentRoute('/blogs') }">
               <router-link v-if="!isProfessional" class=colorRouter to="/blogs">Blogs</router-link>
             </li>
             <li class="li-center" :class="{ 'active': isCurrentRoute('/contact') }">
@@ -44,22 +47,19 @@
               <ul v-show="isProfileMenuVisible" class="dropdown-menu">
                 <li class="text-center">{{ getCurrentUser.name }} {{ getCurrentUser.firstname }}</li>
                 <li>
-                  <router-link to="/commandes">Mes commandes</router-link>
-                </li>
-                <li>
                   <router-link to="/abonnements">Mes abonnements</router-link>
                 </li>
                 <!-- Ajoutez plus d'options ici si nécessaire -->
               </ul>
             </div>
-            <button v-if="getIsConnected" @click="logout" class="colorRouter colorTexte">Déconnecter</button>
-            <router-link v-if="!getIsConnected" class="colorRouter colorTexte" to="/inscription">S'inscrire
+            <button v-if="getIsConnected" @click="logout" class="buttonAuth colorRouter colorTexte">Déconnecter</button>
+            <router-link v-if="!getIsConnected" class="buttonAuth colorRouter colorTexte" to="/inscription">S'inscrire
             </router-link>
-            <router-link v-if="!getIsConnected" class="colorRouter colorTexte" to="/login">Se connecter</router-link>
-            <router-link v-if="getCurrentUser.type ==='particulier'" class="colorRouter colorTexte alignementStyle"
+            <router-link v-if="!getIsConnected" class=" buttonAuth colorRouter colorTexte" to="/login">Se connecter</router-link>
+            <router-link v-if="getCurrentUser.type ==='particulier'" class=" buttonAuth colorRouter colorTexte alignementStyle"
                          to="/panierParticulier">Votre panier
             </router-link>
-            <router-link v-if="getCurrentUser.type ==='professionnel'" class="colorRouter colorTexte alignementStyle"
+            <router-link v-if="getCurrentUser.type ==='professionnel'" class=" buttonAuth colorRouter colorTexte alignementStyle"
                          to="/panierPro">Votre panier
             </router-link>
           </div>
@@ -119,6 +119,10 @@ export default {
 
 <style scoped>
 
+.buttonAuth {
+  background-color: var(--couleur-button) !important;
+
+}
 .divHeaderDroite {
   width: 25%;
 }
@@ -209,7 +213,7 @@ export default {
   /* Utiliser des unités relatives pour les marges, les paddings et les font-sizes */
   padding: 5px;
   text-decoration: none;
-  color: black;
+  color: var(--couleur-header-texte);
   font-family: 'Belleza', sans-serif;
   font-weight: bold;
   font-size: x-large;
@@ -217,9 +221,8 @@ export default {
 }
 
 .colorTexte {
-  border: 1px solid;
   border-radius: 10px;
-  background-color: var(--couleur-button);
+  color: var(--couleur-button-texte) !important;
 }
 
 .alignementStyle {
@@ -248,6 +251,7 @@ export default {
   margin: 0;
   width: 100%;
   transition: all 0.5s ease; /* Transition douce pour l'apparition du menu */
+  background-color: var(--couleur-header-footer)
 }
 
 .li-divCenter {

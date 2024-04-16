@@ -90,9 +90,11 @@ form {
 
 .legend {
   padding: 1rem;
-  font-size: xx-large;
+  font-size: x-large;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ajoute une ombre pour un effet de profondeur */
   border-radius: 8px; /* Bordures arrondies pour le conteneur */
+  background-color: var(--couleur-button);
+  color:var(--couleur-button-texte) ;
 }
 
 .champ-formulaire {
@@ -131,8 +133,8 @@ input[type="password"]:focus {
 button {
   padding: 12px 20px;
   font-size: 16px;
-  color: white;
-  background-color: #007bff;
+  color: var(--couleur-button-texte);
+  background-color: var(--couleur-button);
   border: none;
   border-radius: 4px;
   cursor: pointer;

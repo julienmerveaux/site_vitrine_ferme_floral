@@ -11,20 +11,17 @@
           <button @click="downCompteur">-</button>
           <input style="-moz-appearance: textfield" type="number" @click="button" :value="quantiteAchat">
           <button @click="upCompteur">+</button>
-          <div class="quantity-selector2">
-            <button v-if="!isPanierParticulierRoute" class="styleButtonAddPanier" @click="addItemPanier">Ajouter au
-              panier
-            </button>
+        </div>
+        <div class="divDroite">
+          <FormulaireAchatVue v-if="getIsConnected"
+                              :bouquetId="this.bouquet.id"
+                              :nom="this.bouquet.nom"
+                              :price="this.bouquet.prix"
+                              :quantiteAchat="this.bouquet.quantiteAchat"
+                              @click="cancelPropagation"
+          ></FormulaireAchatVue>
         </div>
 
-        </div>
-        <FormulaireAchatVue v-if="getIsConnected"
-                            :bouquetId="this.bouquet.id"
-                            :nom="this.bouquet.nom"
-                            :price="this.bouquet.prix"
-                            :quantiteAchat="this.bouquet.quantiteAchat"
-                            @click="cancelPropagation"
-        ></FormulaireAchatVue>
       </div>
     </div>
   </div>
@@ -46,9 +43,6 @@
             <button @click="downCompteur">-</button>
             <input style="-moz-appearance: textfield" type="number" :value="quantiteAchat">
             <button @click="upCompteur">+</button>
-          </div>
-          <div class="quantity-selector2">
-            <button class="styleButtonAddPanier" @click="addItemPanier">Ajouter au panier</button>
           </div>
         </div>
 
@@ -151,6 +145,10 @@ export default {
 
 <style scoped>
 
+.divDroite{
+  width: 70%;
+}
+
 .gap-10 {
   gap: 60px;
 }
@@ -247,6 +245,7 @@ img {
   font-family: Arial, sans-serif;
   height: fit-content;
   border-radius: 14px;
+  background-color: white;
 }
 
 .card-image img {

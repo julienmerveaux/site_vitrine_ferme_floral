@@ -9,7 +9,7 @@
                   d="M0,96L60,90.7C120,85,240,75,360,96C480,117,600,171,720,208C840,245,960,267,1080,277.3C1200,288,1320,288,1380,288L1440,288L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path>
           </svg>
           <button class="image-button">
-            <router-link class="textColor" to="/catalogue_fleurs_sechee">Fleurs séchées</router-link>
+            <router-link class="textColor" to="/catalogue_particulier">Boutique</router-link>
           </button>
         </div>
       </section>
@@ -21,7 +21,7 @@
                   d="M0,96L60,90.7C120,85,240,75,360,96C480,117,600,171,720,208C840,245,960,267,1080,277.3C1200,288,1320,288,1380,288L1440,288L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path>
           </svg>
           <button class="image-button">
-            <router-link class="textColor" to="/catalogue_fleurs_fraiche">Bouquets</router-link>
+            <router-link class="textColor" to="/catalogue_Abonnemment">Abonnement</router-link>
           </button>
         </div>
       </section>
@@ -57,6 +57,7 @@
   border-radius: 10px 10px 0 0;
   overflow: hidden;
   box-shadow: 0 5px 5px #c4c0c0;
+  aspect-ratio: 1;
 }
 
 .textColor {

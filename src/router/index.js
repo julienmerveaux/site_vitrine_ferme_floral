@@ -99,6 +99,11 @@ const router = createRouter({
             name: 'ArticleDetail',
             component: ArticleDetail,
             props: true
+        },
+        {
+            path: '/catalogue_Abonnemment',
+            name: 'CatalogueAbonnements',
+            component: () => import('@/views/CatalogueAbonnements.vue'),
         }
     ],
     scrollBehavior(to, from, savedPosition) {

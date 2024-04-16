@@ -143,12 +143,14 @@ export default {
 /* Bouton appliquer */
 .filters button:first-of-type {
   background-color: var(--couleur-button);
-  color: black;
+  color: var(--couleur-button-texte);
 }
 
 /* Bouton réinitialiser */
 .filters button:last-of-type {
   background-color: var(--couleur-button);
+  color: var(--couleur-button-texte);
+
 }
 
 /* Style pour les grands écrans */
