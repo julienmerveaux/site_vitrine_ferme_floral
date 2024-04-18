@@ -1,8 +1,10 @@
 <script>
 import {mapGetters} from "vuex";
+import Abonnements from "@/views/Abonnements.vue";
 
 export default {
   name: "Success",
+  components: {Abonnements},
   data(){
     return{
     }
@@ -29,8 +31,7 @@ export default {
 <template>
   <div class="success-container">
     <h1>Succès!</h1>
-    {{getSessionDetail}}
-    <p>Votre achat a été complétée avec succès.</p>
+    <p>Votre abonnement a été complétée avec succès.</p>
   </div>
 </template>
 

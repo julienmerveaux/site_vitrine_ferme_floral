@@ -1,7 +1,7 @@
 <template>
   <div class="contenu">
     <Etage1ContenuVue></Etage1ContenuVue>
-    <BouquetDuMois :bouquetMois="getBouquetMois"/>
+    <BouquetDuMois :bouquetMois="getBouquetMois" @transitionEnd="triggerFadeLeft"/>
     <Etage2ContenueVueTextePuisImage
         title="À propos"
         text="Mes fleurs sont cultivées près de Lyon, de Saint-Etienne et de Clermont-Ferrand
@@ -17,9 +17,9 @@ Les fleurs ont toujours été pour moi une passion, j’ai quitté la profession
 fleuriste durant plusieurs années, mais le monde des fleurs n’est jamais très
 loin... Je reviens donc à mon métier passionnant tout en produisant mes propres"
         :imageUrl="imageUrlAudrey"
+        @transitionEnd="triggerFadeRight"
     ></Etage2ContenueVueTextePuisImage>
   </div>
-
 </template>
 
 <script>
@@ -44,6 +44,14 @@ export default {
   computed: {
     ...mapGetters("BouquetInformation", ["getBouquetMois"]),
   },
+  methods: {
+    triggerFadeLeft() {
+      this.fadeLeft = true;
+    },
+    triggerFadeRight() {
+      this.fadeRight = true;
+    },
+  }
 }
 </script>
 

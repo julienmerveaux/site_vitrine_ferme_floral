@@ -13,12 +13,12 @@
           <button @click="upCompteur">+</button>
         </div>
         <div class="divDroite">
-          <FormulaireAchatVue v-if="getIsConnected"
-                              :bouquetId="this.bouquet.id"
-                              :nom="this.bouquet.nom"
-                              :price="this.bouquet.prix"
-                              :quantiteAchat="this.bouquet.quantiteAchat"
-                              @click="cancelPropagation"
+          <FormulaireAchatVue
+              :bouquetId="this.bouquet.id"
+              :nom="this.bouquet.nom"
+              :price="this.bouquet.prix"
+              :quantiteAchat="this.bouquet.quantiteAchat"
+              @click="cancelPropagation"
           ></FormulaireAchatVue>
         </div>
 
@@ -37,6 +37,8 @@
       <h3>{{ bouquet.nom }}</h3>
       <p class="card-price2">Quantité : {{ bouquet.quantite }} </p>
       <p class="card-price2">{{ bouquet.prix }} € </p>
+      <h4>A propos :</h4>
+      <p>{{ bouquet.text }}</p>
       <div class="d-flex gap-10">
         <div class="divGaucheInfo">
           <div class="quantity-selector2">
@@ -46,13 +48,13 @@
           </div>
         </div>
 
-        <FormulaireAchatVue v-if="getIsConnected"
-                            :bouquetId="this.bouquet.id"
-                            :nom="this.bouquet.nom"
-                            :price="this.bouquet.prix"
-                            :quantiteAchat="this.bouquet.quantiteAchat"
-                            @click="cancelPropagation"
-                            class="btnAbo"
+        <FormulaireAchatVue
+            :bouquetId="this.bouquet.id"
+            :nom="this.bouquet.nom"
+            :price="this.bouquet.prix"
+            :quantiteAchat="this.bouquet.quantiteAchat"
+            @click="cancelPropagation"
+            class="btnAbo"
         ></FormulaireAchatVue>
       </div>
     </div>
@@ -64,6 +66,7 @@ import {mapGetters} from "vuex";
 import Test from "@/components/FormulaireAchatVue.vue";
 import FormulaireAchatVue from "@/components/FormulaireAchatVue.vue";
 import panierParticulier from "@/stores/PanierParticulier.js";
+import router from "@/router/index.js";
 
 
 export default {
@@ -88,7 +91,7 @@ export default {
     },
   },
   methods: {
-    cancelPropagation(event){
+    cancelPropagation(event) {
       event.stopPropagation();
     },
     addItemPanier() {
@@ -145,7 +148,10 @@ export default {
 
 <style scoped>
 
-.divDroite{
+h4 {
+  margin: 0;
+}
+.divDroite {
   width: 70%;
 }
 
@@ -156,34 +162,13 @@ export default {
 .divGaucheInfo {
   display: flex;
 }
+
 .btnAbo {
   justify-content: center;
   align-items: center;
   display: flex;
 }
-.styleButtonAddPanier {
-  border: 1px solid #ccc;
-  background-color: #f8f8f8;
-  color: #555;
-  font-size: 16px;
-  padding: 8px 16px;
-  border-radius: 4px;
-  cursor: pointer;
-  text-align: center;
-  margin-left: 10px;
-  transition: background-color 0.3s;
-}
 
-.styleButtonAddPanier:hover {
-  background-color: #e9e9e9; /* Lighter background on hover */
-}
-
-/* Adding focus style for accessibility */
-.styleButtonAddPanier:focus {
-  outline: none; /* Remove default focus outline */
-  border-color: blue; /* Blue border for focus */
-  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5); /* Glow effect to indicate focus */
-}
 
 .styleDivButtonClose {
   display: flex;
@@ -230,10 +215,20 @@ export default {
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 80vh; /* Limite la hauteur à 80% de la hauteur de la fenêtre */
+  overflow-y: auto; /* Permet le défilement vertical si nécessaire */
 }
 
 img {
   width: 50%
+}
+
+.popup-content p {
+  max-width: 100%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  margin: 10px auto;
+  color: var(--couleur-texte);
 }
 
 .card {
@@ -252,6 +247,7 @@ img {
   width: 60%;
   display: block;
   margin: 20px 20%;
+  border-radius: 20px;
 }
 
 .card-body {
@@ -286,6 +282,7 @@ img {
 .divGaucheCard {
   display: flex;
 }
+
 .quantity-selector2 {
   display: flex;
   align-items: center;

@@ -11,6 +11,7 @@ import db from "@/Firebase.js";
 import {createUserWithEmailAndPassword} from "@firebase/auth";
 import router from "@/router/index.js";
 import axios from "axios";
+// const {isAgriculturalCompany} = require("../../function.js");
 
 const auth = getAuth();
 
@@ -53,7 +54,6 @@ const UsersInformation = {
         }
     },
     actions: {
-
         async deleteAbo({ commit }, info) {
             try {
                 // Remplacez cette URL par l'endpoint correct de votre API
@@ -168,7 +168,7 @@ const UsersInformation = {
         },
         async registerUserParticulier({ commit }, { name, firstname, email, password, siret, type, nom_entreprise }) {
             try {
-                console.log({ name, firstname, email, password, siret, type, nom_entreprise })
+                // const res = await isAgriculturalCompany(siret); // Ajoutez await ici
                 const dataUser = await createUserWithEmailAndPassword(auth, email, password);
                 await router.push("/");
 

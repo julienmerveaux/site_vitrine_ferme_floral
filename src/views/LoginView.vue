@@ -12,7 +12,7 @@ export default {
     return {
       email: "",
       password: "",
-      error: ""
+      error: "",
     }
   },
   methods: {
@@ -59,6 +59,8 @@ export default {
                aria-label="Adresse Email" required>
         <input v-model="password" type="password" id="password" name="password" placeholder="Mot de Passe"
                aria-label="Mot de Passe" required>
+          <p class="image-message">Si vous avez oublié votre mot de passe, veuillez passer par notre
+            <router-link to="/contact">page de contact</router-link>.</p>
         <button type="submit">Connexion</button>
       </form>
       <button class="styleButtonGoogle" @click="loginWithGoogle">Google</button>
@@ -75,6 +77,9 @@ body, html {
   background-color: #f4f4f4;
 }
 
+.image-message {
+  font-size: small;
+}
 /* Navigation */
 nav.container-fluid {
   background-color: #ffffff;
@@ -114,6 +119,9 @@ nav ul li a {
   text-decoration: none;
   padding: 0.5rem;
 }
+.image {
+  max-width: 10%; /* Ajustez la taille de l'image selon vos besoins */
+}
 
 /* Styles spécifiques au formulaire */
 form {
@@ -123,12 +131,12 @@ form {
   border-radius: 8px;
   max-width: 400px;
   margin: 2rem auto;
+  display: grid;
+  gap: 10px;
 }
 
 input[type="email"], input[type="password"] {
-  width: 100%;
   padding: 0.75rem;
-  margin-bottom: 1rem;
   border: 1px solid #cccccc;
   border-radius: 4px;
 }

@@ -3,7 +3,7 @@
     <div class="imageAccueil">
       <div class="conteneurTexte">
         <h1 class="H1Style"> Bienvenue à la Ferme Florale Les 5 Saisons</h1>
-        <h3 class="H3Style"> Nos fleurs 100% en agriculture biologique, 100% de saison, cultivées avec 100% d'amour! </h3>
+        <h3 class="H3Style"> Nos fleurs 100% en agriculture biologique, 100% de saison, cultivées avec 100% d'amour ! </h3>
       </div>
     </div>
     <div class="sectionCard">
@@ -90,10 +90,7 @@ export default {
   text-align: center;
 }
 
-.texteImage {
-  color: white;
-  font-size: xx-large;
-}
+
 
 .body {
   display: flex;
@@ -105,7 +102,7 @@ export default {
 @media (max-width: 600px) {
   .imageAccueil {
     //background-image: url("../assets/nature-3333236_1920.jpg");
-    background-image: url("../assets/photo-couverture2.jpg");
+    background-image: url("../assets/nature-3333236_1920.jpg");
     display: flex;
     justify-content: center;
   }

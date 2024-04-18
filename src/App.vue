@@ -37,6 +37,7 @@ export default {
   font-family: Helvetica, Courier New, Arial, sans-serif !important;
   background-color: var(--couleur-principale) !important ;
 }
+
 .app {
   display: flex;
   flex-direction: column;
@@ -61,7 +62,6 @@ export default {
 @media (max-width: 600px) {
   .content {
     padding-top: 0;
-    margin-top: 50px;
   }
 }
 

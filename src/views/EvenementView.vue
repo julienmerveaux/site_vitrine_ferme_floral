@@ -24,5 +24,6 @@ export default {
   margin:0 auto;
   font-size: xx-large;
   font-family: 'Belleza', sans-serif;
+  white-space: break-spaces;
 }
 </style>

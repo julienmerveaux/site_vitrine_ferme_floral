@@ -46,6 +46,8 @@ export default {
   font-size: 1em; /* Standard font size for content */
   line-height: 1.6; /* Spacing between lines */
   color: #666; /* Slightly lighter color for the text */
+  white-space: break-spaces;
+
 }
 
 /* Add additional styles for subheadings, links, etc. as needed */

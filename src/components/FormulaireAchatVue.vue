@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button @click="showValidePanier = true" class="styleButtonAddAbo">S'abonner mensuellement</button>
+    <button @click="isConnected" class="styleButtonAddAbo">S'abonner mensuellement</button>
     <div v-if="showValidePanier" class="overlay">
       <div class="modal">
         <h1>Adresse de livraison</h1>
@@ -17,7 +17,7 @@
 
           <div class="d-flex">
             <p name="adresse_livraison_postal"> Code postal : </p>
-            <input v-model="adresse_livraison_postal" type="number">
+            <input style="-moz-appearance: textfield" v-model="adresse_livraison_postal" type="number">
           </div>
 
           <div class="d-flex">
@@ -48,12 +48,14 @@
 
           <h5 class="d-flex">
             <div> Cocher pour valider vos informations</div>
-            <input v-model="checkboxValidate" type="checkbox">
+            <input class="checkBoxStyle" v-model="checkboxValidate" type="checkbox">
           </h5>
           <p>{{message}}</p>
-          <button type="submit" class="buy-button">S'abonner</button>
+          <div class="partiePopup">
+            <button type="submit" class="buy-button">S'abonner</button>
+            <button @click="showValidePanier = false" class="buy-button">Annuler</button>
+          </div>
         </form>
-        <button @click="showValidePanier = false" class="buy-button">Annuler</button>
 
       </div>
     </div>
@@ -62,6 +64,7 @@
 
 <script>
 import {mapActions, mapGetters} from "vuex";
+import router from "@/router/index.js";
 
 export default {
   name: 'FormulaireAchatVue',
@@ -74,9 +77,9 @@ export default {
   data() {
     return {
       showValidePanier: false,
-      adresse_livraison_lieu: "19 rue des charmes",
-      adresse_livraison_ville: "pont sur sambre",
-      adresse_livraison_postal: "59138",
+      adresse_livraison_lieu: "",
+      adresse_livraison_ville: "",
+      adresse_livraison_postal: "",
       adresse_facturation_lieu: "",
       adresse_facturation_ville: "",
       adresse_facturation_postal: "",
@@ -87,10 +90,18 @@ export default {
   },
   computed: {
     ...mapGetters("PanierParticulier", ["getPanierparticulier"]),
-    ...mapGetters("UsersInformation", ["getCurrentUser"]),
+    ...mapGetters("UsersInformation", ["getCurrentUser","getIsConnected"]),
   },
   methods: {
     ...mapActions("Stripe", ["createSession"]),
+    isConnected(){
+      if (!this.getIsConnected){
+        console.log(this.getIsConnected)
+        router.push("/login")
+      }else {
+        this.showValidePanier = true
+      }
+    },
     async createStripeSession() {
       try {
         if (!this.checkboxValidate) {
@@ -138,10 +149,14 @@ export default {
 </script>
 
 <style scoped>
+.partiePopup {
+  display: flex;
+  justify-content: space-between;
+}
 .styleButtonAddAbo {
   border: 1px solid #ccc;
-  background-color: #f8f8f8;
-  color: #555;
+  background-color: var(--couleur-button);
+  color: var(--couleur-button-texte);;
   font-size: 16px;
   padding: 8px 16px;
   border-radius: 4px;
@@ -152,16 +167,21 @@ export default {
 }
 
 .styleButtonAddAbo:hover {
-  background-color: cornflowerblue; /* Lighter background on hover */
+  background-color: var(--couleur-button-texte); /* Lighter background on hover */
+  color: black;
 }
 
 /* Adding focus style for accessibility */
 .styleButtonAddAbo:focus {
   outline: none; /* Remove default focus outline */
-  border-color: blue; /* Blue border for focus */
+  border-color: var(--couleur-button); /* Blue border for focus */
+  color: var(--couleur-button-texte);
   box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5); /* Glow effect to indicate focus */
 }
 
+input[type="checkbox"] {
+  accent-color: var(--couleur-button);
+}
 
 .d-flex {
   display: flex;
@@ -233,8 +253,8 @@ body, html {
 
 /* Styles pour les boutons */
 button.buy-button {
-  background-color: #007bff;
-  color: white;
+  background-color: var(--couleur-button);
+  color: var(--couleur-button-texte);
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
@@ -244,7 +264,8 @@ button.buy-button {
 }
 
 button.buy-button:hover {
-  background-color: #0056b3;
+  background-color: var(--couleur-button-texte);
+  color: black;
 }
 
 /* Responsive design avec media queries */

@@ -1,18 +1,17 @@
 <template>
-  <div v-if="!getIsConnected && showPopUp" class="popup-overlay">
-    <div class="popup">
-      <p class="popup_styleText">Veuillez vous connecter ou vous inscrire pour acheter.</p>
-      <div class="popup-buttons">
-        <router-link class="button-link" to="/inscription">S'inscrire</router-link>
-        <router-link class="button-link" to="/login">Se connecter</router-link>
-        <button class="button close" @click="closePopup">Fermer</button>
-      </div>
-    </div>
+  <div v-if="!getIsConnected && showPopup" class="popup-overlay">
+    <Popup
+        :showPopup="showPopup"
+        @close="showPopup = false"
+        text="Veuillez vous connecter ou vous inscrire pour acheter."
+    />
   </div>
   <div class="divIntroduction">
-    <p class="colorTextIntro">Ce qui distingue La ferme florale Les 5 Saisons, c'est notre engagement envers l'excellence et l'originalité.
+    <p class="colorTextIntro">Ce qui distingue La ferme florale Les 5 Saisons, c'est notre engagement envers
+      l'excellence et l'originalité.
       Chacune de nos créations est le fruit d'un savoir-faire artisanal, alliant expertise florale et créativité
-      débordante. Nous mettons un point d'honneur à sélectionner nos fleurs issus de notre production afin de garantir la
+      débordante. Nous mettons un point d'honneur à sélectionner nos fleurs issus de notre production afin de garantir
+      la
       fraîcheur et la qualité de nos bouquets et compositions!</p>
   </div>
 
@@ -39,9 +38,11 @@
 <script>
 import CardCatalogueParticulierVue from "@/components/CardCatalogueParticulierVue.vue";
 import {mapActions, mapGetters} from "vuex";
+import Popup from "@/components/Popup.vue";
 
 export default {
   components: {
+    Popup,
     CardCatalogueParticulierVue,
   },
   props: ['type'],
@@ -50,7 +51,7 @@ export default {
       showAll: true,
       showSechee: false,
       showFraiche: false,
-      showPopUp: true,
+      showPopup: true,
       nom: "",
       maxPrix: null,
       selectTaille: '',
@@ -71,9 +72,6 @@ export default {
     }
   },
   methods: {
-    closePopup() {
-      this.showPopUp = false;
-    },
     applyFilters() {
       this.$store.dispatch('BouquetInformation/filter', {
         maxPrix: this.maxPrix,
@@ -96,20 +94,6 @@ export default {
 
 <style scoped>
 
-
-.category-buttons {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin: 20px 0;
-}
-
-.popup_styleText {
-  font-family: 'Belleza', sans-serif;
-  font-size: xx-large;;
-}
-
 .divIntroduction {
   padding: 10px 0;
 }
@@ -117,23 +101,12 @@ export default {
 .colorTextIntro {
   text-align: center;
   width: 50%;
-  margin:0 auto;
-  font-size: xx-large;
+  margin: 0 auto;
+  font-size: 27px;
   font-family: 'Belleza', sans-serif;
   color: var(--couleur-texte);
-}
-.category-button {
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: opacity 0.3s ease;
-}
+  white-space: break-spaces;
 
-.category-button:hover {
-  opacity: 0.8;
 }
 
 .catalogue-grid {
@@ -158,65 +131,8 @@ export default {
   z-index: 1000;
 }
 
-.popup {
-  background: white;
-  border-radius: 15px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
-  padding: 25px;
-  max-width: 90%;
-  box-sizing: border-box;
-  transform: translateY(-50%);
-  position: relative;
-}
-
-.popup-message {
-  font-size: 18px;
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.popup-buttons {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.button-link {
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 5px;
-  text-decoration: none;
-  transition: background-color 0.3s ease;
-}
-
-.button-link:hover, .button.close:hover {
-  background-color: #367c39;
-}
 #taille, #type {
   background-color: white;
-}
-
-.button.close {
-  background-color: #f44336;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-@media (max-width: 600px) {
-  .popup-buttons {
-    flex-direction: column;
-  }
-
-  .button-link, .button.close {
-    width: 100%;
-    margin-bottom: 10px;
-  }
 }
 
 

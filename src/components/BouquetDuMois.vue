@@ -1,15 +1,5 @@
 <template>
-  <div class="popup-overlay" v-if="showPopUp && !getIsConnected">
-    <div class="popup">
-      <p class="popup-message">Veuillez vous connecter ou vous inscrire pour ajouter le bouquet du mois à votre panier.</p>
-      <div class="popup-buttons">
-        <router-link class="button-link" to="/inscription">S'inscrire</router-link>
-        <router-link class="button-link" to="/login">Se connecter</router-link>
-        <button class="button close" @click="closePopup">Fermer</button>
-      </div>
-    </div>
-  </div>
-  <main class="container">
+  <main :class="{ 'fade-left': fadeLeft }" ref="imageSide" class="container">
     <div class="image-side">
       <img v-if="bouquetMois.image && bouquetMois.image.length" :src="bouquetMois.image[0].url" alt="Fleurs de la ferme">
     </div>
@@ -19,6 +9,7 @@
       <p class="pStyle">{{ bouquetMois.text }}</p>
       <h3 class="h3Style">{{ bouquetMois.prix }} €</h3>
       <div class="payment-options">
+        <router-link class="button" to="/catalogue_particulier">Voir boutique</router-link>
       </div>
     </div>
   </main>
@@ -35,13 +26,29 @@ export default {
   data() {
     return {
       showPopUp:false,
-      showPopupValidation: false
+      showPopupValidation: false,
+      fadeLeft: false,
     };
   },
   computed: {
     ...mapGetters("UsersInformation", ["getIsConnected"])
   },
   methods: {
+    handleScroll() {
+      const imageElement = this.$refs.imageSide;
+      const rect = imageElement.getBoundingClientRect();
+      const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+      console.log(windowHeight)
+      console.log(rect.bottom)
+      console.log(rect.top)
+      // Si l'image est visible dans la fenêtre
+      if (rect.top >= 0 && rect.bottom <= windowHeight) {
+        console.log("gfzeg")
+        this.fadeLeft = true; // Déclenchez la transition
+        console.log( this.fadeLeft)
+        window.removeEventListener('scroll', this.handleScroll); // Supprimez l'écouteur d'événements pour éviter de déclencher à nouveau
+      }
+    },
     addItemPanier() {
       if (!this.getIsConnected) {
         console.log(true)
@@ -61,86 +68,35 @@ export default {
     closePopup() {
       this.showPopUp = false;
     }
+  },
+  mounted() {
+    // Ajoutez l'écouteur d'événements lors du montage du composant
+    window.addEventListener('scroll', this.handleScroll);
   }
 }
 </script>
 
 <style scoped>
-
+.fade-left {
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  transform: translateX(-100%); /* Déplacez le composant vers la gauche */
+}
+.button{
+  border: 1px solid;
+  background-color: var(--couleur-button);
+  padding: 5px;
+  text-decoration: none;
+  color: var(--couleur-button-texte);
+  font-family: 'Belleza', sans-serif;
+  font-weight: bold;
+  font-size: x-large;
+  border-radius:10px
+}
 .pStyle {
   color: var(--couleur-texte);
   line-height:1.6;
   font-size: x-large;
-}
-
-.button-link {
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 5px;
-  text-decoration: none;
-  transition: background-color 0.3s ease;
-}
-
-.button-link:hover, .button.close:hover {
-  background-color: #367c39;
-}
-
-.margin_bottom {
-  margin-bottom: 20px;
-}
-.popup-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(50, 50, 50, 0.8);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-.popup {
-  background: white;
-  border-radius: 15px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
-  padding: 25px;
-  max-width: 90%;
-  box-sizing: border-box;
-  transform: translateY(-50%);
-  position: relative;
-}
-
-.popup-message {
-  font-size: 18px;
-  text-align: center;
-  margin-bottom: 20px;
-  font-family: 'Arial', sans-serif; /* Nouveau style de police */
-  font-weight: normal; /* Supprimer le style gras */
-}
-
-.popup-validation {
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  background-color: #4CAF50;
-  color: white;
-  padding: 20px 40px;
-  border-radius: 5px;
-  z-index: 100;
-  font-size: 1em;
-  font-family: 'Arial', sans-serif; /* Nouveau style de police */
-  font-weight: normal; /* Supprimer le style gras */
-}
-
-.title {
-  text-align: center;
-  font-family: 'Arial', sans-serif; /* Nouveau style de police */
-  font-weight: normal; /* Supprimer le style gras */
-  color: black;
+  white-space: break-spaces;
 }
 
 .text-side {
@@ -155,32 +111,14 @@ export default {
   align-items: center;
 }
 
-
-.popup-buttons {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-
-
-.button.close {
-  background-color: var(--couleur-button);
-  color: black;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-
 .container {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-evenly;
   background-color: var(--couleur-separeted-part);
+  left: 100%;
+  position: relative;
 }
 
 
@@ -188,23 +126,16 @@ export default {
   flex: 1;
   text-align: center;
   max-width: 600px;
+  left: 100%;
 }
 
 .image-side img {
-  max-width: 100%;
+  max-width: 90%;
   height: auto;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.quantity-input {
-  text-align: center;
-  width: 200px;
-  padding: 8px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  margin-bottom: 10px;
-}
 
 button {
   background-color: var(--couleur-button);
@@ -228,6 +159,8 @@ button:hover {
     flex-direction: column;
     margin-bottom: 10px;
     padding: 0;
+    //left: 0;
+    position: relative;
   }
 }
 </style>
