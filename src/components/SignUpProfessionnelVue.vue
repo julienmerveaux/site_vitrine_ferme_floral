@@ -20,7 +20,7 @@
       </div>
       <div class="champ-formulaire">
         <label for="siret">Siret:</label>
-        <input class="size" v-model="siret" type="number" id="siret" name="siret" placeholder="Siret" required>
+        <input class="size" style="-moz-appearance: textfield" v-model="siret" type="number" id="siret" name="siret" placeholder="Siret" required>
       </div>
       <div class="champ-formulaire">
         <label for="password">Mot de passe:</label>
@@ -89,8 +89,7 @@ form {
 }
 
 .legend {
-  padding: 1rem;
-  font-size: x-large;
+  padding: 1.2rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ajoute une ombre pour un effet de profondeur */
   border-radius: 8px; /* Bordures arrondies pour le conteneur */
   background-color: var(--couleur-button);

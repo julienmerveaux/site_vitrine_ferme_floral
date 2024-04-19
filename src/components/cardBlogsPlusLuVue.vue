@@ -70,7 +70,7 @@ export default {
 
 #greyLine {
   height: 2px;
-  width: 100%;
+  width: 97%;
   background-color: #666;
   margin-top: 10px;
   padding: 0;
@@ -199,4 +199,5 @@ export default {
   border-radius: 10px;
   position: relative; /* For positioning the close button */
 }
+
 </style>

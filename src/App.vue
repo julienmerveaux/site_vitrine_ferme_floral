@@ -56,7 +56,6 @@ export default {
 
 .content {
   flex-grow: 1; /* Fait en sorte que le contenu prenne toute la hauteur restante */
-
 }
 
 @media (max-width: 600px) {

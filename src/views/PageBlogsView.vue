@@ -193,7 +193,7 @@ export default {
   display: flex;
   max-width: 1500px; /* Ou la largeur maximale de votre choix */
   margin: 0 auto; /* Centrer le wrapper */
-  padding: 20px;
+  padding: 20px 0;
   gap: 20px; /* Espace entre la section À LA UNE et les articles */
 }
 
@@ -246,6 +246,10 @@ export default {
   .wrapper {
     flex-direction: column;
   }
+  .articles-container2 {
+    grid-template-columns: repeat(2, 1fr);
+
+  }
 
   .featured-article,
   .latest-articles {
@@ -255,11 +259,30 @@ export default {
   .articles-container {
     grid-template-columns: 1fr; /* Une seule colonne pour les articles sur petits écrans */
   }
+  .featured-article {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .featured-article img {
+    width: 50%;
+  }
 }
 
 .article-entry img {
   width: 100%;
   height: auto;
 }
+
+@media (max-width: 572px) {
+
+  .articles-container2 {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
 
 </style>

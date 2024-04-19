@@ -56,12 +56,6 @@
             <router-link v-if="!getIsConnected" class="buttonAuth colorRouter colorTexte" to="/inscription">S'inscrire
             </router-link>
             <router-link v-if="!getIsConnected" class=" buttonAuth colorRouter colorTexte" to="/login">Se connecter</router-link>
-            <router-link v-if="getCurrentUser.type ==='particulier'" class=" buttonAuth colorRouter colorTexte alignementStyle"
-                         to="/panierParticulier">Votre panier
-            </router-link>
-            <router-link v-if="getCurrentUser.type ==='professionnel'" class=" buttonAuth colorRouter colorTexte alignementStyle"
-                         to="/panierPro">Votre panier
-            </router-link>
           </div>
         </div>
 
@@ -123,19 +117,11 @@ export default {
   background-color: var(--couleur-button) !important;
 
 }
-.divHeaderDroite {
-  width: 25%;
-}
 
 .divHeaderCenter {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 50%;
-}
-
-.divHeaderGauche {
-  width: 25%;
 }
 
 .header {
@@ -251,7 +237,9 @@ export default {
   margin: 0;
   width: 100%;
   transition: all 0.5s ease; /* Transition douce pour l'apparition du menu */
-  background-color: var(--couleur-header-footer)
+  background-color: var(--couleur-header-footer);
+  justify-content: space-around;
+
 }
 
 .li-divCenter {
@@ -266,10 +254,24 @@ export default {
   .li-divCenter {
     flex-direction: column;
     align-items: center;
-    gap: 20px;
+    gap: 5px;
     margin-bottom: 20px;
   }
 
+  .divHeaderGauche {
+    width: 100%;
+    text-align: center;
+  }
+
+  .divHeaderDroite {
+    width: 100%;
+    justify-content: center;
+    display: flex;
+  }
+  .divHeaderCenter {
+    width: 100%;
+
+  }
   .nav-menu {
     flex-direction: column;
   }
@@ -285,9 +287,21 @@ export default {
 }
 
 @media (max-width: 985px ) {
-  .colorTexte, .colorRouter {
-    /* Utiliser des unités relatives pour les marges, les paddings et les font-sizes */
-    font-size: large;
+
+  .li-divDroite {
+    height: 145px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: max-content;
+    padding: 5px;
+  }
+  .li-divCenter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+
   }
 }
 </style>

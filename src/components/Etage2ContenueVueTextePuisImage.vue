@@ -1,5 +1,5 @@
 <template>
-  <main :class="{ 'fade-right' : fadeRight }" ref="componentSide" class="container">
+  <main class="container">
     <div class="text-side">
       <h1>{{ title }}</h1>
       <p class="textStyle">{{ text }}</p>
@@ -21,26 +21,13 @@ export default {
     imageUrl: String
   },
   data() {
-    return {
-      fadeRight: false,
-    }
+
   },
   methods: {
-    handleScroll() {
-      const imageElement = this.$refs.componentSide;
-      const rect = imageElement.getBoundingClientRect();
-      const windowHeight = window.innerHeight || document.documentElement.clientHeight;
-
-      // Si l'image est visible dans la fenêtre
-      if (rect.top >= 0 && rect.bottom <= windowHeight) {
-        this.fadeRight = true; // Déclenchez la transition
-        window.removeEventListener('scroll', this.handleScroll); // Supprimez l'écouteur d'événements pour éviter de déclencher à nouveau
-      }
+    startAnimation() {
+      // Appliquez les animations nécessaires
+      this.$el.classList.add('start-animation');
     }
-  },
-  mounted() {
-    // Ajoutez l'écouteur d'événements lors du montage du composant
-    window.addEventListener('scroll', this.handleScroll);
   }
 }
 
@@ -49,16 +36,26 @@ export default {
 
 <style scoped>
 
-.fade-right {
-  transition: opacity 10s ease, transform 1s ease; /* Ajoutez une transition pour l'opacité et la transformation */
-  transform: translateX(100%); /* Déplacez le composant vers la gauche */
+@keyframes slideInFromRight {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
-
+.start-animation {
+  animation: slideInFromRight 1s ease-out forwards;
+}
 p {
   justify-content: space-around;
 }
 
 .textStyle {
+  color: var(--couleur-texte);
+  line-height: 1.6;
   font-size: x-large;
   white-space: break-spaces;
 }
@@ -68,10 +65,8 @@ p {
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-evenly;
-  background-color: var(--couleur-separeted-part);
+  background:linear-gradient(var(--couleur-button-texte),var(--couleur-principale));
   padding: 2rem;
-  right: 100%;
-  position: relative;
 }
 
 .text-side {
@@ -109,9 +104,14 @@ p {
     flex-direction: column-reverse;
     margin-bottom: 10px;
     padding: 0;;
-    right: 100%;
   }
 
+}
+
+@media (max-width: 1000px) {
+  .textStyle {
+    font-size: large;
+  }
 }
 
 </style>

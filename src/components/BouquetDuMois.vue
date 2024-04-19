@@ -1,22 +1,22 @@
 <template>
-  <main :class="{ 'fade-left': fadeLeft }" ref="imageSide" class="container">
-    <div class="image-side">
-      <img v-if="bouquetMois.image && bouquetMois.image.length" :src="bouquetMois.image[0].url" alt="Fleurs de la ferme">
-    </div>
-
-    <div class="text-side">
-      <h1>{{ bouquetMois.nom }}</h1>
-      <p class="pStyle">{{ bouquetMois.text }}</p>
-      <h3 class="h3Style">{{ bouquetMois.prix }} €</h3>
-      <div class="payment-options">
-        <router-link class="button" to="/catalogue_particulier">Voir boutique</router-link>
+    <main class="container">
+      <div class="image-side">
+        <img v-if="bouquetMois.image && bouquetMois.image.length" :src="bouquetMois.image[0].url"
+             alt="Fleurs de la ferme">
       </div>
-    </div>
-  </main>
+      <div class="text-side">
+        <h1>{{ bouquetMois.nom }}</h1>
+        <p class="pStyle">{{ bouquetMois.text }}</p>
+        <h3 class="h3Style">{{ bouquetMois.prix }} €</h3>
+        <div class="payment-options">
+          <router-link class="button" to="/catalogue_particulier">Voir boutique</router-link>
+        </div>
+      </div>
+    </main>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import {mapGetters} from "vuex";
 
 export default {
   props: {
@@ -25,63 +25,39 @@ export default {
   name: 'BouquetDuMois',
   data() {
     return {
-      showPopUp:false,
+      showPopUp: false,
       showPopupValidation: false,
-      fadeLeft: false,
     };
   },
   computed: {
     ...mapGetters("UsersInformation", ["getIsConnected"])
   },
   methods: {
-    handleScroll() {
-      const imageElement = this.$refs.imageSide;
-      const rect = imageElement.getBoundingClientRect();
-      const windowHeight = window.innerHeight || document.documentElement.clientHeight;
-      console.log(windowHeight)
-      console.log(rect.bottom)
-      console.log(rect.top)
-      // Si l'image est visible dans la fenêtre
-      if (rect.top >= 0 && rect.bottom <= windowHeight) {
-        console.log("gfzeg")
-        this.fadeLeft = true; // Déclenchez la transition
-        console.log( this.fadeLeft)
-        window.removeEventListener('scroll', this.handleScroll); // Supprimez l'écouteur d'événements pour éviter de déclencher à nouveau
+    startAnimation() {
+      if (!this.$el.classList.contains('start-animation')) {
+        this.$el.classList.add('start-animation');
       }
-    },
-    addItemPanier() {
-      if (!this.getIsConnected) {
-        console.log(true)
-        this.showPopUp = true;
-        return;
-      }
-
-      const quantite = this.bouquetMois.quantiteAchat;
-      if (quantite > 0 && quantite <= 5) {
-        // Ajoutez l'article au panier
-        this.showPopupValidation = true;
-        setTimeout(() => this.showPopupValidation = false, 3000);
-      } else {
-        alert('Au-delà de 5 bouquets, vous pouvez me contacter au 07 83 93 45 86 ou par email à audrey@les-5-saisons.fr');
-      }
-    },
-    closePopup() {
-      this.showPopUp = false;
     }
-  },
-  mounted() {
-    // Ajoutez l'écouteur d'événements lors du montage du composant
-    window.addEventListener('scroll', this.handleScroll);
   }
 }
 </script>
 
 <style scoped>
-.fade-left {
-  transition: opacity 0.5s ease, transform 0.5s ease;
-  transform: translateX(-100%); /* Déplacez le composant vers la gauche */
+
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
-.button{
+.start-animation {
+  animation: slideInFromLeft 1s ease-out forwards;
+}
+.button {
   border: 1px solid;
   background-color: var(--couleur-button);
   padding: 5px;
@@ -90,11 +66,12 @@ export default {
   font-family: 'Belleza', sans-serif;
   font-weight: bold;
   font-size: x-large;
-  border-radius:10px
+  border-radius: 10px
 }
+
 .pStyle {
   color: var(--couleur-texte);
-  line-height:1.6;
+  line-height: 1.6;
   font-size: x-large;
   white-space: break-spaces;
 }
@@ -116,9 +93,7 @@ export default {
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-evenly;
-  background-color: var(--couleur-separeted-part);
-  left: 100%;
-  position: relative;
+  background: linear-gradient(var(--couleur-button-texte),var(--couleur-principale));
 }
 
 
@@ -159,8 +134,11 @@ button:hover {
     flex-direction: column;
     margin-bottom: 10px;
     padding: 0;
-    //left: 0;
-    position: relative;
+  }
+}
+@media (max-width: 1000px) {
+  .pStyle {
+    font-size: large;
   }
 }
 </style>

@@ -50,6 +50,12 @@
   padding: 0 15px;
 }
 
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
 .image-container {
   position: relative;
   width: 100%;
@@ -57,25 +63,26 @@
   border-radius: 10px 10px 0 0;
   overflow: hidden;
   box-shadow: 0 5px 5px #c4c0c0;
-  aspect-ratio: ;
 }
 
 .textColor {
   text-decoration: none;
   color: black;
-  font-size: xx-large;
+  font-size: x-large;
 }
+
 .image-button {
   position: relative;
   z-index: 102;
   background-color: transparent;
   color: black;
   border: none;
-  padding: 30px 50px;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  font-size: x-large;
+  font-size: inherit; /* Utilisez la taille de police héritée */
+  padding: 3% 5%;
+
 }
 
 .divBouton {
@@ -92,33 +99,23 @@
   bottom: -1px;
   left: 0;
   fill: #ffffff;
+  font-size: 1.5em; /* Réglez la taille de la police pour correspondre à celle de la vague */
 }
 
-.responsive-images {
-  width: 100%;
-  display: block;
-  height: 100%;
-}
-
-@media (min-width: 751px) {
+/* Ajoutez une règle pour rendre la taille de la police réactive */
+@media (max-width: 981px) {
   .grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 10px;
   }
 
   .image-button {
-    padding: 0;
+    padding: 3% 5%; /* Augmenter la taille du bouton pour les écrans plus petits */
     font-size: large;
   }
-
-  .divBouton {
-    padding: 5px 0;
-
-  }
 }
-
-@media (max-width: 750px) {
+@media (max-width: 625px) {
   .grid {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
@@ -126,23 +123,8 @@
   }
 
   .image-button {
-    padding: 10px 10px; /* Augmenter la taille du bouton pour les écrans plus petits */
-  }
-}
-
-@media (min-width: 1075px) {
-  .image-button {
-    font-size: x-large;
-    padding: 0 10px;
-  }
-}
-
-@media (min-width: 1265px) {
-  .image-button {
-    font-size: x-large;
-    padding: 3% 5%;
+    padding: 3% 5%; /* Augmenter la taille du bouton pour les écrans plus petits */
+    font-size: large;
   }
 }
 </style>
-<script setup>
-</script>

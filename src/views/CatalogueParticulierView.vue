@@ -81,4 +81,10 @@ export default {
 #kuuFormContent {
   color: blue !important;
 }
+
+@media (max-width: 800px) {
+  #kuuFormContent{
+    width: 100%;
+  }
+}
 </style>

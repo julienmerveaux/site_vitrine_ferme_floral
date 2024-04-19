@@ -10,7 +10,7 @@
     <p class="colorTextIntro">Ce qui distingue La ferme florale Les 5 Saisons, c'est notre engagement envers
       l'excellence et l'originalité.
       Chacune de nos créations est le fruit d'un savoir-faire artisanal, alliant expertise florale et créativité
-      débordante. Nous mettons un point d'honneur à sélectionner nos fleurs issus de notre production afin de garantir
+      débordante. Nous mettons un point d'honneur à sélectionner nos fleurs issues de notre production afin de garantir
       la
       fraîcheur et la qualité de nos bouquets et compositions!</p>
   </div>
@@ -100,23 +100,21 @@ export default {
 
 .colorTextIntro {
   text-align: center;
-  width: 50%;
+  width: 90%; /* Réduire la largeur du texte sur les petits écrans */
   margin: 0 auto;
-  font-size: 27px;
+  font-size: 20px; /* Réduire la taille du texte sur les petits écrans */
   font-family: 'Belleza', sans-serif;
   color: var(--couleur-texte);
   white-space: break-spaces;
-
 }
 
 .catalogue-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 50px;
-  padding: 0 20px;
+  gap: 20px; /* Réduire l'espace entre les cartes sur les petits écrans */
+  padding: 0 10px; /* Réduire le padding sur les petits écrans */
   margin-bottom: 20px;
 }
-
 
 .popup-overlay {
   position: fixed;
@@ -134,7 +132,6 @@ export default {
 #taille, #type {
   background-color: white;
 }
-
 
 .filters {
   display: flex;
@@ -198,9 +195,7 @@ export default {
 }
 
 /* Style pour les écrans très petits */
-@media (
-
-max-width: 600px) {
+@media (max-width: 600px) {
   .filters {
     width: 100%;
     box-sizing: border-box;
@@ -214,6 +209,7 @@ max-width: 600px) {
 
   .catalogue-grid {
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10px; /* Réduire l'espace entre les cartes sur les très petits écrans */
   }
 }
 </style>

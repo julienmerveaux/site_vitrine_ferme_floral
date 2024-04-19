@@ -35,14 +35,13 @@ const choisirParticulier = () => {
 .divBouton{
   display: flex;
   justify-content: center;
-  gap: 100px;
+  gap: 10%;
   width: 100%;
   margin: 30px auto 70px auto;
 
 }
 .bouton {
   padding: 1rem;
-  font-size: xx-large;
   color: var(--couleur-button-texte);
   background-color: var(--couleur-button);
   border: none;

@@ -16,22 +16,18 @@
       <iframe class="airtable-embed" src="https://airtable.com/embed/appbmkbokhHog6r1K/pagkC2PfmEF5ZSwlO/form" width="100%" height="533" style="background: transparent; border: 1px solid #ccc;"></iframe>    </div>
   </footer>
 </template>
+
 <script setup>
 
 </script>
 
-
 <style scoped>
 
-.divDoubleForm {
-  height: 325px;
+.iframeLoca {
+  border: 0;
+  width: 100%;
+  aspect-ratio: 1;
 }
-
-.form {
-  height: 100%;
-  border: none;
-}
-
 .newsletter-container {
   display: flex;
   flex-direction: column;
@@ -41,6 +37,7 @@
   text-align: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin-top: 0;
+  padding: 20px;
 }
 
 .newsletter-container h2 {
@@ -52,13 +49,6 @@
 .newsletter-container p {
   color: #666;
   margin-bottom: 1.5rem;
-}
-
-.newsletter-form {
-  display: flex;
-  justify-content: center;
-  gap: 0.5rem;
-  margin-bottom: 0;
 }
 
 .newsletter-form input[type="email"] {
@@ -88,7 +78,6 @@
   padding: 20px 0;
   background-color: var(--couleur-header-footer) !important;
   grid-template-columns: repeat(3, 1fr);
-
 }
 
 .footer img {
@@ -102,10 +91,10 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-right: 50px;
+  white-space: nowrap;
 }
 
-@media (max-width: 1427px) {
+@media (max-width: 800px) {
   .footer {
     justify-content: center;
     flex-direction: column;
@@ -127,6 +116,6 @@
     height: 100%;
     margin-bottom: 0;
   }
-
 }
+
 </style>

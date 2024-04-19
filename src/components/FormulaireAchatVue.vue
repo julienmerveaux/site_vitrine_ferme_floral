@@ -157,13 +157,12 @@ export default {
   border: 1px solid #ccc;
   background-color: var(--couleur-button);
   color: var(--couleur-button-texte);;
-  font-size: 16px;
   padding: 8px 16px;
   border-radius: 4px;
   cursor: pointer;
   text-align: center;
   transition: background-color 0.3s;
-  width: 100%;
+
 }
 
 .styleButtonAddAbo:hover {

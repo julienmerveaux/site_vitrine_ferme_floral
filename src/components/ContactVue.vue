@@ -27,4 +27,11 @@ import axios from "axios";
 .colors-background-default {
   color: blue !important;
 }
+@media (max-width: 485px) {
+  .airtable-embed {
+    width: 100%;
+  }
+}
+
+
 </style>

@@ -161,4 +161,11 @@ export default {
   border-radius: 10px;
   word-wrap: break-word; /* Ajout de la propriété pour que le texte s'adapte à la taille de la div */
 }
+
+@media (max-width: 1000px) {
+  .article-info {
+    flex-direction: column;
+  }
+
+}
 </style>

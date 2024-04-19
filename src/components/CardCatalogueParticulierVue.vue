@@ -151,9 +151,6 @@ export default {
 h4 {
   margin: 0;
 }
-.divDroite {
-  width: 70%;
-}
 
 .gap-10 {
   gap: 60px;
@@ -277,6 +274,7 @@ img {
   display: flex;
   align-items: center;
   gap: 50px;
+  justify-content: space-around;
 }
 
 .divGaucheCard {
@@ -322,5 +320,25 @@ img {
   box-shadow: red
 }
 
-
+@media (max-width: 1217px) {
+  .quantity-selector {
+    flex-direction: column;
+    gap:15px ;
+  }
+  .divDroite {
+    justify-content: center;
+    display: flex;
+  }
+}
+@media (max-width: 380px) {
+  .d-flex {
+    flex-direction: column;
+  }
+  .gap-10 {
+    gap: 20px;
+  }
+  .divGaucheInfo {
+    justify-content: center;
+  }
+}
 </style>
