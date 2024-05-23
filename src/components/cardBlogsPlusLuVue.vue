@@ -100,6 +100,7 @@ export default {
   width: 100%;
   align-items: center; /* Aligner les éléments verticalement */
   background-color: var(--couleur-separeted-part);
+  cursor: pointer;
 }
 
 .article-image {

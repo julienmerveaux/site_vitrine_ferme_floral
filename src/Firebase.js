@@ -9,21 +9,22 @@ import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
 
-    apiKey: "AIzaSyBVtHQWXSZMHiwpxi1B4D_QPfHZKwMNSA4",
+    apiKey: "AIzaSyCzO0JgRTG-Ou5b21H8hAFR0WsWOq4KJaI",
 
-    authDomain: "les-5-saisons.firebaseapp.com",
+    authDomain: "les-5-saisons-f6a5d.firebaseapp.com",
 
-    projectId: "les-5-saisons",
+    projectId: "les-5-saisons-f6a5d",
 
-    storageBucket: "les-5-saisons.appspot.com",
+    storageBucket: "les-5-saisons-f6a5d.appspot.com",
 
-    messagingSenderId: "185050715706",
+    messagingSenderId: "297732616791",
 
-    appId: "1:185050715706:web:1992cabf83c699d08cc703",
+    appId: "1:297732616791:web:1f8f770b332ae0bd686912",
 
-    measurementId: "G-08Q51XKGGW"
+    measurementId: "G-6GL6R1TNW7"
 
 };
+
 
 const app = initializeApp(firebaseConfig);
 // Initialize Cloud Firestore and get a reference to the service

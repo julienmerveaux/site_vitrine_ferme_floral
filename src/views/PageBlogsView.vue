@@ -1,16 +1,16 @@
 <template>
-  <div class="filters">
-    <select class="styleSelect" v-model="selectType" name="type" id="type">
-      <option value="">Toutes les types</option>
-      <option v-for="type in tabType" :value="type" :key="type">{{ type }}</option>
-    </select>
-    <button @click="applyFilters">Appliquer</button>
-    <button @click="resetFilters">Réinitialiser les filtres</button>
-  </div>
+<!--  <div class="filters">-->
+<!--    <select class="styleSelect" v-model="selectType" name="type" id="type">-->
+<!--      <option value="">Toutes les types</option>-->
+<!--      <option v-for="type in tabType" :value="type" :key="type">{{ type }}</option>-->
+<!--    </select>-->
+<!--    <button @click="applyFilters">Appliquer</button>-->
+<!--    <button @click="resetFilters">Réinitialiser les filtres</button>-->
+<!--  </div>-->
 
   <div class="wrapper">
     <!-- À LA UNE section -->
-    <aside class="featured-article">
+    <aside class="featured-article" @click="redirectToArticle(getBlogsUne.id, getBlogsUne.Titre_url)">
       <img :src="getBlogsUne?.Image_couverture[0].url" alt="Image mise en avant">
       <time :datetime="getBlogsUne.Temps_lecture" class="featured-article-date">{{ getBlogsUne.Temps_lecture }}
         minutes
@@ -90,6 +90,11 @@ export default {
       this.$store.commit('BlogsInformations/setFilteredBlogs', this.getAllBlogs);
       this.selectType = ""
     },
+    redirectToArticle(id, title) {
+      this.$store.dispatch("BlogsInformations/setCurrentBlogs", this.getBlogsUne);
+      this.$router.push({ name: 'ArticleDetail', params: { id: id, titre: title } });
+      this.$store.dispatch('BlogsInformations/updateNombreVue', id);
+    }
   },
   created() {
     this.allBlogs()
@@ -200,6 +205,7 @@ export default {
 .featured-article {
   width: 35%; /* Ajuster en fonction de la largeur souhaitée */
   margin-right: 20px;
+  cursor: pointer;
 }
 
 .featured-article h2,

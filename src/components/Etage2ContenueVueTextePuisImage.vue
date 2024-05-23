@@ -65,7 +65,7 @@ p {
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-evenly;
-  background:linear-gradient(var(--couleur-button-texte),var(--couleur-principale));
+  //background:linear-gradient(var(--couleur-button-texte),var(--couleur-principale));
   padding: 2rem;
 }
 

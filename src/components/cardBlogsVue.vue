@@ -67,6 +67,7 @@ export default {
 }
 
 .article-card {
+  cursor: pointer;
   display: flex;
   flex-direction: column;
   width: 100%;

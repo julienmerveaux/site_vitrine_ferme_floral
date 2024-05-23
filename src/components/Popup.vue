@@ -85,6 +85,7 @@ export default {
   cursor: pointer;
 }
 
+
 @media (max-width: 600px) {
   .popup-buttons {
     flex-direction: column;
@@ -93,6 +94,9 @@ export default {
   .button-link, .button.close {
     width: 100%;
     margin-bottom: 10px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
   }
 }
 

@@ -7,11 +7,11 @@
       <h2 class="card-title">{{ bouquet.nom }}</h2>
       <p class="card-price">{{ bouquet.prix }} € </p>
       <div v-if="!isPanierParticulierRoute" class="quantity-selector">
-        <div class="divGaucheCard">
-          <button @click="downCompteur">-</button>
-          <input style="-moz-appearance: textfield" type="number" @click="button" :value="quantiteAchat">
-          <button @click="upCompteur">+</button>
-        </div>
+<!--        <div class="divGaucheCard">-->
+<!--          <button @click="downCompteur">-</button>-->
+<!--          <input style="-moz-appearance: textfield" type="number" @click="button" :value="quantiteAchat">-->
+<!--          <button @click="upCompteur">+</button>-->
+<!--        </div>-->
         <div class="divDroite">
           <FormulaireAchatVue
               :bouquetId="this.bouquet.id"
@@ -306,7 +306,7 @@ img {
 }
 
 .quantity-selector input, .quantity-selector2 input {
-  max-width: 80px;
+  max-width: 60px;
   text-align: center;
   margin: 0 5px;
 }

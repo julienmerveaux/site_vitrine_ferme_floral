@@ -73,11 +73,11 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url("../assets/nature-3333236_1920.jpg");
-  background-size: cover;
+  background-image: url("../assets/5.jpg");
   width: 100%;
   height: 60vh;
   background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .conteneurTexte {
@@ -102,7 +102,7 @@ export default {
 @media (max-width: 600px) {
   .imageAccueil {
     //background-image: url("../assets/nature-3333236_1920.jpg");
-    background-image: url("../assets/nature-3333236_1920.jpg");
+    background-image: url("../assets/5.jpg");
     display: flex;
     justify-content: center;
   }

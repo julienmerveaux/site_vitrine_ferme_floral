@@ -1,4 +1,4 @@
-import {createRouter, createWebHistory} from 'vue-router'
+import {createRouter, createWebHashHistory, createWebHistory} from 'vue-router'
 import HomePageView from "@/views/HomePageView.vue";
 import store from "@/stores/index.js";
 import ArticleDetail from "@/views/ArticleDetail.vue";
@@ -104,6 +104,11 @@ const router = createRouter({
             path: '/catalogue_Abonnemment',
             name: 'CatalogueAbonnements',
             component: () => import('@/views/CatalogueAbonnements.vue'),
+        },
+        {
+            path: '/profil',
+            name: 'ProfilView',
+            component: () => import('@/views/ProfilView.vue'),
         }
     ],
     scrollBehavior(to, from, savedPosition) {

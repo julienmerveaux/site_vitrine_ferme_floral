@@ -4,7 +4,7 @@ import {
     onAuthStateChanged,
     signInWithEmailAndPassword,
     signInWithPopup,
-    signOut
+    signOut, updatePassword
 } from "firebase/auth";
 import {getFirestore, doc, getDoc, setDoc} from "firebase/firestore";
 import db from "@/Firebase.js";
@@ -54,19 +54,47 @@ const UsersInformation = {
         }
     },
     actions: {
-        async deleteAbo({ commit }, info) {
+        async changePassword({ commit }, newPassword) {
+            console.log(newPassword)
             try {
+                const user = auth.currentUser;
+                if (user) {
+                    await updatePassword(user, newPassword);
+                    // Mettre à jour localement si nécessaire
+                    // Par exemple, vous pouvez vider l'état de l'utilisateur actuel
+                    commit('clearUserState');
+                    // Vous pouvez également gérer la redirection vers une page appropriée ici
+                    // et toute autre logique nécessaire après le changement de mot de passe réussi
+                    return Promise.resolve("Mot de passe modifié avec succès !");
+                } else {
+                    return Promise.reject(new Error("Aucun utilisateur connecté."));
+                }
+            } catch (error) {
+                console.error("Erreur lors du changement de mot de passe :", error);
+                return Promise.reject(error);
+            }
+        },
+        async deleteAbo({ commit, rootGetters }, info) {
+            try {
+                const user = rootGetters['UsersInformation/getCurrentUser'];
+                console.log(user)
+                const infoAbo = {
+                    idAbonnement:info.idAbonnement,
+                    userId:user.userId
+                }
+                console.log(info)
                 // Remplacez cette URL par l'endpoint correct de votre API
-                const response = await fetch(`https://localhost:3000/deleteAbo/${info.idAbonnement}`, {
+                const response = await fetch(`https://api.les-5-saisons.fr/deleteAbo/${info.idAbonnement}`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({info}),
+                    body: JSON.stringify({infoAbo}),
                 });
                 if (!response.ok) {
                     throw new Error('Erreur lors de l\'annulation de l\'abonnement');
                 }
+                console.log("salut")
                 // Traitement supplémentaire si nécessaire
             } catch (error) {
                 console.error("Erreur dans annulerAbonnementAction", error);
@@ -170,6 +198,7 @@ const UsersInformation = {
             try {
                 // const res = await isAgriculturalCompany(siret); // Ajoutez await ici
                 const dataUser = await createUserWithEmailAndPassword(auth, email, password);
+                console.log(dataUser)
                 await router.push("/");
 
                 const userDocRef = doc(db, "users", dataUser.user.uid);

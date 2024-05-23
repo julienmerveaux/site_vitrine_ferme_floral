@@ -208,7 +208,7 @@ export default {
   }
 
   .catalogue-grid {
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
     gap: 10px; /* Réduire l'espace entre les cartes sur les très petits écrans */
   }
 }

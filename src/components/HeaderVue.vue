@@ -45,10 +45,14 @@
                   @click="toggleProfileMenu"
               />
               <ul v-show="isProfileMenuVisible" class="dropdown-menu">
-                <li class="text-center">{{ getCurrentUser.name }} {{ getCurrentUser.firstname }}</li>
+                <li class="text-center">{{ getCurrentUser.firstname }} {{ getCurrentUser.name }} </li>
+                <li>
+                  <router-link to="/profil">Mon profil</router-link>
+                </li>
                 <li>
                   <router-link to="/abonnements">Mes abonnements</router-link>
                 </li>
+
                 <!-- Ajoutez plus d'options ici si nécessaire -->
               </ul>
             </div>

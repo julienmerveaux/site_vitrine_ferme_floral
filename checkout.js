@@ -19,7 +19,7 @@ document
 async function initialize() {
     const response = await fetch("/create-payment-intent", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/test.json" },
         body: JSON.stringify({ items }),
     });
     const { clientSecret } = await response.json();
@@ -45,7 +45,7 @@ async function handleSubmit(e) {
         elements,
         confirmParams: {
             // Make sure to change this to your payment completion page
-            return_url: "https://localhost:4242/checkout.html",
+            return_url: "https://les-5-saisons:4242/checkout.html",
         },
     });
 

@@ -56,7 +56,6 @@
             <button @click="showValidePanier = false" class="buy-button">Annuler</button>
           </div>
         </form>
-
       </div>
     </div>
   </div>
@@ -85,7 +84,8 @@ export default {
       adresse_facturation_postal: "",
       checkboxValidate: true,
       errorText: "",
-      message:"En achetant ce produit local je contribue à la production de fleurs de saisons et je m’abonne jusqu’à ce que j’arrête mon abonnement dans mon compte client"
+      message:"En achetant ce produit local je contribue à la production de fleurs de saisons et je m’abonne jusqu’à ce que j’arrête mon abonnement dans mon compte client",
+      text:""
     };
   },
   computed: {
@@ -93,7 +93,7 @@ export default {
     ...mapGetters("UsersInformation", ["getCurrentUser","getIsConnected"]),
   },
   methods: {
-    ...mapActions("Stripe", ["createSession"]),
+    ...mapActions("Stripe", ["createSession","test"]),
     isConnected(){
       if (!this.getIsConnected){
         console.log(this.getIsConnected)
@@ -101,6 +101,12 @@ export default {
       }else {
         this.showValidePanier = true
       }
+    },
+    async test(){
+      const test = await this.$store.dispatch(
+          "Stripe/test",
+      );
+      this.text = test
     },
     async createStripeSession() {
       try {
@@ -136,7 +142,7 @@ export default {
         const stripe = await this.$store.getters["Stripe/stripeInstance"];
         await stripe.redirectToCheckout({sessionId});
       } catch (error) {
-        console.error("Error creating Stripe session:", error);
+        console.error(" Error creating Stripe session:", error);
       }
     },
     copierAdresseLivraisonToFacturation() {
